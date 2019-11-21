@@ -31,8 +31,20 @@ public class User {
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany
-    @JoinColumn(name = "address_id")
-    private List<Address> address = new LinkedList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "shipping_id")
+    private List <Address> shippingAddress;
 
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "shipping_id")
+//    private Address shippingAddress;
+//
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "home_id")
+//    private Address homeAddress;
+//
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "invoice_id")
+//    private Address invoiceAddress;
 }

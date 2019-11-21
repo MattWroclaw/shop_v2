@@ -17,5 +17,5 @@ public class ProductDto {
 
     private ProductType productType;
 
-    private ProductCategory productCategory;
+    private ProductCategoryDto productCategory;
 }

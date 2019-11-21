@@ -1,7 +1,6 @@
 package pl.mojeprojekty.shop_v2.dto;
 
 import lombok.Data;
-import pl.mojeprojekty.shop_v2.entity.AddressType;
 
 @Data
 public class AddressDto {
@@ -14,5 +13,4 @@ public class AddressDto {
 
     private String zipCode;
 
-    private AddressType addressType;
 }

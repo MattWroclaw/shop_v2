@@ -10,6 +10,6 @@ public class ProductCategoryDto {
 
     private String description;
 
-    private ProductCategory parent;
+    private Long parentId;
 
 }

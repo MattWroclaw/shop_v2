@@ -4,6 +4,9 @@ import lombok.Data;
 import pl.mojeprojekty.shop_v2.entity.Address;
 import pl.mojeprojekty.shop_v2.entity.Role;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class UserDto {
     private String name;
@@ -16,5 +19,11 @@ public class UserDto {
 
     private Role roles;
 
-    private Address address;
+    private AddressDto shippingAddress;
+
+//     private AddressDto shippingAddress;
+//
+//    private AddressDto homeAddress;
+//
+//    private AddressDto invoiceAddress;
 }
