@@ -3,10 +3,7 @@ package pl.mojeprojekty.shop_v2.utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import pl.mojeprojekty.shop_v2.dto.AddressDto;
-import pl.mojeprojekty.shop_v2.dto.ProductCategoryDto;
-import pl.mojeprojekty.shop_v2.dto.ProductDto;
-import pl.mojeprojekty.shop_v2.dto.UserDto;
+import pl.mojeprojekty.shop_v2.dto.*;
 import pl.mojeprojekty.shop_v2.entity.*;
 import pl.mojeprojekty.shop_v2.repositories.ProductCategoryRepsiotory;
 import pl.mojeprojekty.shop_v2.repositories.RoleRepository;
@@ -19,11 +16,13 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class DtoToObjectConverters {
 
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
     private final ProductCategoryRepsiotory productCategoryRepsiotory;
 
     //      **************** USER *******************
+
+
     public Address addressDtoToAddressEntity(AddressDto addressDto) {
         Address entity = new Address();
         if (addressDto == null) {
@@ -53,10 +52,12 @@ public class DtoToObjectConverters {
 //        entity.setShippingAddress(shipping);
 //        entity.setInvoiceAddress(invoice);
 
-//        entity.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        entity.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-//        Role role = roleRepository.findByRole("USER");
-        Role role = roleRepository.findByRole("ADMIN");
+        Role role = roleRepository.findByRole("USER");
+        if(userDto.getEmail().equalsIgnoreCase("admin")){
+         role = roleRepository.findByRole("ADMIN");
+        }
         entity.setRoles(Collections.singleton(role));
 
         return entity;

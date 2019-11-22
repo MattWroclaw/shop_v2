@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register page</title>
+</head>
+<body>
+<h3>Create user</h3>
+<form th:action="@{/newUser}" method="post" th:object="${newUser}">
+
+    email <input th:field="*{email}">
+    PASS <input th:field="*{password}">
+
+    <!--    <select th:field="*{roles}">-->
+<!--    CITY <input th:field="*{city}">-->
+<!--    email <input th:field="*{email}">-->
+    <input type="submit" value="Add user">
+</form>
+</body>
+</html>

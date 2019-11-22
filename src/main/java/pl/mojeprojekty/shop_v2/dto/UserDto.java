@@ -1,11 +1,9 @@
 package pl.mojeprojekty.shop_v2.dto;
 
 import lombok.Data;
-import pl.mojeprojekty.shop_v2.entity.Address;
 import pl.mojeprojekty.shop_v2.entity.Role;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Data
 public class UserDto {
@@ -16,8 +14,6 @@ public class UserDto {
     private String password;
 
     private String city;
-
-    private Role roles;
 
     private AddressDto shippingAddress;
 
