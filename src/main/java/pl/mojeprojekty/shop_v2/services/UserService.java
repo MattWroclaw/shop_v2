@@ -13,11 +13,18 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
     private final UserRepository userRepository;
     private final DtoToObjectConverters dtoToObjectConverters;
 
     public List<User> findAllUsers(){
         return userRepository.findAll();
+    }
+
+    public User findUserById(long id){
+        return   userRepository.findById(id)
+                .orElseThrow(()->new NoSuchElementException("There is no user with id: "+id));
+
     }
 
     public void createUser(UserDto userDto){
@@ -28,10 +35,11 @@ public class UserService {
     public void deleteUser(long id){
         User userToDelete = userRepository.findById(id)
                 .orElseThrow(()->new NoSuchElementException("No user with id "+id));
+
         userRepository.delete(userToDelete);
     }
 
-    public void editUSer(long id, UserDto userDto){
+    public void editUser(long id, UserDto userDto){
         User newEditedUser = dtoToObjectConverters.userDtoToUserEntity(userDto);
         newEditedUser.setId(id);
         userRepository.save(newEditedUser);

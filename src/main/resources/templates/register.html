@@ -5,15 +5,23 @@
     <title>Register page</title>
 </head>
 <body>
-<h3>Create user</h3>
+<h3>Create your account</h3>
 <form th:action="@{/newUser}" method="post" th:object="${newUser}">
-
-    email <input th:field="*{email}">
+    Name <input th:field="*{name}">
+    login/email <input th:field="*{email}">
     PASS <input th:field="*{password}">
+    CITY <input th:field="*{city}">
+   <br>Delivery ADDRESS: <br>
+   Country <input th:field="*{shippingAddress.country}">
+   City <input th:field="*{shippingAddress.city}">
+   Street <input th:field="*{shippingAddress.street}">
+   Zip-Code <input th:field="*{shippingAddress.zipCode}">
 
-    <!--    <select th:field="*{roles}">-->
-<!--    CITY <input th:field="*{city}">-->
-<!--    email <input th:field="*{email}">-->
+    <br>Invoice ADDRESS: <br>
+    Country <input th:field="*{shippingAddress.country}">
+    City <input th:field="*{shippingAddress.city}">
+    Street <input th:field="*{shippingAddress.street}">
+    Zip-Code <input th:field="*{shippingAddress.zipCode}">
     <input type="submit" value="Add user">
 </form>
 </body>

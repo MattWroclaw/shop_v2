@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.mojeprojekty.shop_v2.dto.AddressDto;
 import pl.mojeprojekty.shop_v2.dto.UserDto;
 import pl.mojeprojekty.shop_v2.entity.Role;
 import pl.mojeprojekty.shop_v2.entity.User;
@@ -20,15 +21,16 @@ public class UserController {
 
     @RequestMapping(value = { "/register"}, method = RequestMethod.GET)
     public String goUser(Model model){
-        Role role = new Role();
+
         model.addAttribute("newUser", new UserDto());
-        model.addAttribute("userRole", role);
+        model.addAttribute("userAddress", new AddressDto());
         return "register";
     }
 
     @PostMapping("/newUser")
-    public String goEditForm(@ModelAttribute UserDto userDto){
-        userService.createUser(userDto);
+    public String goEditForm(@ModelAttribute UserDto userForm){
+
+        userService.createUser(userForm);
         return "redirect:/login";
     }
 
