@@ -8,6 +8,7 @@ import pl.mojeprojekty.shop_v2.entity.User;
 import pl.mojeprojekty.shop_v2.repositories.UserRepository;
 import pl.mojeprojekty.shop_v2.utils.DtoToObjectConverters;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Service
@@ -27,6 +28,7 @@ public class UserService {
 
     }
 
+    @Transactional
     public void createUser(UserDto userDto){
        User newUser = dtoToObjectConverters.userDtoToUserEntity(userDto);
        userRepository.save(newUser);
