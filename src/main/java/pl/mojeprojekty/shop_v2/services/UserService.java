@@ -46,4 +46,9 @@ public class UserService {
         newEditedUser.setId(id);
         userRepository.save(newEditedUser);
     }
+
+    public User findUserByEmail(String email){
+       return userRepository.findUserByEmail(email)
+               .orElseThrow(()->new NoSuchElementException("No user with login/email " + email));
+    }
 }

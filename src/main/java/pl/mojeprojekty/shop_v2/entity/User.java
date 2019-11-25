@@ -3,6 +3,9 @@ package pl.mojeprojekty.shop_v2.entity;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.*;
@@ -11,7 +14,7 @@ import java.util.*;
 @Setter
 @Entity
 @Table(name = "user")
-public class User {
+public class User  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,4 +50,6 @@ public class User {
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "invoice_id")
 //    private Address invoiceAddress;
+
+
 }

@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import pl.mojeprojekty.shop_v2.dto.AddressDto;
 import pl.mojeprojekty.shop_v2.dto.UserDto;
 import pl.mojeprojekty.shop_v2.dto.WeatherDataDto;
+import pl.mojeprojekty.shop_v2.entity.User;
 import pl.mojeprojekty.shop_v2.services.UserService;
 import pl.mojeprojekty.shop_v2.services.WeatherRestService;
+
+import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,19 +35,23 @@ public class UserController {
         return "redirect:/login";
     }
 
-
-    public void weatherHandler(Model model, String city) {
-       String[] wroclawTemp = weatherRestService.weatherData("wroclaw12");
-        if (wroclawTemp != null) {
-            model.addAttribute("weatherFromOW", wroclawTemp);
+    public  Model weatherHandler(Model model, Principal principal) {
+        String userEmail = principal.getName();
+        User loggedUser = userService.findUserByEmail(userEmail);
+        String userCity = loggedUser.getCity();
+        String[] dataWeather = weatherRestService.weatherData(userCity);
+        if (dataWeather != null) {
+           model.addAttribute("weatherFromOW", dataWeather);
+           model.addAttribute("userCity", userCity);
         } else {
-            model.addAttribute("noWeather", "Not available");
+           model.addAttribute("noWeather", "Not available");
         }
+        return model;
     }
 
     @GetMapping("/secret")
-    public String goSecret(Model model){
-        weatherHandler(model, "");
+    public String goSecret(Model model, Principal principal){
+        weatherHandler(model, principal);
         return "top";
     }
 }
