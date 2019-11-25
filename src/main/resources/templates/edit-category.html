@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit product category</title>
+</head>
+<body>
+
+<h2>Edit product category</h2>
+<form th:action="@{/editCategory}" method="post" th:object="${editedCategory}">
+    Id: <input th:field="*{id}">
+    Description: <input th:field="*{description}">
+<!--    Parent id: <input th:field="*{parentId}">-->
+    <input type="submit" value="Confirm">
+</form>
+</body>
+</html>

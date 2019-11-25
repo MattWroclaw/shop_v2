@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product and categories</title>
+</head>
+<body>
+
+<h2>List of categories used in our shop</h2>
+<span th:if="${categories.isEmpty()}" th:text="'No products categories'">empty list</span>
+<table th:if="${!categories.isEmpty()}">
+    <thead>
+    <tr><td>Id</td>
+        <td>Description</td>
+        <td>Parent id</td>
+    </tr>
+
+    </thead>
+    <tbody>
+    <tr th:each="category, Stat : ${categories}">
+        <td th:text="${category.id}"></td>
+        <td th:text="${category.description}"></td>
+<!--        <td th:text="${category.parent.id}"></td>-->
+<!--        TODO fix 'show parent id' -->
+        <td ><a th:href="@{/edit-category/{id}(id=${category.id})}">Edit</a> </td>
+        <td th:if="${Stat.last}"><a th:href="@{/delete-category/{id}(id=${category.id})}">Delete</a> </td>
+    </tr>
+    </tbody>
+</table>
+<h2>Create a new category</h2>
+<form th:action="@{/createCategory}" method="post" th:object="${singleCategorie}">
+   (Id:) <input type="hidden" th:field="*{id}">
+   Description: <input th:field="*{description}">
+   Parent id: <input th:field="*{parentId}">
+    <input type="submit" value="Add category">
+</form>
+
+</body>
+</html>

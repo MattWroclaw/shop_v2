@@ -35,10 +35,15 @@ public class ProductCategoryService {
         productCategoryRepsiotory.save(categoryEntity);
     }
 
-    public void editProductCategory(long id, ProductCategoryDto dto){
-        ProductCategory editedProductCategory = findProductCategoryById(id);
+    public void editProductCategory(ProductCategoryDto dto){
+        ProductCategory editedProductCategory = findProductCategoryById(dto.getId());
         editedProductCategory.setDescription(dto.getDescription());
         productCategoryRepsiotory.save(editedProductCategory);
+    }
+
+    public void deleteProductCategory(long id){
+        ProductCategory categoryToDelete = findProductCategoryById(id);
+        productCategoryRepsiotory.delete(categoryToDelete);
     }
 
 }

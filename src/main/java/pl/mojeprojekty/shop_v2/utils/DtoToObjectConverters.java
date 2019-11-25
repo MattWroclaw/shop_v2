@@ -68,7 +68,6 @@ public class DtoToObjectConverters {
             ProductCategoryDto productCategoryDto
     ) {
         ProductCategory entity = new ProductCategory();
-
         entity.setDescription(productCategoryDto.getDescription());
 
         if (productCategoryDto.getParentId() != null) {
