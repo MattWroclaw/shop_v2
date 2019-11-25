@@ -75,7 +75,6 @@ public class DtoToObjectConverters {
             ProductCategory parent = productCategoryRepsiotory
                     .findById(productCategoryDto.getParentId())
                     .orElseThrow(() -> new NoSuchElementException("No such parent category"));
-
             entity.setParent(parent);
         }
         return entity;
