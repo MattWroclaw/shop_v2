@@ -34,6 +34,7 @@ public class ProductsController {
         List<ProductDto> productDtos = productService.findAllProductsDto();
         model.addAttribute("productsDto", productDtos);
         model.addAttribute("singleProductDto", new ProductDto());
+
         return "products";
     }
 // ******************** CATEGORIES ***************************

@@ -53,7 +53,7 @@
             <td th:text="${p.description}"></td>
             <td th:text="${p.stockAmount}"></td>
             <td th:text="${p.price}"></td>
-            <td th:text="${p.productCategory.getDescription()}"></td>
+            <td th:text="${p.productCategory?.description}"></td>
             <td th:text="${p.productType}"></td>
             <td ><a th:href="@{/edit-product/{id}(id=${p.id})}">Edit</a> </td>
             <td><a th:href="@{/delete-product/{id}(id=${p.id})}">Delete</a> </td>
