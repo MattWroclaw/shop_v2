@@ -7,8 +7,8 @@
 <body>
 
 <h2>List of categories used in our shop</h2>
-<span th:if="${categories.isEmpty()}" th:text="'No products categories'">empty list</span>
-<table th:if="${!categories.isEmpty()}">
+<span th:if="${categoriesDto.isEmpty()}" th:text="'No products categories'">empty list</span>
+<table th:if="${!categoriesDto.isEmpty()}">
     <thead>
     <tr><td>Id</td>
         <td>Description</td>
@@ -17,23 +17,67 @@
 
     </thead>
     <tbody>
-    <tr th:each="category, Stat : ${categories}">
+    <tr th:each="category, Stat : ${categoriesDto}">
         <td th:text="${category.id}"></td>
         <td th:text="${category.description}"></td>
-<!--        <td th:text="${category.parent.id}"></td>-->
-<!--        TODO fix 'show parent id' -->
+        <td th:text="${category.parentId}"></td>
         <td ><a th:href="@{/edit-category/{id}(id=${category.id})}">Edit</a> </td>
         <td th:if="${Stat.last}"><a th:href="@{/delete-category/{id}(id=${category.id})}">Delete</a> </td>
     </tr>
     </tbody>
 </table>
 <h2>Create a new category</h2>
-<form th:action="@{/createCategory}" method="post" th:object="${singleCategorie}">
-   (Id:) <input type="hidden" th:field="*{id}">
-   Description: <input th:field="*{description}">
-   Parent id: <input th:field="*{parentId}">
+<form th:action="@{/createCategory}" method="post" th:object="${singleCategorieDto}">
+   (Id:) <input type="text" th:field="*{id}">
+   Description: <input type="text" th:field="*{description}">
+   Parent id: <input type="text" th:field="*{parentId}">
     <input type="submit" value="Add category">
 </form>
 
+<h2>Product list</h2>
+<span th:if="${productsDto.isEmpty()}" th:text=" 'No products so far..'">Nothing</span>
+<table>
+    <thead>
+    <td>Id</td>
+    <td>Title</td>
+    <td>Description</td>
+    <td>Stock</td>
+    <td>Price</td>
+    <td>Category</td>
+    <td>Product type</td>
+    </thead>
+    <tbody>
+        <tr th:each="p : ${productsDto}">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.title}"></td>
+            <td th:text="${p.description}"></td>
+            <td th:text="${p.stockAmount}"></td>
+            <td th:text="${p.price}"></td>
+            <td th:text="${p.productCategory.getDescription()}"></td>
+            <td th:text="${p.productType}"></td>
+            <td ><a th:href="@{/edit-product/{id}(id=${p.id})}">Edit</a> </td>
+            <td><a th:href="@{/delete-product/{id}(id=${p.id})}">Delete</a> </td>
+        </tr>
+    </tbody>
+</table>
+<h2>Add product</h2>
+<form th:action="@{/createProduct}" method="post" th:object="${singleProductDto}">
+    Title: <input type="text" th:field="*{title}">
+    Description: <input type="text" th:field="*{description}">
+    Price: <input type="text" th:field="*{price}">
+    Product type: <select name = "type" th:field="*{productType}">
+        <option th:each="type : ${T(pl.mojeprojekty.shop_v2.entity.ProductType).values()}" th:text="${type}" th:value="${type}"></option>
+
+    </select>
+    Stock amount: <input type="text" th:field="*{stockAmount}">
+    Product category:
+    <select th:field="*{productCategory}">
+        <option th:each="c : ${categoriesDto}"
+                th:text="${c.getDescription()}"
+                th:value="${c.getId()}">
+        </option>
+    </select>
+    <input type="submit" value="Add">
+</form>
 </body>
 </html>

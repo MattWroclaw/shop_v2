@@ -7,6 +7,8 @@ import pl.mojeprojekty.shop_v2.entity.ProductType;
 @Data
 public class ProductDto {
 
+    private Long id;
+
     private String title;
 
     private String description;
@@ -17,5 +19,5 @@ public class ProductDto {
 
     private ProductType productType;
 
-    private ProductCategoryDto productCategory;
+    private ProductCategory productCategory;
 }

@@ -21,8 +21,6 @@ public class DtoToObjectConverters {
     private final ProductCategoryRepsiotory productCategoryRepsiotory;
 
     //      **************** USER *******************
-
-
     public Address addressDtoToAddressEntity(AddressDto addressDto) {
         Address entity = new Address();
         if (addressDto == null) {
@@ -56,18 +54,19 @@ public class DtoToObjectConverters {
 
         Role role = roleRepository.findByRole("USER");
         if(userDto.getEmail().equalsIgnoreCase("admin")){
-         role = roleRepository.findByRole("ADMIN");
+            role = roleRepository.findByRole("ADMIN");
         }
         entity.setRoles(Collections.singleton(role));
 
         return entity;
     }
 
-    //    **************** PRODUCTS ****************
-    public ProductCategory productCategoryDtoToEntity(
-            ProductCategoryDto productCategoryDto
-    ) {
+    //    **************** CATEGORY ****************
+    public ProductCategory productCategoryDtoToEntity(ProductCategoryDto productCategoryDto) {
         ProductCategory entity = new ProductCategory();
+        if(productCategoryDto == null){
+            productCategoryDto = new ProductCategoryDto();
+        }
         entity.setDescription(productCategoryDto.getDescription());
 
         if (productCategoryDto.getParentId() != null) {
@@ -79,16 +78,45 @@ public class DtoToObjectConverters {
         return entity;
     }
 
+    public ProductCategoryDto categoryEntityToDto(ProductCategory categoryEntity){
+        ProductCategoryDto dto = new ProductCategoryDto();
+        if(categoryEntity == null){
+            categoryEntity = new ProductCategory();
+        }
+//        dto.setDescription("Koziołek matołek");
+        dto.setDescription(categoryEntity.getDescription());
+        dto.setId(categoryEntity.getId());
+//        dto.setId(1l);
+        if(categoryEntity.getParent() != null) {
+            dto.setParentId(categoryEntity.getParent().getId());
+        }
+        return dto;
+    }
+//  **************** PRODUCTS ****************
     public Product productDtoToEntity(ProductDto productDto) {
         Product entity = new Product();
+
+        if(productDto.getId() == null){
+            productDto.setId(100l);
+        }
         entity.setTitle(productDto.getTitle());
         entity.setDescription(productDto.getDescription());
         entity.setPrice(productDto.getPrice());
         entity.setStockAmount(productDto.getStockAmount());
         entity.setProductType(productDto.getProductType());
-        entity.setProductCategory(
-                productCategoryDtoToEntity(productDto.getProductCategory())
-        );
+        entity.setProductCategory(productDto.getProductCategory());
         return entity;
+    }
+
+    public ProductDto productEntityToDto(Product entity){
+        ProductDto dto = new ProductDto();
+        dto.setId(entity.getId());
+        dto.setTitle(entity.getTitle());
+        dto.setProductCategory(entity.getProductCategory());
+        dto.setProductType(entity.getProductType());
+        dto.setDescription(entity.getDescription());
+        dto.setPrice(entity.getPrice());
+        dto.setStockAmount(entity.getStockAmount());
+        return dto;
     }
 }
