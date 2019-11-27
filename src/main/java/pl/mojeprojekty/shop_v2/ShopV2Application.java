@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 import org.springframework.web.client.RestTemplate;
 
+import java.security.Principal;
+
 @SpringBootApplication
 public class ShopV2Application {
 
@@ -17,4 +19,6 @@ public class ShopV2Application {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
+
+
 }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your order</title>
+</head>
+<body>
+Your order: <br>
+<table>
+    <thead>
+    <td>Mail/login uzytkownika</td>
+    <td th:text="${userEmail}"></td>
+    <td></td>
+    <td>Użytkownik</td>
+    <td th:text="${userZBazy.name}"></td>
+    <td th:text="${userZBazy.id}"></td>
+    <td th:text="${userZBazy.city}"></td>
+    <td th:text="${userZBazy.email}"></td>
+    <td></td>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Name</td>
+        <td th:text="${order.getUser().name}"></td>
+    </tr>
+    <tr>
+        <td>Shiping adress (list)</td>
+        <td th:text="${order.getUser().shippingAddress}"></td>
+    </tr>
+    <tr>
+        <td>Total price</td>
+        <td th:text="${order.getTotalPrice()}"></td>
+    </tr>
+    <tr>
+        <td>City</td>
+        <td th:text="${order.getUser().getCity()}"></td>
+    </tr>
+    <tr>
+        <td>address to aaray</td>
+        <td th:text="${order.getUser().getShippingAddress().toArray()}"></td>
+    </tr>
+    <tr>
+        <td>Date of buying</td>
+        <td th:text="${order.getOrderDate()}"></td>
+    </tr>
+    </tbody>
+</table>
+</table>
+</body>
+</html>
