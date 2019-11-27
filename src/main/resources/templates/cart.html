@@ -22,6 +22,11 @@ hello from cart
             <td th:text="${product.key.productCategory?.description}"> </td>
             <td th:text="${product.key.price}"> </td>
             <td th:text="${product.value}"></td>
+            <td>
+                <form th:action="@{/removeItems/{id}(id=${product.key.id}) }">
+                    <button>Remove</button>
+                </form>
+            </td>
         </tr>
     </tbody>
 </table>
