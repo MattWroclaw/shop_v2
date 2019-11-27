@@ -22,14 +22,14 @@ public class ShopController {
 
     private final UserService userService;
 
-    @RequestMapping(value = { "/", "/shop"}, method = RequestMethod.GET)
+    @RequestMapping(value =  "/shop", method = RequestMethod.GET)
     public String goShop(Model model){
         List<User> users = userService.findAllUsers();
         Role role = new Role();
         model.addAttribute("newUser", new User());
         model.addAttribute("usersList", users);
         model.addAttribute("userRole", role);
-        return "index";
+        return "usersData";
     }
 
     @PostMapping("/createUser")

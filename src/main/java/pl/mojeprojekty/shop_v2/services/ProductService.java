@@ -64,4 +64,10 @@ public class ProductService {
         edited.setProductCategory(productDto.getProductCategory());
         productRepository.save(edited);
     }
+
+    public Product findProductById(long id){
+        Product productWithGivenId = productRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Product with " + id + "does not exist.."));
+        return productWithGivenId;
+    }
 }

@@ -10,7 +10,13 @@
 <form th:action="@{/editCategory}" method="post" th:object="${editedCategory}">
     Id: <input th:field="*{id}">
     Description: <input th:field="*{description}">
-    Parent id: <input th:field="*{parentId}">
+    Parent id:
+    <select th:field="*{parentId}">
+        <option th:each="ctg : ${allCategories}"
+                th:text="${ctg.id}"
+                th:value="${ctg.id}">
+        </option>
+    </select>
     <input type="submit" value="Confirm">
 </form>
 </body>

@@ -52,8 +52,11 @@ public class ProductsController {
 
     @GetMapping("/edit-category/{id}")
     public String showEditCategoryPage(@PathVariable long id, Model model){
-        ProductCategoryDto editedCategory = productCategoryService.findProductCategoryById(id);
-        model.addAttribute("editedCategory", editedCategory);
+        ProductCategoryDto editedCategoryDto = productCategoryService.findProductCategoryById(id);
+        model.addAttribute("editedCategory", editedCategoryDto);
+
+        List<ProductCategoryDto> categoryDtos = productCategoryService.showAllProductCategories();
+        model.addAttribute("allCategories", categoryDtos);
         return "edit-category";
     }
 

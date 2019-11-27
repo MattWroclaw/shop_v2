@@ -28,7 +28,7 @@
 </table>
 <h2>Create a new category</h2>
 <form th:action="@{/createCategory}" method="post" th:object="${singleCategorieDto}">
-   (Id:) <input type="text" th:field="*{id}">
+   <input type="hidden" th:field="*{id}">
    Description: <input type="text" th:field="*{description}">
    Parent id: <input type="text" th:field="*{parentId}">
     <input type="submit" value="Add category">
