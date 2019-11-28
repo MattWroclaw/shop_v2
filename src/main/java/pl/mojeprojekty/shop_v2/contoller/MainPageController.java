@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.mojeprojekty.shop_v2.dto.ProductDto;
 import pl.mojeprojekty.shop_v2.entity.Product;
+import pl.mojeprojekty.shop_v2.services.ApplicationUserDetailService;
 import pl.mojeprojekty.shop_v2.services.CartService;
 import pl.mojeprojekty.shop_v2.services.ProductService;
 
@@ -21,11 +22,18 @@ public class MainPageController {
 
     private final ProductService productService;
     private final CartService cartService;
+    private final ApplicationUserDetailService applicationUserDetailService;
+
 
     @GetMapping({"/", "/welcome"})
     public String goShop(Model model){
         List<ProductDto> allProductsDto = productService.findAllProductsDto();
         model.addAttribute("productsList", allProductsDto);
+
+        //        *********************
+//        String user = applicationUserDetailService.loggedUser();
+//        model.addAttribute("userName", user);
+//        *********************
         return "index";
     }
 

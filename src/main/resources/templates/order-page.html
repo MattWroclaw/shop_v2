@@ -31,9 +31,11 @@ Your order: <br>
         <td>Total price</td>
         <td th:text="${order.getTotalPrice()}"></td>
     </tr>
-    <tr>
-        <td>City</td>
-        <td th:text="${order.getUser().getCity()}"></td>
+    <tr th:each="item: ${order.getOrderLines()}">
+        <td th:text="${item.product.title}">Items</td>
+        <td th:text="${item.product.description}">Items</td>
+        <td th:text="${item.product.price}">Items</td>
+
     </tr>
     <tr>
         <td>address to aaray</td>
@@ -45,6 +47,8 @@ Your order: <br>
     </tr>
     </tbody>
 </table>
-</table>
+<form th:action="@{/}">
+    <button>Back to the store</button>
+</form>
 </body>
 </html>

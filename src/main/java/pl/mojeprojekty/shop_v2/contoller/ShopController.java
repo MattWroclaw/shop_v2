@@ -11,6 +11,7 @@ import pl.mojeprojekty.shop_v2.dto.UserDto;
 import pl.mojeprojekty.shop_v2.entity.Role;
 import pl.mojeprojekty.shop_v2.entity.User;
 import pl.mojeprojekty.shop_v2.repositories.UserRepository;
+import pl.mojeprojekty.shop_v2.services.ApplicationUserDetailService;
 import pl.mojeprojekty.shop_v2.services.UserService;
 
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ public class ShopController {
         model.addAttribute("newUser", new User());
         model.addAttribute("usersList", users);
         model.addAttribute("userRole", role);
+
+
         return "usersData";
     }
 
