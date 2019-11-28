@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <head>
     <meta charset="UTF-8">
     <title>Welcome to r'shop</title>
@@ -37,5 +37,12 @@
 <form action="/cart">
     <button>Your cart</button>
 </form>
+
+<div th:if="${#authorization.expression('isAuthenticated()')}">
+    <span th:text="'Czesc'"></span>
+    <a th:href="@{/logout}" th:text="'Spadam'" >Logout</a>
+</div>
+
+
 </body>
 </html>
