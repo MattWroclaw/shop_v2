@@ -31,7 +31,6 @@ public class ShopController {
         model.addAttribute("usersList", users);
         model.addAttribute("userRole", role);
 
-
         return "usersData";
     }
 

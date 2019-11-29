@@ -7,9 +7,32 @@
     <title>Welcome to r'shop</title>
 </head>
 <body>
-<div class="container">
     <div th:replace="fragments :: navigationBar"></div>
+<!--page content-->
+<div class="container">
+
     <div class="row">
+
+        <div class="col-lg-3">
+            <h1 class="my-4">Universal shop</h1>
+            <div class="list-group">
+                <a th:href="@{/byType/{type}(type='CHILDREN')}" class="list-group-item" th:text="${'Children'}">category 1 </a>
+                <a th:href="@{/byType/{type}(type='MOTO')}" class="list-group-item" th:text="${'Moto'}">category 1 </a>
+                <a th:href="@{/byType/{type}(type='BOOKS')}" class="list-group-item" th:text="${'Books'}">category 1 </a>
+                <a th:href="@{/byType/{type}(type='SPORT')}" class="list-group-item" th:text="${'Sport'}">category 1 </a>
+
+            </div>
+        </div>
+<!--/col-lg-3-->
+
+        <div class="col-lg-9">
+            <div id="carouselExampleIdnicators" class="carousel slide my-4" data-ride="carousel">
+
+
+
+            </div>
+
+
         <h2>Products</h2>
         <table>
             <thead>
@@ -56,6 +79,7 @@
         <div th:if="${@applicationUserDetailService.loggedUser() == null}">
             <p> You're not logged</p>
         </div>
+
         <div th:unless="${@applicationUserDetailService.loggedUser() != null}">
             <span th:text="${@applicationUserDetailService.loggedUser()}"></span>
         </div>
@@ -68,11 +92,14 @@
             <button>Admin site</button>
         </form>
         </div>
+<!--            /col-lg-9-->
+        </div>
+<!--        /.row-->
+    </div>
+<!--    container-->
+</div>
 
         <div th:replace="fragments :: scripts">
         </div>
-
-    </div>
-</div>
 </body>
 </html>

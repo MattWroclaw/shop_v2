@@ -23,6 +23,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final OrderLineRepository orderLineRepository;
     private final UserService userService;
+    private final ProductService productService;
 
         Order order = null;
 
@@ -39,6 +40,12 @@ public class OrderService {
             Product aProduct = entry.getKey();
             Integer quantity = entry.getValue();
             double orderLinePrice = ( entry.getKey().getPrice() * quantity );
+
+            int stockAmount = aProduct.getStockAmount();
+            int newStockAmount = stockAmount - quantity;
+            aProduct.setStockAmount(newStockAmount);
+            productService.updateProduct(aProduct);
+
             OrderLine orderLine = new OrderLine();
             orderLine.setQuantity(quantity);
             orderLine.setProduct(aProduct);

@@ -6,6 +6,7 @@ import pl.mojeprojekty.shop_v2.dto.ProductCategoryDto;
 import pl.mojeprojekty.shop_v2.dto.ProductDto;
 import pl.mojeprojekty.shop_v2.entity.Product;
 import pl.mojeprojekty.shop_v2.entity.ProductCategory;
+import pl.mojeprojekty.shop_v2.entity.ProductType;
 import pl.mojeprojekty.shop_v2.repositories.ProductRepository;
 import pl.mojeprojekty.shop_v2.utils.DtoToObjectConverters;
 
@@ -65,9 +66,33 @@ public class ProductService {
         productRepository.save(edited);
     }
 
+    public void updateProduct(Product product){
+        Product productById = findProductById(product.getId());
+        productById.setStockAmount(product.getStockAmount());
+        productRepository.save(productById);
+    }
+
     public Product findProductById(long id){
         Product productWithGivenId = productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Product with " + id + "does not exist.."));
         return productWithGivenId;
+    }
+
+    public List<ProductDto> findProductsByType(ProductType productType){
+        List<Product> productsSameType = productRepository.findAllByProductType(productType);
+        List<ProductDto> dtos =  new ArrayList<>();
+        for (Product entity : productsSameType) {
+            ProductDto dto = new ProductDto();
+            dto.setId(entity.getId());
+            dto.setTitle(entity.getTitle());
+            dto.setStockAmount(entity.getStockAmount());
+            dto.setPrice(entity.getPrice());
+            dto.setDescription(entity.getDescription());
+            dto.setProductType(entity.getProductType());
+
+            dto.setProductCategory(entity.getProductCategory());
+            dtos.add(dto);
+        }
+        return dtos;
     }
 }

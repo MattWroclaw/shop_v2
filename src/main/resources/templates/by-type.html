@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>list of products by their type..</title>
+</head>
+<body>
+type - sport:
+1.
+2.
+3.
+.
+.
+.
+<table>
+    <thead>
+    <tr>
+        <td>tytuł</td>
+        <td>opis</td>
+        <td>typ</td>
+        <td>cena</td>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each=" product : ${productsOfType}">
+    <td th:text="${product.title}"></td>
+    <td th:text="${product.description}"></td>
+    <td th:text="${product.productType.toString()}"></td>
+    <td th:text="${product.price}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

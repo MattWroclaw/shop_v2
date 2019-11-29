@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.mojeprojekty.shop_v2.dto.ProductDto;
 import pl.mojeprojekty.shop_v2.entity.Product;
+import pl.mojeprojekty.shop_v2.entity.ProductCategory;
+import pl.mojeprojekty.shop_v2.entity.ProductType;
 import pl.mojeprojekty.shop_v2.services.ApplicationUserDetailService;
 import pl.mojeprojekty.shop_v2.services.CartService;
 import pl.mojeprojekty.shop_v2.services.ProductService;
@@ -39,5 +41,12 @@ public class MainPageController {
         return "redirect:/welcome";
     }
 
+    @GetMapping("/byType/{type}")
+    public String goCategory(@PathVariable String type, Model model){
+        ProductType productType = ProductType.valueOf(type);
+        List<ProductDto> productsByType = productService.findProductsByType(productType);
+        model.addAttribute("productsOfType", productsByType);
+        return "by-type";
+    }
 
 }
