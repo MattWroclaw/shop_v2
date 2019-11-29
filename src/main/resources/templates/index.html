@@ -1,132 +1,78 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>Welcome to r'shop</title>
 </head>
 <body>
-<h2>Products</h2>
-<table>
-    <thead>
-    <tr>
-        <td>Title</td>
-        <td>Description</td>
-        <td>Type</td>
-        <td>Category</td>
-        <td>Type</td>
-        <td>Price</td>
-        <td>Stock amount</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="prod : ${productsList}">
-        <td th:text="${prod.title}"></td>
-        <td th:text="${prod.description}"></td>
-        <td th:text="${prod.productCategory?.description}"></td>
-        <td th:text="${prod.productType}"></td>
-        <td th:text="${prod.price}"></td>
-        <td th:text="${prod.stockAmount}"></td>
-        <td th:if="${#authorization.expression('isAuthenticated()')}">
-        <form th:action="@{/buy/{id}(id = ${prod.id})}">
-            <button>Buy</button>
-        </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<form th:if="${#authorization.expression('isAuthenticated()')}" action="/cart">
-    <button>Your cart</button>
-</form>
-
-<div th:if="${#authorization.expression('isAuthenticated()')}">
-    <span th:text="'Chcesz wyjść?'"></span>
-    <a th:href="@{/logout}" th:text="'Wyloguj'" >Logout</a>
-</div>
-
-<div th:if="${not #authorization.expression('isAuthenticated()')}">
-    <span th:text="'Chcesz coś kupić'"></span>
-    <a th:href="@{/login}" th:text="'Zaloguj się'" >Logout</a>
-</div>
-
-<div th:if="${@applicationUserDetailService.loggedUser() == null}">
-    <p> You're not logged</p>
-</div>
-<div th:unless="${@applicationUserDetailService.loggedUser() != null}">
-    <span th:text="${@applicationUserDetailService.loggedUser()}"></span>
-</div>
-
-
-<div th:text="${#authorization.expression('hasRole(''ADMIN'')')}">Admin</div>
-
-<div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-<form th:action="@{/admin}">
-    <button>Admin site</button>
-</form>
-</div>
-
-<!--bootstrap-->
 <div class="container">
-    <!-- Static navbar -->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#" th:text="${username}">Project name</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li class="dropdown-header">Nav header</li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Static top</a></li>
-                    <li><a href="#/">Fixed top</a></li>
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-    </nav>
-    <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <!--Usage of models we wrote in WepAppController th:text="'Welcome to basic Bootstrap with Spring Boot created by ' + ${username} -->
-        <h3 th:text="'Welcome to basic Bootstrap with Spring Boot created by ' + ${username}"></h3>
-        <p th:text="'This date example  ' + ${#dates.format(datetime, 'dd MMM yyyy HH:mm')}"></p>
-        <p> is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work.
-            It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>
-            <a class="btn btn-lg btn-primary" href="#" role="button">View navbar docs &raquo;</a>
-        </p>
-    </div>
-</div> <!-- /container -->
-<!--bootstrap-->
+    <div th:replace="fragments :: navigationBar"></div>
+    <div class="row">
+        <h2>Products</h2>
+        <table>
+            <thead>
+            <tr>
+                <td>Title</td>
+                <td>Description</td>
+                <td>Type</td>
+                <td>Category</td>
+                <td>Type</td>
+                <td>Price</td>
+                <td>Stock amount</td>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="prod : ${productsList}">
+                    <td th:text="${prod.title}"></td>
+                    <td th:text="${prod.description}"></td>
+                    <td th:text="${prod.productCategory?.description}"></td>
+                    <td th:text="${prod.productType}"></td>
+                    <td th:text="${prod.price}"></td>
+                    <td th:text="${prod.stockAmount}"></td>
+                    <td th:if="${#authorization.expression('isAuthenticated()')}">
+                    <form th:action="@{/buy/{id}(id = ${prod.id})}">
+                        <button>Buy</button>
+                    </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <form th:if="${#authorization.expression('isAuthenticated()')}" action="/cart">
+            <button>Your cart</button>
+        </form>
 
-</body>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <div th:if="${#authorization.expression('isAuthenticated()')}">
+            <span th:text="'Chcesz wyjść?'"></span>
+            <a th:href="@{/logout}" th:text="'Wyloguj'" >Logout</a>
+        </div>
+
+        <div th:if="${not #authorization.expression('isAuthenticated()')}">
+            <span th:text="'Chcesz coś kupić'"></span>
+            <a th:href="@{/login}" th:text="'Zaloguj się'" >Logout</a>
+        </div>
+
+        <div th:if="${@applicationUserDetailService.loggedUser() == null}">
+            <p> You're not logged</p>
+        </div>
+        <div th:unless="${@applicationUserDetailService.loggedUser() != null}">
+            <span th:text="${@applicationUserDetailService.loggedUser()}"></span>
+        </div>
+
+
+        <div th:text="${#authorization.expression('hasRole(''ADMIN'')')}">Admin</div>
+
+        <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+        <form th:action="@{/admin}">
+            <button>Admin site</button>
+        </form>
+        </div>
+
+        <div th:replace="fragments :: scripts">
+        </div>
+
+    </div>
+</div>
 </body>
 </html>

@@ -30,10 +30,6 @@ public class MainPageController {
         List<ProductDto> allProductsDto = productService.findAllProductsDto();
         model.addAttribute("productsList", allProductsDto);
 
-        //        *********************
-//        String user = applicationUserDetailService.loggedUser();
-//        model.addAttribute("userName", user);
-//        *********************
         return "index";
     }
 
