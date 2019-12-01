@@ -43,8 +43,12 @@ public class OrderService {
 
             int stockAmount = aProduct.getStockAmount();
             int newStockAmount = stockAmount - quantity;
-            aProduct.setStockAmount(newStockAmount);
-            productService.updateProduct(aProduct);
+            if(newStockAmount>0) {
+                aProduct.setStockAmount(newStockAmount);
+                productService.updateProduct(aProduct);
+            }else {
+                productService.deletePorduct(aProduct.getId());
+            }
 
             OrderLine orderLine = new OrderLine();
             orderLine.setQuantity(quantity);

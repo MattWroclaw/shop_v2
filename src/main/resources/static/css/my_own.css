@@ -1,0 +1,23 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+.wrapper-my {
+    min-height: 100%;
+
+    /* Equal to height of footer */
+    /* But also accounting for potential margin-bottom of last child */
+    margin-bottom: -50px;
+}
+.footer-my{
+    position: fixed;
+    bottom: 0;
+    width: 644px;
+    height: 20px;
+    margin: 0 auto;
+    background-color: #343a40 !important;
+}
+.push-my {
+    height: 50px;
+}
+
