@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Shop Item - Start Bootstrap Template</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/shop-item.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/my_own.css">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<div th:replace="fragments::navigationBar"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-lg-3">
+            <h1 class="my-4">Dreams shop</h1>
+            <div class="list-group">
+                <a th:href="@{/byType/{type}(type='WEALTH')}" class="list-group-item active" th:text="${'Wealth'}">category 1 </a>
+                <a th:href="@{/byType/{type}(type='FREEDOM')}" class="list-group-item" th:text="${'Freedom'}">category 1 </a>
+                <a th:href="@{/byType/{type}(type='GOOD_HEALTH')}" class="list-group-item" th:text="${'Good heath'}">category 1 </a>
+                <a th:href="@{/byType/{type}(type='FRIENDS')}" class="list-group-item" th:text="${'Friends'}">category 1 </a>
+
+            </div>
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+            <div class="card mt-4">
+                <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
+                <div class="card-body">
+                    <h3 class="card-title">Product Name</h3>
+                    <h4>$24.99</h4>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
+                    <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                    4.0 stars
+                </div>
+            </div>
+            <!-- /.card -->
+
+            <div class="card card-outline-secondary my-4">
+                <div class="card-header">
+                    Product Reviews
+                </div>
+                <div class="card-body">
+                    <p th:text="${givenProduct.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+                    <small class="text-muted" >Posted by Anonymous on 3/1/17</small>
+                    <hr>
+                    <p th:text="${givenProduct.title}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+                    <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+                    <hr>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+                    <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+                    <hr>
+                    <a href="#" class="btn btn-success">Leave a Review</a>
+                </div>
+            </div>
+            <!-- /.card -->
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+    </div>
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<div th:replace="fragments :: footer"></div>
+
+<!--<footer class="py-5 bg-dark">-->
+<!--    <div class="container">-->
+<!--        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; /.container &ndash;&gt;-->
+<!--</footer>-->
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!--<div th:replace="fragments :: scripts"></div>-->
+
+</body>
+
+</html>

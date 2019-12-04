@@ -74,7 +74,7 @@
 <h2>Add product</h2>
 <form th:action="@{/createProduct}" method="post" th:object="${singleProductDto}">
     Title: <input type="text" th:field="*{title}">
-    Description: <input type="text" th:field="*{description}">
+    Description: <textarea cols="30" rows="4" maxlength="200" th:field="*{description}"></textarea>
     Price: <input type="text" th:field="*{price}">
     Product type: <select name = "type" th:field="*{productType}">
         <option th:each="type : ${T(pl.mojeprojekty.shop_v2.entity.ProductType).values()}" th:text="${type}" th:value="${type}"></option>
