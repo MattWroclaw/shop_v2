@@ -1,14 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+>
 <head>
     <meta charset="UTF-8">
-    <title>Edit product category</title>
-    <link rel="stylesheet" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/shop-homepage.css" rel="stylesheet">
+    <link href="/css/my_own.css" rel="stylesheet">
+
+
+    <title th:text="#{app.app.name}">Welcome to r'shop</title>
 </head>
 <body>
+<div th:replace="fragments :: navigationBar"></div>
+<!--page content-->
+<div class="container wrapper-my">
 
-<div th:insert="fragments :: navigationBar"></div>
-
+    <div class="row">
 <h2>Edit product category</h2>
 <form th:action="@{/editCategory}" method="post" th:object="${editedCategory}">
     Id: <input th:field="*{id}">
@@ -23,6 +35,9 @@
     <input type="submit" value="Confirm">
 </form>
 
+        <div th:replace="fragments :: footer"></div>
 <div th:replace="fragments:: scripts"></div>
+    </div>
+</div>
 </body>
 </html>

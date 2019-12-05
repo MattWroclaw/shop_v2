@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Your order</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title th:text="#{app.app.name}">Dream shop</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/shop-item.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/my_own.css">
 </head>
 <body>
+<div th:insert="fragments :: navigationBar"></div>
+<div class="container wrapper-my">
 Your order: <br>
 <table>
     <thead>
@@ -49,6 +62,10 @@ Your order: <br>
 </table>
 <form th:action="@{/}">
     <button>Back to the store</button>
+
+    <div th:insert="fragments :: footer"></div>
+    <div th:insert="fragments :: scripts"></div>
 </form>
+</div>
 </body>
 </html>

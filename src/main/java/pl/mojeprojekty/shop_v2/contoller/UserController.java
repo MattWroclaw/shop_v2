@@ -49,9 +49,11 @@ public class UserController {
         return model;
     }
 
-    @GetMapping("/secret")
+//    @GetMapping("/secret")
+    @GetMapping("/fragment")
     public String goSecret(Model model, Principal principal){
         weatherHandler(model, principal);
-        return "top";
+//        return "top";
+        return "fragments";
     }
 }

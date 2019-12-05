@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+>
 <head>
     <meta charset="UTF-8">
-    <title>list of products by their type..</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/shop-homepage.css" rel="stylesheet">
+    <link href="/css/my_own.css" rel="stylesheet">
+
+
+    <title th:text="#{app.app.name}">Welcome to r'shop</title>
 </head>
 <body>
+<div th:replace="fragments :: navigationBar"></div>
+<!--page content-->
+<div class="container wrapper-my">
+
 type - sport:
 1.
 2.
@@ -31,6 +46,9 @@ type - sport:
     </tr>
     </tbody>
 </table>
-
+</div>
+<p th:insert="fragments::footer"></p>
+<p th:insert="fragments::scripts"></p>
+</p>
 </body>
 </html>

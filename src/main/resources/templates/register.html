@@ -1,29 +1,66 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+>
 <head>
     <meta charset="UTF-8">
-    <title>Register page</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/shop-homepage.css" rel="stylesheet">
+    <link href="/css/my_own.css" rel="stylesheet">
+
+
+    <title th:text="#{app.app.name}">Welcome to r'shop</title>
 </head>
 <body>
-<h3>Create your account</h3>
-<form th:action="@{/newUser}" method="post" th:object="${newUser}">
-    Name <input th:field="*{name}">
-    login/email <input th:field="*{email}">
-    PASS <input th:field="*{password}">
-    CITY <input th:field="*{city}">
-   <br>Delivery ADDRESS: <br>
-   Country <input th:field="*{shippingAddress.country}">
-   City <input th:field="*{shippingAddress.city}" >
-   Street <input th:field="*{shippingAddress.street}">
-   Zip-Code <input th:field="*{shippingAddress.zipCode}">
+<div th:replace="fragments :: navigationBar"></div>
+<!--page content-->
+<div class="container wrapper-my">
 
-    <br>Invoice ADDRESS: <br>
-    Country <input th:field="*{shippingAddress.country}">
-    City <input th:field="*{shippingAddress.city}">
-    Street <input th:field="*{shippingAddress.street}">
-    Zip-Code <input th:field="*{shippingAddress.zipCode}">
-    <input type="reset" value="Clear data">
-    <input type="submit" value="Add user">
+    <div class="row">
+<h3 th:text="#{form.create.account}">Create your account</h3>
+<form th:action="@{/newUser}" method="post" th:object="${newUser}">
+    <label for="firestName" th:text="#{form.name}"></label>
+    <input id="firestName" type="text" th:field="*{name}" th:placeholder="#{form.hint.name}">
+
+    <label for="login" th:text="#{form.login}"></label>
+    <input id="login" type="text" th:field="*{email}" th:placeholder="#{form.hint.email}">
+
+    <label for="password" th:text="#{form.pass}"></label>
+    <input id="password" th:field="*{password}" th:placeholder=" 'find out smthg'">
+
+    <label for="cityWeather" th:text="#{form.city.weather}"></label>
+    <input id="cityWeather" th:field="*{city}" th:placeholder="#{form.hint.cityWeather}">
+    <br> <span th:text="#{form.deliver.address}"> Delivery ADDRESS:</span> <br>
+
+    <label for="country" th:text="#{form.country}"></label>
+    <input id="country" type="text" th:field="*{shippingAddress.country}">
+    <label for="city" th:text="#{form.city}"></label>
+    <input id="city" type="text" th:field="*{shippingAddress.city}" >
+    <label for="street" th:text="#{form.street}"></label>
+    <input id="street" th:field="*{shippingAddress.street}">
+    <label for="zipCode" th:text="#{form.zipCode}"></label>
+    <input id="zipCode" th:field="*{shippingAddress.zipCode}">
+
+    <br><span th:text="#{form.invoice.address}">Invoice ADDRESS:</span><br>
+    <label for="country2" th:text="#{form.country}"></label>
+    <input id="country2" type="text" th:field="*{shippingAddress.country}">
+    <label for="city2" th:text="#{form.city}"></label>
+    <input id="city2" type="text" th:field="*{shippingAddress.city}" >
+    <label for="street2" th:text="#{form.street}"></label>
+    <input id="street2" th:field="*{shippingAddress.street}">
+    <label for="zipCode2" th:text="#{form.zipCode}"></label>
+    <input id="zipCode2" th:field="*{shippingAddress.zipCode}">
+
+    <input type="reset" th:value="#{form.button.clear}">
+    <input type="submit" th:value="#{form.button.save}">
 </form>
+    </div>
+</div>
+<p th:insert="fragments::footer"></p>
+<p th:insert="fragments::scripts"></p>
 </body>
 </html>

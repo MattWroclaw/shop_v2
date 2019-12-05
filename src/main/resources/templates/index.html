@@ -18,12 +18,15 @@
 <body>
     <div th:replace="fragments :: navigationBar"></div>
 <!--page content-->
+
+
+
 <div class="container wrapper-my">
 
     <div class="row">
 
         <div class="col-lg-3">
-            <h1 class="my-4">Dreams shop</h1>
+            <h1 class="my-4" th:text="#{app.motto}">Dreams shop</h1>
             <div class="list-group">
                 <a th:href="@{/byType/{type}(type='WEALTH')}" class="list-group-item active" th:text="#{app.wealth}">category 1 </a>
                 <a th:href="@{/byType/{type}(type='FREEDOM')}" class="list-group-item" th:text="#{app.freedom}">category 1 </a>
@@ -32,6 +35,8 @@
 
             </div>
         </div>
+        <br>
+
 
 
 <!--/col-lg-3-->
@@ -157,6 +162,7 @@
         </div>
 <!--        /.row-->
     </div>
+    <p th:insert="fragments::weather"></p>
 <!--    container-->
 </div>
     <div class="push-my"></div>
