@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Your shopping cart</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title th:text="#{app.app.name}">Dream shop</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/shop-item.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/my_own.css">
 </head>
 <body>
+
+<p th:insert="fragments :: navigationBar"></p>
 hello from cart
 <span th:if="${cart.isEmpty()}" th:text=" 'Your cart is empty'"></span>
-<table>
-    <thead>
-        <tr>
-        <td>Title</td>
-        <td>Category</td>
-        <td>Price</td>
-        <td>Quantity</td>
-        </tr>
-    </thead>
+<div class="container wrapper-my">
+    <table>
+        <thead>
+            <tr>
+            <td>Title</td>
+            <td>Category</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            </tr>
+        </thead>
     <tbody>
         <tr th:each="product : ${cart}">
             <td th:text="${product.key.title}"> </td>
@@ -28,10 +42,13 @@ hello from cart
                 </form>
             </td>
         </tr>
-    </tbody>
-</table>
+        </tbody>
+    </table>
 <form th:action="@{/order}">
     <button>I'm buying</button>
 </form>
+</div>
+<p th:insert="fragments :: footer"></p>
+<p th:insert="fragments :: scripts"></p>
 </body>
 </html>

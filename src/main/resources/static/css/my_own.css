@@ -9,14 +9,14 @@ html, body {
     /* But also accounting for potential margin-bottom of last child */
     margin-bottom: -50px;
 }
-.footer-my{
-    position: fixed;
-    bottom: 0;
-    width: 644px;
-    height: 20px;
-    margin: 0 auto;
-    background-color: #343a40 !important;
-}
+/*.footer-my{*/
+/*    position: fixed;*/
+/*    bottom: 0;*/
+/*    width: 644px;*/
+/*    height: 20px;*/
+/*    margin: 0 auto;*/
+/*    background-color: #343a40 !important;*/
+/*}*/
 .push-my {
     height: 50px;
 }
