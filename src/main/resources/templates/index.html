@@ -23,13 +23,15 @@
         <div class="col-lg-3">
             <h1 class="my-4">Dreams shop</h1>
             <div class="list-group">
-                <a th:href="@{/byType/{type}(type='WEALTH')}" class="list-group-item active" th:text="${'Wealth'}">category 1 </a>
-                <a th:href="@{/byType/{type}(type='FREEDOM')}" class="list-group-item" th:text="${'Freedom'}">category 1 </a>
-                <a th:href="@{/byType/{type}(type='GOOD_HEALTH')}" class="list-group-item" th:text="${'Good heath'}">category 1 </a>
-                <a th:href="@{/byType/{type}(type='FRIENDS')}" class="list-group-item" th:text="${'Friends'}">category 1 </a>
+                <a th:href="@{/byType/{type}(type='WEALTH')}" class="list-group-item active" th:text="#{app.wealth}">category 1 </a>
+                <a th:href="@{/byType/{type}(type='FREEDOM')}" class="list-group-item" th:text="#{app.freedom}">category 1 </a>
+                <a th:href="@{/byType/{type}(type='GOOD_HEALTH')}" class="list-group-item" th:text="#{app.health}">category 1 </a>
+                <a th:href="@{/byType/{type}(type='FRIENDS')}" class="list-group-item" th:text="#{app.friends}">category 1 </a>
 
             </div>
         </div>
+
+
 <!--/col-lg-3-->
 <!--carousel-->
         <div class="col-lg-9">
@@ -51,7 +53,7 @@
                     </div>
 
                     <div class="carousel-item">
-                        <img class="d-block img-fluid img-thumbnail"  src="image/freedom.png" alt="Third slide">
+                        <img class="d-block img-fluid "  src="image/freedom.png" alt="Third slide">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -64,6 +66,7 @@
                 </a>
             </div>
 <!--end of carousel-->
+
 <!--            descriptions-->
             <div class="row" th:if="${!productsList.isEmpty()}" >
 
@@ -75,8 +78,13 @@
                                 <a th:href="@{/product-details/{id}(id=${product.getId()})}"  th:text="${product.title}">Item One</a>
                             </h4>
                             <h5 th:text=" '$' + ${product.price}">$24.99</h5>
-                            <p class="card-text" th:text="${product.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                            <p class="card-text" th:text="#{app.category} + #{${product.productType.getMessageKey()}}">Type of product</p>
+                            <p class="card-text" th:text=" ${product.description}">Description </p>
+                            <p class="card-text" th:text="#{app.stock.amount} + ${product.stockAmount}">stock amount</p>
                         </div>
+                        <form th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/buy/{id}(id = ${product.id})}">
+                            <button th:text="#{app.add.to.cart}">I'm buying</button>
+                        </form>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9734;</small>
                         </div>
@@ -107,14 +115,14 @@
                     <td th:text="${prod.stockAmount}"></td>
                     <td th:if="${#authorization.expression('isAuthenticated()')}">
                     <form th:action="@{/buy/{id}(id = ${prod.id})}">
-                        <button>Buy</button>
+                        <button th:text="#{app.add.to.cart}">Buy</button>
                     </form>
                     </td>
                 </tr>
             </tbody>
         </table>
         <form th:if="${#authorization.expression('isAuthenticated()')}" action="/cart">
-            <button>Your cart</button>
+            <button th:text="#{app.cart}">Your cart</button>
         </form>
 
         <div th:if="${#authorization.expression('isAuthenticated()')}">
