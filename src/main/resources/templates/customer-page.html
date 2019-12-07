@@ -4,51 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
-
     <!-- Bootstrap core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="/css/shop-homepage.css" rel="stylesheet">
     <link href="/css/my_own.css" rel="stylesheet">
-
-
     <title th:text="#{app.app.name}">Welcome to r'shop</title>
 </head>
 <body>
 <div th:replace="fragments :: navigationBar"></div>
 <!--page content-->
 <div class="container wrapper-my">
-
-type - sport:
-1.
-2.
-3.
-.
-.
-.
-<table>
-    <thead>
-    <tr>
-        <td>tytuł</td>
-        <td>opis</td>
-        <td>typ</td>
-        <td>cena</td>
-    </tr>
-    </thead>
-    <tbody>
-
-    <tr th:each=" product : ${productsOfType}">
-    <td th:text="${product.title}"></td>
-    <td th:text="${product.description}"></td>
-    <td th:text="${product.productType.toString()}"></td>
-    <td th:text="${product.price}"></td>
-    </tr>
-    </tbody>
-</table>
+<!--TODO customer's former shoppings list-->
 </div>
-<p th:insert="fragments::footer"></p>
-<p th:insert="fragments::scripts"></p>
-
 </body>
 </html>

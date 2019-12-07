@@ -3,6 +3,7 @@ package pl.mojeprojekty.shop_v2.contoller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.mojeprojekty.shop_v2.dto.AddressDto;
 import pl.mojeprojekty.shop_v2.dto.UserDto;
@@ -11,6 +12,7 @@ import pl.mojeprojekty.shop_v2.entity.User;
 import pl.mojeprojekty.shop_v2.services.UserService;
 import pl.mojeprojekty.shop_v2.services.WeatherRestService;
 
+import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
@@ -29,31 +31,13 @@ public class UserController {
     }
 
     @PostMapping("/newUser")
-    public String goEditForm(@ModelAttribute UserDto userForm) {
+    public String goEditForm( @Valid @ModelAttribute("newUser") UserDto userForm, BindingResult errors) {
 
+        if(errors.hasErrors()){
+            return "register";
+        }
         userService.createUser(userForm);
         return "redirect:/login";
     }
 
-    public  Model weatherHandler(Model model, Principal principal) {
-        String userEmail = principal.getName();
-        User loggedUser = userService.findUserByEmail(userEmail);
-        String userCity = loggedUser.getCity();
-        String[] dataWeather = weatherRestService.weatherData(userCity);
-        if (dataWeather != null) {
-           model.addAttribute("weatherFromOW", dataWeather);
-           model.addAttribute("userCity", userCity);
-        } else {
-           model.addAttribute("noWeather", "Not available");
-        }
-        return model;
-    }
-
-//    @GetMapping("/secret")
-    @GetMapping("/fragment")
-    public String goSecret(Model model, Principal principal){
-        weatherHandler(model, principal);
-//        return "top";
-        return "fragments";
-    }
 }

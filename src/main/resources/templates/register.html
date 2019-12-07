@@ -21,46 +21,90 @@
 <div class="container wrapper-my">
 
     <div class="row">
-<h3 th:text="#{form.create.account}">Create your account</h3>
-<form th:action="@{/newUser}" method="post" th:object="${newUser}">
-    <label for="firestName" th:text="#{form.name}"></label>
-    <input id="firestName" type="text" th:field="*{name}" th:placeholder="#{form.hint.name}">
+        <h3 th:text="#{form.create.account}">Create your account</h3>
 
-    <label for="login" th:text="#{form.login}"></label>
-    <input id="login" type="text" th:field="*{email}" th:placeholder="#{form.hint.email}">
+        <form class="row" th:action="@{/newUser}" method="post" th:object="${newUser}">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="firestName" th:text="#{form.name}"></label>
+                    <input id="firestName" class="form-control" type="text" th:field="*{name}"
+                           th:placeholder="#{form.hint.name}" th:errorclass="is-invalid">
+                    <small class="invalid-feedback" th:text="#{form.hint.name}"></small>
+                </div>
 
-    <label for="password" th:text="#{form.pass}"></label>
-    <input id="password" th:field="*{password}" th:placeholder=" 'find out smthg'">
+                <div class="form-group">
+                    <label for="login" th:text="#{form.login}"></label>
+                    <input id="login" class="form-control" type="text" th:field="*{email}"
+                           th:placeholder="#{form.hint.email}" th:errorclass="is-invalid">
+                    <small class="invalid-feedback" th:text="#{form.hint.email}"></small>
+                </div>
 
-    <label for="cityWeather" th:text="#{form.city.weather}"></label>
-    <input id="cityWeather" th:field="*{city}" th:placeholder="#{form.hint.cityWeather}">
-    <br> <span th:text="#{form.deliver.address}"> Delivery ADDRESS:</span> <br>
+                <div class="form-group">
+                    <label for="password" th:text="#{form.pass}"></label>
+                    <input id="password" class="form-control" th:field="*{password}"
+                           th:placeholder=" 'find out smthg'" th:errorclass="is-invalid">
+                    <small class="invalid-feedback" th:text="#{form.cannot.empty}"></small>
+                </div>
 
-    <label for="country" th:text="#{form.country}"></label>
-    <input id="country" type="text" th:field="*{shippingAddress.country}">
-    <label for="city" th:text="#{form.city}"></label>
-    <input id="city" type="text" th:field="*{shippingAddress.city}" >
-    <label for="street" th:text="#{form.street}"></label>
-    <input id="street" th:field="*{shippingAddress.street}">
-    <label for="zipCode" th:text="#{form.zipCode}"></label>
-    <input id="zipCode" th:field="*{shippingAddress.zipCode}">
+                <div class="form-group">
+                    <label for="cityWeather" th:text="#{form.city.weather}"></label>
+                    <input id="cityWeather" class="form-control" type="text" th:field="*{city}"
+                           th:placeholder="#{form.hint.cityWeather}" th:errorclass="is-invalid">
+                    <small class="invalid-feedback" th:text="#{form.hint.cityWeather}"></small>
+                </div>
+            </div>
 
-    <br><span th:text="#{form.invoice.address}">Invoice ADDRESS:</span><br>
-    <label for="country2" th:text="#{form.country}"></label>
-    <input id="country2" type="text" th:field="*{shippingAddress.country}">
-    <label for="city2" th:text="#{form.city}"></label>
-    <input id="city2" type="text" th:field="*{shippingAddress.city}" >
-    <label for="street2" th:text="#{form.street}"></label>
-    <input id="street2" th:field="*{shippingAddress.street}">
-    <label for="zipCode2" th:text="#{form.zipCode}"></label>
-    <input id="zipCode2" th:field="*{shippingAddress.zipCode}">
+            <div class="col-md-5">
+            <span th:text="#{form.deliver.address}"> Delivery ADDRESS:</span>
+                <div class="form-group">
+                    <label for="country" th:text="#{form.country}"></label>
+                    <input id="country" class="form-control" type="text" th:field="*{shippingAddress.country}"
+                           th:placeholder="#{form.country}" th:errorclass="is-invalid">
+                    <small class="invalid-feedback" th:text="#{form.hint.country}"></small>
+                </div>
 
-    <input type="reset" th:value="#{form.button.clear}">
-    <input type="submit" th:value="#{form.button.save}">
-</form>
+                <div class="form-group">
+                    <label for="city" th:text="#{form.city}"></label>
+                    <input id="city" type="text" class="form-control" th:field="*{shippingAddress.city}"
+                           th:placeholder="#{form.city}" th:errorclass="is-invalid">
+                    <small class="invalid-feedback" th:text="#{form.hint.city}"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="street" th:text="#{form.street}"></label>
+                    <input id="street" type="text" class="form-control"
+                           th:field="*{shippingAddress.street}" th:placeholder="#{form.street}"
+                           th:errorclass="is-invalid">
+                    <small class="invalid-feedback" th:text="#{form.hint.street}"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="zipCode" th:text="#{form.zipCode}"></label>
+                    <input id="zipCode" class="form-control" type="text"
+                           th:field="*{shippingAddress.zipCode}"
+                           th:placeholder="#{form.zipCode}" th:errorclass="is-invalid">
+                    <small class="invalid-feedback" th:text="#{form.hint.zipcode}"></small>
+                </div>
+                <!--                additional address -->
+                <!--                <br><span th:text="#{form.invoice.address}">Invoice ADDRESS:</span><br>-->
+                <!--                <label for="country2" th:text="#{form.country}"></label>-->
+                <!--                <input id="country2" type="text" th:field="*{shippingAddress.country}">-->
+                <!--                <label for="city2" th:text="#{form.city}"></label>-->
+                <!--                <input id="city2" type="text" th:field="*{shippingAddress.city}">-->
+                <!--                <label for="street2" th:text="#{form.street}"></label>-->
+                <!--                <input id="street2" th:field="*{shippingAddress.street}">-->
+                <!--                <label for="zipCode2" th:text="#{form.zipCode}"></label>-->
+                <!--                <input id="zipCode2" th:field="*{shippingAddress.zipCode}">-->
+                <!-- end of additional address-->
+            </div>
+            <div class="col-4">
+            <input type="reset" class="btn btn-outline-primary" th:value="#{form.button.clear}">
+            <input type="submit" class="btn btn-outline-primary" th:value="#{form.button.save}">
+            </div>
+        </form>
     </div>
 </div>
-<p th:insert="fragments::footer"></p>
+<!--<p th:insert="fragments::footer"></p>-->
 <p th:insert="fragments::scripts"></p>
 </body>
 </html>

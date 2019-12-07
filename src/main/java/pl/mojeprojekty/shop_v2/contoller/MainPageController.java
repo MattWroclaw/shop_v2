@@ -5,18 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import pl.mojeprojekty.shop_v2.dto.ProductDto;
-import pl.mojeprojekty.shop_v2.entity.Product;
-import pl.mojeprojekty.shop_v2.entity.ProductCategory;
 import pl.mojeprojekty.shop_v2.entity.ProductType;
-import pl.mojeprojekty.shop_v2.services.ApplicationUserDetailService;
+import pl.mojeprojekty.shop_v2.entity.User;
 import pl.mojeprojekty.shop_v2.services.CartService;
 import pl.mojeprojekty.shop_v2.services.ProductService;
+import pl.mojeprojekty.shop_v2.services.UserService;
+import pl.mojeprojekty.shop_v2.services.WeatherRestService;
 
+import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,25 +22,26 @@ public class MainPageController {
 
     private final ProductService productService;
     private final CartService cartService;
-    private final ApplicationUserDetailService applicationUserDetailService;
-
+    private final UserService userService;
+    private final WeatherRestService weatherRestService;
 
     @GetMapping({"/", "/welcome"})
-    public String goShop(Model model){
+    public String goShop(Model model, Principal principal) {
         List<ProductDto> allProductsDto = productService.findAllProductsDto();
         model.addAttribute("productsList", allProductsDto);
 
+        weatherHandler(model, principal);
         return "index";
     }
 
     @GetMapping("/buy/{id}")
-    public String addToCart(@PathVariable long id){
+    public String addToCart(@PathVariable long id) {
         cartService.addProductToCart(id);
         return "redirect:/welcome";
     }
 
     @GetMapping("/byType/{type}")
-    public String goCategory(@PathVariable String type, Model model){
+    public String goCategory(@PathVariable String type, Model model) {
         ProductType productType = ProductType.valueOf(type);
         List<ProductDto> productsByType = productService.findProductsByType(productType);
         model.addAttribute("productsOfType", productsByType);
@@ -50,22 +49,47 @@ public class MainPageController {
     }
 
     @GetMapping("/product-details/{id}")
-    public String goProductDetails(@PathVariable long id, Model model){
+    public String goProductDetails(@PathVariable long id, Model model) {
         ProductDto productDto = productService.findProductDtoById(id);
         model.addAttribute("givenProduct", productDto);
         return "productDetails";
     }
 
     @GetMapping("/test/1")
-    public String toTest( Model model){
+    public String toTest(Model model) {
         ProductDto productDto = productService.findProductDtoById(1l);
         model.addAttribute("givenProduct", productDto);
         return "test";
     }
 
     @GetMapping("test2")
-    public String test2(){
+    public String test2() {
         return "test2";
+    }
+
+    //    Weather service
+
+    public Model weatherHandler(Model model, Principal principal) {
+        String userEmail = "";
+        String userCity = "";
+        if (principal != null) {
+            principal.getName();
+            userEmail = principal.getName();
+            User loggedUser = userService.findUserByEmail(userEmail);
+            userCity = loggedUser.getCity();
+        } else {
+            userCity = "Wroclaw";
+        }
+
+        String[] dataWeather = weatherRestService.weatherData(userCity);
+        if (dataWeather != null) {
+            model.addAttribute("weatherFromOW", dataWeather);
+            model.addAttribute("userCity", userCity);
+        } else {
+            model.addAttribute("noWeather", "Not available");
+        }
+        return model;
+
     }
 
 }
