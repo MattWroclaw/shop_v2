@@ -10,6 +10,8 @@ import pl.mojeprojekty.shop_v2.repositories.UserRepository;
 import pl.mojeprojekty.shop_v2.services.OrderService;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor

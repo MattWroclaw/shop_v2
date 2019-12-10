@@ -19,7 +19,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class ShopController {
+public class AllUsersDataController {
 
     private final UserService userService;
 

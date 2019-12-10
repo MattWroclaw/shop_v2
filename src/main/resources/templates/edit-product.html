@@ -24,25 +24,55 @@
 <h2>Edit product</h2>
 <form th:action="@{/editProduct}" method="post" th:object="${editedProduct}">
     <input type="hidden" th:field="*{id}">
-    Title: <input type="text" th:field="*{title}">
-    Description: <input type="text" th:field="*{description}">
-    Price: <input type="text" th:field="*{price}">
-    Stock amount: <input type="text" th:field="*{stockAmount}">
-    Product type: <select   th:field="*{productType}">
+    <div class="form-group">
+        <label for="productTitle" th:text="#{product.title}"></label>
+        <input id="productTitle" class="form-control" type="text"
+               th:field="*{title}" th:placeholder="#{product.title}"
+               th:errorclass="is-invalid">
+        <small class="invalid-feedback" th:text="#{product.hint.title}"></small>
+    </div>
+    <div class="form-group">
+        <label for="prodDescr" th:text="#{product.description}"></label>
+        <input id="prodDescr" cols="30" rows="4" maxlength="200"
+               th:field="*{description}" th:placeholder="#{product.description}"
+               th:errorclass="is-invalid">
+        <small class="invalid-feedback" th:text="#{product.hint.description}"></small>
+    </div>
+    <div class="form-group">
+        <label for="price" th:text="#{product.price}"></label>
+        <input id="price" class="form-control" type="text"
+               th:field="*{price}"
+               th:placeholder="#{product.price}"
+               th:errorclass="is-invalid">
+        <small class="invalid-feedback" th:text="#{product.hint.price}"></small>
+    </div>
+    <label for="typeProduct" th:text="#{product.category}"></label>
+    <select id="typeProduct" name="type" th:field="*{productType}">
         <option th:each="type : ${T(pl.mojeprojekty.shop_v2.entity.ProductType).values()}"
-        th:text="${type}" th:value="${type}"></option>
+                th:text="${type}"
+                th:value="${type}"></option>
     </select>
-    Product category: <select th:field="*{productCategory}">
-        <option th:each="cat : ${categories}"
-                th:text="${cat.id} +', ' + ${cat.description}"
-                th:value="${cat.id}">
+    <div class="form-group">
+        <label for="stockAmount" th:text="#{app.stock.amount}"></label>
+        <input type="text" id="stockAmount" class="form-control"
+               th:field="*{stockAmount}"
+               th:placeholder="#{product.strockAmount}"
+               th:errorclass="is-invalid">
+        <small class="invalid-feedback" th:text="#{product.hint.stockAmount}"></small>
+    </div>
+    Product category:
+    <select th:field="*{productCategory}">
+        <option th:each="c : ${categories}"
+                th:text="${c.getDescription()}"
+                th:value="${c.getId()}">
         </option>
     </select>
-    <button type="submit" class="btn btn-primary btn-sm" value="Change">Small button</button>
+    <input type="submit" value="Add">
+</form>
 <!--    <input type="submit" value="Change">-->
     <p th:insert="fragments::footer"></p>
     <p th:insert="fragments::scripts"></p>
-</form>
+
     </div>
 </div>
 </body>

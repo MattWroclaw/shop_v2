@@ -17,7 +17,7 @@ import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
-public class UserController {
+public class NewUserController {
 
     private final UserService userService;
     private final WeatherRestService weatherRestService;

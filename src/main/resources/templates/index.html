@@ -4,21 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
-
     <!-- Bootstrap core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="/css/shop-homepage.css" rel="stylesheet">
     <link href="/css/my_own.css" rel="stylesheet">
 
-
     <title th:text="#{app.app.name}">Welcome to r'shop</title>
 </head>
 <body>
-    <div th:replace="fragments :: navigationBar"></div>
+<div th:replace="fragments :: navigationBar"></div>
 <!--page content-->
-
 
 
 <div class="container wrapper-my">
@@ -28,19 +24,22 @@
         <div class="col-lg-3">
             <h1 class="my-4" th:text="#{app.motto}">Dreams shop</h1>
             <div class="list-group">
-                <a th:href="@{/byType/{type}(type='WEALTH')}" class="list-group-item active" th:text="#{app.wealth}">category 1 </a>
-                <a th:href="@{/byType/{type}(type='FREEDOM')}" class="list-group-item" th:text="#{app.freedom}">category 1 </a>
-                <a th:href="@{/byType/{type}(type='GOOD_HEALTH')}" class="list-group-item" th:text="#{app.health}">category 1 </a>
-                <a th:href="@{/byType/{type}(type='FRIENDS')}" class="list-group-item" th:text="#{app.friends}">category 1 </a>
+                <a th:href="@{/byType/{type}(type='WEALTH')}" class="list-group-item active" th:text="#{app.wealth}">category
+                    1 </a>
+                <a th:href="@{/byType/{type}(type='FREEDOM')}" class="list-group-item" th:text="#{app.freedom}">category
+                    1 </a>
+                <a th:href="@{/byType/{type}(type='GOOD_HEALTH')}" class="list-group-item" th:text="#{app.health}">category
+                    1 </a>
+                <a th:href="@{/byType/{type}(type='FRIENDS')}" class="list-group-item" th:text="#{app.friends}">category
+                    1 </a>
 
             </div>
         </div>
         <br>
 
 
-
-<!--/col-lg-3-->
-<!--carousel-->
+        <!--/col-lg-3-->
+        <!--carousel-->
         <div class="col-lg-9">
             <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -50,17 +49,17 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
-                        <img class="d-block img-fluid "  src="/image/friends.jpg" alt="First slide">
+                        <img class="d-block img-fluid " src="/image/friends.jpg" alt="First slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block img-fluid "  src="image/goodHealth.jpg" alt="second slie">
+                        <img class="d-block img-fluid " src="image/goodHealth.jpg" alt="second slie">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block img-fluid "  src="image/gold.jpg" alt="Third slide">
+                        <img class="d-block img-fluid " src="image/gold.jpg" alt="Third slide">
                     </div>
 
                     <div class="carousel-item">
-                        <img class="d-block img-fluid "  src="image/freedom.png" alt="Third slide">
+                        <img class="d-block img-fluid " src="image/freedom.png" alt="Third slide">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -72,47 +71,53 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-<!--end of carousel-->
+            <!--end of carousel-->
 
-<!--            descriptions-->
-            <div class="row " th:if="${!productsList.isEmpty()}" >
+            <!--            descriptions-->
+            <div class="row " th:if="${!productsList.isEmpty()}">
 
-                <div class="col-lg-4 col-md-6 mb-4"  th:each="product : ${productsList}"  >
+                <div class="col-lg-4 col-md-6 mb-4" th:each="product : ${productsList}">
                     <div class="card h-100">
-                        <a th:href="@{/product-details/{id}(id=${product.getId()})}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        <a th:href="@{/product-details/{id}(id=${product.getId()})}"><img class="card-img-top"
+                                                                                          src="http://placehold.it/700x400"
+                                                                                          alt=""></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a th:href="@{/product-details/{id}(id=${product.getId()})}"  th:text="${product.title}">Item One</a>
+                                <a th:href="@{/product-details/{id}(id=${product.getId()})}" th:text="${product.title}">Item
+                                    One</a>
                             </h4>
                             <h5 th:text=" '$' + ${product.price}">$24.99</h5>
-                            <p class="card-text" th:text="#{app.category} + #{${product.productType.getMessageKey()}}">Type of product</p>
+                            <p class="card-text" th:text="#{app.category} + #{${product.productType.getMessageKey()}}">
+                                Type of product</p>
                             <p class="card-text" th:text=" ${product.description}">Description </p>
                             <p class="card-text" th:text="#{app.stock.amount} + ${product.stockAmount}">stock amount</p>
                         </div>
-                        <form th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/buy/{id}(id = ${product.id})}">
+                        <form th:if="${#authorization.expression('isAuthenticated()')}"
+                              th:action="@{/buy/{id}(id = ${product.id})}">
                             <button th:text="#{app.add.to.cart}">I'm buying</button>
                         </form>
                         <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733;
+                                &#9733; &#9733; &#9734;</small>
                         </div>
                     </div>
                 </div>
-        </div>
+            </div>
 
-        <h2>Products</h2>
-        <table>
-            <thead>
-            <tr>
-                <td>Title</td>
-                <td>Description</td>
-                <td>Type</td>
-                <td>Category</td>
-                <td>Type</td>
-                <td>Price</td>
-                <td>Stock amount</td>
-            </tr>
-            </thead>
-            <tbody>
+            <h2>Products</h2>
+            <table>
+                <thead>
+                <tr>
+                    <td>Title</td>
+                    <td>Description</td>
+                    <td>Type</td>
+                    <td>Category</td>
+                    <td>Type</td>
+                    <td>Price</td>
+                    <td>Stock amount</td>
+                </tr>
+                </thead>
+                <tbody>
                 <tr th:each="prod : ${productsList}">
                     <td th:text="${prod.title}"></td>
                     <td th:text="${prod.description}"></td>
@@ -121,54 +126,56 @@
                     <td th:text="${prod.price}"></td>
                     <td th:text="${prod.stockAmount}"></td>
                     <td th:if="${#authorization.expression('isAuthenticated()')}">
-                    <form th:action="@{/buy/{id}(id = ${prod.id})}">
-                        <button th:text="#{app.add.to.cart}">Buy</button>
-                    </form>
+<!--                    || th:if="${prod.getStockAmount()} gt 1" >-->
+<!--                        TODO if statement thymeleaf-->
+                        <form th:action="@{/buy/{id}(id = ${prod.id})}">
+                            <button th:text="#{app.add.to.cart}">Add to cart</button>
+                        </form>
                     </td>
                 </tr>
-            </tbody>
-        </table>
-        <form th:if="${#authorization.expression('isAuthenticated()')}" action="/cart">
-            <button th:text="#{app.cart}">Your cart</button>
-        </form>
+                </tbody>
+            </table>
+            <form th:if="${#authorization.expression('isAuthenticated()')}" action="/cart">
+                <button th:text="#{app.cart}">Your cart</button>
+            </form>
 
-        <div th:if="${#authorization.expression('isAuthenticated()')}">
-            <span th:text="'Chcesz wyjść?'"></span>
-            <a th:href="@{/logout}" th:text="'Wyloguj'" >Logout</a>
+            <div th:if="${#authorization.expression('isAuthenticated()')}">
+                <span th:text="'Chcesz wyjść?'"></span>
+                <a th:href="@{/logout}" th:text="'Wyloguj'">Logout</a>
+            </div>
+
+            <div th:if="${not #authorization.expression('isAuthenticated()')}">
+                <span th:text="'Chcesz coś kupić'"></span>
+                <a th:href="@{/login}" th:text="'Zaloguj się'">Logout</a>
+            </div>
+
+            <div th:if="${@applicationUserDetailService.loggedUser() == null}">
+                <p> You're not logged</p>
+            </div>
+
+            <div th:unless="${@applicationUserDetailService.loggedUser() != null}">
+                <span th:text="${@applicationUserDetailService.loggedUser()}"></span>
+            </div>
+
+
+            <div th:text="${#authorization.expression('hasRole(''ADMIN'')')}">Admin</div>
+
+            <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                <form th:action="@{/admin}">
+                    <button>Admin site</button>
+                </form>
+            </div>
+            <!--            /col-lg-9-->
         </div>
-
-        <div th:if="${not #authorization.expression('isAuthenticated()')}">
-            <span th:text="'Chcesz coś kupić'"></span>
-            <a th:href="@{/login}" th:text="'Zaloguj się'" >Logout</a>
-        </div>
-
-        <div th:if="${@applicationUserDetailService.loggedUser() == null}">
-            <p> You're not logged</p>
-        </div>
-
-        <div th:unless="${@applicationUserDetailService.loggedUser() != null}">
-            <span th:text="${@applicationUserDetailService.loggedUser()}"></span>
-        </div>
-
-
-        <div th:text="${#authorization.expression('hasRole(''ADMIN'')')}">Admin</div>
-
-        <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-        <form th:action="@{/admin}">
-            <button>Admin site</button>
-        </form>
-        </div>
-<!--            /col-lg-9-->
-        </div>
-<!--        /.row-->
+        <!--        /.row-->
     </div>
     <p th:insert="fragments::weather"></p>
-<!--    container-->
+    <!--    container-->
 </div>
-    <div class="push-my"></div>
-    <div  th:insert="fragments :: footer"></div>
+<div class="push-my"></div>
+<div th:insert="fragments :: footer"></div>
 
-    <div th:insert="fragments :: scripts">
-    </div>
+<div th:insert="fragments :: scripts">
+</div>
 </body>
 </html>

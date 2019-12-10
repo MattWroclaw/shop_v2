@@ -18,35 +18,38 @@
 <body>
 
 <p th:insert="fragments :: navigationBar"></p>
-hello from cart
+
 <span th:if="${cart.isEmpty()}" th:text=" 'Your cart is empty'"></span>
 <div class="container wrapper-my">
-    <table>
+    <table class="table table-striped">
         <thead>
-            <tr>
-            <td>Title</td>
-            <td>Category</td>
-            <td>Price</td>
-            <td>Quantity</td>
-            </tr>
+        <tr>
+            <th scope="col" th:text="'No'">Number</th>
+            <th scope="col" th:text="#{product.title}">title</th>
+            <th scope="col" th:text="#{product.category}">category</th>
+            <th scope="col" th:text="#{product.price}">price</th>
+            <th scope="col" th:text="#{product.quantity}">quantity</th>
+        </tr>
         </thead>
-    <tbody>
-        <tr th:each="product : ${cart}">
-            <td th:text="${product.key.title}"> </td>
-            <td th:text="${product.key.productCategory?.description}"> </td>
-            <td th:text="${product.key.price}"> </td>
-            <td th:text="${product.value}"></td>
+        <tbody>
+        <tr th:each="prod, Stat : ${cart}">
+            <th scope="row" th:text="${Stat.count}"></th>
+            <td th:text="${prod.key.getTitle()}"></td>
+            <td th:text="${prod.key.productCategory?.getDescription()}"></td>
+            <td th:text="${prod.key.getPrice()}"></td>
+            <td th:text="${prod.value.toString()}"></td>
             <td>
-                <form th:action="@{/removeItems/{id}(id=${product.key.id}) }">
+                <form th:action="@{/removeItems/{id}(id=${prod.key.id}) }">
                     <button>Remove</button>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
-<form th:action="@{/order}">
-    <button>I'm buying</button>
-</form>
+
+    <form th:if="${not cart.isEmpty()}" th:action="@{/order}">
+        <button>I'm buying</button>
+    </form>
 </div>
 <p th:insert="fragments :: footer"></p>
 <p th:insert="fragments :: scripts"></p>

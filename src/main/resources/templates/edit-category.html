@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity"
->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
-
     <!-- Bootstrap core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="/css/shop-homepage.css" rel="stylesheet">
     <link href="/css/my_own.css" rel="stylesheet">
-
 
     <title th:text="#{app.app.name}">Welcome to r'shop</title>
 </head>
@@ -21,23 +17,24 @@
 <div class="container wrapper-my">
 
     <div class="row">
-<h2>Edit product category</h2>
-<form th:action="@{/editCategory}" method="post" th:object="${editedCategory}">
-    Id: <input th:field="*{id}">
-    Description: <input th:field="*{description}">
-    Parent id:
-    <select th:field="*{parentId}">
-        <option th:each="ctg : ${allCategories}"
-                th:text="${ctg.id}"
-                th:value="${ctg.id}">
-        </option>
-    </select>
-    <input type="submit" value="Confirm">
-</form>
-
-        <div th:replace="fragments :: footer"></div>
-<div th:replace="fragments:: scripts"></div>
+        <h2>Edit product category</h2>
+        <form th:action="@{/editCategory}" method="post" th:object="${editedCategory}">
+            Id: <input th:field="*{id}" readonly>
+            Description: <input th:field="*{description}">
+            Parent id:
+            <select th:field="*{parentId}">
+                <option th:each="ctg : ${allCategories}"
+                        th:text="${ctg.id}"
+                        th:value="${ctg.id}">
+                </option>
+            </select>
+            <input type="submit" value="Confirm">
+        </form>
     </div>
 </div>
+        <div th:replace="fragments :: footer"></div>
+        <div th:replace="fragments:: scripts"></div>
+
+
 </body>
 </html>

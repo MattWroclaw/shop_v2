@@ -18,54 +18,85 @@
 <body>
 <div th:insert="fragments :: navigationBar"></div>
 <div class="container wrapper-my">
-Your order: <br>
-<table>
-    <thead>
-    <td>Mail/login uzytkownika</td>
-    <td th:text="${userEmail}"></td>
-    <td></td>
-    <td>Użytkownik</td>
-    <td th:text="${userZBazy.name}"></td>
-    <td th:text="${userZBazy.id}"></td>
-    <td th:text="${userZBazy.city}"></td>
-    <td th:text="${userZBazy.email}"></td>
-    <td></td>
-    </thead>
-    <tbody>
-    <tr>
-        <td>Name</td>
-        <td th:text="${order.getUser().name}"></td>
-    </tr>
-    <tr>
-        <td>Shiping adress (list)</td>
-        <td th:text="${order.getUser().shippingAddress}"></td>
-    </tr>
-    <tr>
-        <td>Total price</td>
-        <td th:text="${order.getTotalPrice()}"></td>
-    </tr>
-    <tr th:each="item: ${order.getOrderLines()}">
-        <td th:text="${item.product.title}">Items</td>
-        <td th:text="${item.product.description}">Items</td>
-        <td th:text="${item.product.price}">Items</td>
 
-    </tr>
-    <tr>
-        <td>address to aaray</td>
-        <td th:text="${order.getUser().getShippingAddress().toArray()}"></td>
-    </tr>
-    <tr>
-        <td>Date of buying</td>
-        <td th:text="${order.getOrderDate()}"></td>
-    </tr>
-    </tbody>
-</table>
-<form th:action="@{/}">
-    <button>Back to the store</button>
+    <span th:text="#{order.thisIsYourOrder}"></span>
+    <p th:text="#{order.userMail} + ':' + ${userZBazy.getEmail()}"></p>
+    <p th:text="#{order.DateOfPurchase} + ':' + ${order.getOrderDate()}"></p>
 
-    <div th:insert="fragments :: footer"></div>
-    <div th:insert="fragments :: scripts"></div>
-</form>
+    <table class="table table-striped" th:if="${order != null}">
+        <thead>
+        <tr>
+            <th scope="col" th:text="#{product.title}">title</th>
+            <th scope="col" th:text="#{product.category}">category</th>
+            <th scope="col" th:text="#{product.price}">price</th>
+            <th scope="col" th:text="#{product.quantity}">quantity</th>
+            <th scope="col" th:text="#{order.TotalPrice}">Total price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ord : ${order.getOrderLines()}">
+            <td scope="row" th:text="${ord.getProduct().getTitle()}"></td>
+            <td scope="row" th:text="${ord.getProduct().getProductCategory().getDescription()}"></td>
+            <td scope="row" th:text="${ord.getProduct().getPrice()}"></td>
+            <td scope="row" th:text="${ord.getQuantity()}"></td>
+            <td scope="row" th:text="${order.getTotalPrice()}"></td>
+
+            <td th:text="${order?.getDeliveryAdress()?.getCountry()}"></td>
+            <td th:text="${order?.getDeliveryAdress()?.getCity()}"></td>
+            <td th:text="${order?.getDeliveryAdress()?.getStreet()}"></td>
+            <td th:text="${order?.getDeliveryAdress()?.getZipCode()}"></td>
+        </tr>
+        </tbody>
+        <h1>poniżej jest stara tabelka, do wykreślenia</h1>
+    </table>
+    <table>
+        <thead>
+        <td>Mail/login uzytkownika</td>
+        <td th:text="${userEmail}"></td>
+        <td></td>
+        <td>Użytkownik</td>
+        <td th:text="${userZBazy.name}"></td>
+        <td th:text="${userZBazy.id}"></td>
+        <td th:text="${userZBazy.city}"></td>
+        <td th:text="${userZBazy.email}"></td>
+        <td></td>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Name</td>
+            <td th:text="${order.getUser().name}"></td>
+        </tr>
+        <tr>
+            <td>Shiping adress (list)</td>
+            <td th:text="${order.getUser().shippingAddress}"></td>
+        </tr>
+        <tr>
+            <td>Total price</td>
+            <td th:text="${order.getTotalPrice()}"></td>
+        </tr>
+        <tr th:each="item: ${order.getOrderLines()}">
+            <td th:text="${item.product.title}">Items</td>
+            <td th:text="${item.product.description}">Items</td>
+            <td th:text="${item.product.price}">Items</td>
+
+        </tr>
+        <tr>
+            <td>address to array</td>
+            <td th:text="${order.getUser().getShippingAddress().toArray()}"></td>
+        </tr>
+        <tr>
+            <td>Date of buying</td>
+            <td th:text="${order.getOrderDate()}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <form th:action="@{/}">
+        <button>Back to the store</button>
+
+        <div th:insert="fragments :: footer"></div>
+        <div th:insert="fragments :: scripts"></div>
+    </form>
 </div>
+
 </body>
 </html>

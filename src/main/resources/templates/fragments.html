@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <meta charset="UTF-8">
     <title>Welcome to r'shop</title>
@@ -9,49 +10,63 @@
 
 <!-- Navigation -->
 <div th:fragment="navigationBar">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" th:href="@{/welcome}" th:text="#{app.app.name}" >Universal shop</a>
-<!--        cart-->
-        <form th:if="${#authorization.expression('isAuthenticated()')}" action="/cart">
-            <button th:text="#{app.cart}">Your cart</button>
-        </form>&nbsp;
-<!--        cart - end-->
-<!--        languages-->
-        <a href="?lang=en_GB" th:text="#{language.english}">english</a>&nbsp;
-        <a href="?lang=pl_PL" th:text="#{language.polish}">polski</a>&nbsp;
-        <a href="?lang=de_DE" th:text="#{language.german}">deutsch</a>
-<!--        languages end-->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li th:if="${not #authorization.expression('isAuthenticated()')}" class="nav-item active">
-                    <a class="nav-link" th:href="@{/login}" th:text="#{app.login}" >LogIn
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/welcome}" th:text="#{app.app.name}">Universal shop</a>
+            <!--        cart-->
+            <form th:if="${#authorization.expression('isAuthenticated()')}" action="/cart">
+                <button th:text="#{app.cart}">Your cart</button>
+            </form>&nbsp;
+            <!--        cart - end-->
+            <!--        languages-->
+            <a href="?lang=en_GB" th:text="#{language.english}">english</a>&nbsp;
+            <a href="?lang=pl_PL" th:text="#{language.polish}">polski</a>&nbsp;
+            <a href="?lang=de_DE" th:text="#{language.german}">deutsch</a>
+            <!--        languages end-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li th:if="${not #authorization.expression('isAuthenticated()')}" class="nav-item active">
+                        <a class="nav-link" th:href="@{/login}" th:text="#{app.login}">LogIn
                             <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li th:if="${not #authorization.expression('isAuthenticated()')}" class="nav-item active">
-                    <a class="nav-link" th:href="@{/register}" th:text="#{app.register}" >LogIn
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
+                        </a>
+                    </li>
+                    <li th:if="${not #authorization.expression('isAuthenticated()')}" class="nav-item active">
+                        <a class="nav-link" th:href="@{/register}" th:text="#{app.register}">register
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
 
-                <li th:if="${ #authorization.expression('isAuthenticated()')}" class="nav-item">
-                    <a class="nav-link" th:href="@{/logout}" th:text="#{app.logout}">wyloguj</a>
-                </li>
+                    <li th:if="${ #authorization.expression('isAuthenticated()')}" class="nav-item">
+                        <a class="nav-link" th:href="@{/logout}" th:text="#{app.logout}">wyloguj</a>
+                    </li>
 
-                <li  th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="nav-item">
-                    <a class="nav-link" th:href="@{/product-category}" th:text="'Admin site'">admin page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
+                    <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="nav-item">
+                        <a class="nav-link" th:href="@{/product-category}" th:text="'Admin site - depricated'">admin page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="dropdown show" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" >
+                        <a class="nav-link" href="#" id="dropdownMenuLink" data-toggle="dropdown" >
+                            <!--                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                            Admin site
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" th:href="@{/categories}" th:text="#{nav.category}">category</a>
+                            <a class="dropdown-item" th:href="@{/products-settings}" th:text="#{nav.product}">product settings</a>
+                            <a class="dropdown-item" href="#">users settings</a>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 </div>
 <!--navigation end-->
 
@@ -64,10 +79,9 @@
 <!--scripts end-->
 
 <!--footer-->
-<div th:fragment="footer">
-<!--    <footer class="py-5 bg-dark footer-my">-->
-
-    <footer class="py-2 bg-dark footer-my2 ">
+<div th:fragment="footer" class="footerholder-own">
+    <!--    <footer class="py-5 bg-dark footer-my">-->
+    <footer class="py-2 bg-dark footer-my2 footer-own ">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
         </div>
@@ -77,28 +91,28 @@
 <!-- footer end-->
 
 <!--    weather-->
-    <div th:fragment="weather">
-        <p th:if="${weatherFromOW} == null" th:text="${noWeather}">
-        <p th:text="#{weather.conditions.for} + ${userCity}">user city</p>
-        <table th:if="${weatherFromOW} != null">
-            <thead>
-            <tr>
-                <th>Temp</th>
-                <th>Humidity</th>
-                <th>Pressure</th>
-                <th>Temp max</th>
-                <th>Temp min</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td th:each=" element : ${weatherFromOW}">
-                    <span th:text="${element}"></span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+<div th:fragment="weather">
+    <p th:if="${weatherFromOW} == null" th:text="${noWeather}">
+    <p th:text="#{weather.conditions.for} + ${userCity}">user city</p>
+    <table th:if="${weatherFromOW} != null">
+        <thead>
+        <tr>
+            <th>Temp</th>
+            <th>Humidity</th>
+            <th>Pressure</th>
+            <th>Temp max</th>
+            <th>Temp min</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:each=" element : ${weatherFromOW}">
+                <span th:text="${element}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 <!--    weather end-->
 
 </body>

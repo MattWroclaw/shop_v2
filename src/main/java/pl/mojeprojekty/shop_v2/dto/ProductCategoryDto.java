@@ -14,12 +14,11 @@ public class ProductCategoryDto {
     private long id;
 
     @NotNull
-    @Size(min = 1, max = 12, message = "Min 1, max 12 chars")
+    @Size(min = 1, max = 30, message = "Min 1, max 30 chars")
     @NotBlank
     private String description;
 
-    @NotNull
-    @Digits(integer = 2, fraction = 0)
+
     private Long parentId;
 
 }

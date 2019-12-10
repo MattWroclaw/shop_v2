@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/shop-homepage.css" rel="stylesheet">
+    <link href="/css/my_own.css" rel="stylesheet">
+
+    <title th:text="#{app.app.name}">Welcome to r'shop</title>
+</head>
+<body>
+<div th:replace="fragments :: navigationBar"></div>
+<!--page content-->
+<div class="container wrapper-my">
+
+    <div class="row">
+        <div class="col-md-5">
+            <h3>List of categories used in our shop</h3>
+            <span th:if="${categories == null}" th:text="#{product.noProductCategory}">empty list</span>
+
+            <table class="table table-striped" th:if="${categories != null}">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col" th:text="#{product.category}">First</th>
+                    <th scope="col" th:text="#{produkt.parent}">Last</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="category, Stat : ${categories}">
+                    <th scope="row" th:text="${category.id}"></th>
+                    <td th:text="${category.description}"></td>
+                    <td th:text="${category.parentId}"></td>
+                    <td><a th:href="@{/edit-category/{id}(id=${category.id})}" th:text="#{form.button.edit}">Edit</a></td>
+                    <td th:if="${Stat.last}"><a th:href="@{/deleteCategory/{id}(id=${category.id})}" th:text="#{form.button.delete}">Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-sm-7">
+            <h2>Create a new category</h2>
+            <form class="row" th:action="@{/newCategory}" method="post" th:object="${singleCategory}">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group">
+                    <label for="categoryDescr" th:text="#{product.category}"></label>
+                    <input id="categoryDescr" class="form-control" type="text"
+                           th:field="*{description}" th:placeholder="#{product.category.description}"
+                           th:errorclass="is-invalid">
+                    <small class="invalid-feedback" th:text="#{form.cannot.empty}"></small>
+                </div>
+                <div class="btn-group form-group">
+                    <label for="parentsId" th:text="#{produkt.parent}"></label>
+                    <select id="parentsId"  th:field="*{parentId}">
+                        <option th:each="ctg : ${categories}"
+                                th:text="${ctg.id}"
+                                th:value="${ctg.id}">
+                        </option>
+                    </select>
+                </div>
+
+                <input type="reset" class="btn btn-outline-primary" th:value="#{form.button.clear}">
+                <input type="submit" class="btn btn-outline-primary" th:value="#{form.button.save}">
+            </form>
+        </div>
+    </div>
+</div>
+
+        <p th:insert="fragments::footer"></p>
+    <p th:insert="fragments::scripts"></p>
+</body>
+</html>

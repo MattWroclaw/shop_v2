@@ -12,7 +12,6 @@
     <link href="/css/shop-homepage.css" rel="stylesheet">
     <link href="/css/my_own.css" rel="stylesheet">
 
-
     <title th:text="#{app.app.name}">Welcome to r'shop</title>
 </head>
 <body>
@@ -25,6 +24,7 @@
 
         <form class="row" th:action="@{/newUser}" method="post" th:object="${newUser}">
             <div class="col-md-5">
+                <span th:text="#{form.customer.data}">Dustomer's data</span>
                 <div class="form-group">
                     <label for="firestName" th:text="#{form.name}"></label>
                     <input id="firestName" class="form-control" type="text" th:field="*{name}"

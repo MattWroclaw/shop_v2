@@ -55,17 +55,12 @@ public class MainPageController {
         return "productDetails";
     }
 
-    @GetMapping("/test/1")
-    public String toTest(Model model) {
-        ProductDto productDto = productService.findProductDtoById(1l);
-        model.addAttribute("givenProduct", productDto);
-        return "test";
-    }
-
     @GetMapping("test2")
     public String test2() {
         return "test2";
     }
+
+
 
     //    Weather service
 

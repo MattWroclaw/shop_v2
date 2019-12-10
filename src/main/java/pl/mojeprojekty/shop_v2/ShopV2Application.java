@@ -20,5 +20,4 @@ public class ShopV2Application {
         return new RestTemplate();
     }
 
-
 }

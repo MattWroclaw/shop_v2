@@ -1,31 +1,18 @@
-html, body {
-    height: 100%;
-    margin: 0;
-}
-.wrapper-my {
-    min-height: 100%;
 
-    /* Equal to height of footer */
-    /* But also accounting for potential margin-bottom of last child */
-    margin-bottom: -50px;
-}
-/*.footer-my{*/
-/*    position: fixed;*/
-/*    bottom: 0;*/
-/*    width: 644px;*/
-/*    height: 20px;*/
-/*    margin: 0 auto;*/
-/*    background-color: #343a40 !important;*/
-/*}*/
-.push-my {
-    height: 50px;
+.footerholder-own {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
 }
 
-.footer-my2{
-    margin-top: 15px;
-}
-
-.navBar-my{
-    margin-bottom: 20px;
+#footer-own {
+    max-width: 1140px;
+    display: block;
+    bottom: 0;
+    margin: 30px auto;
+    text-align: center;
 }
 

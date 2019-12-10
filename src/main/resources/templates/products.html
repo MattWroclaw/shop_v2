@@ -4,93 +4,104 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/shop-homepage.css">
     <link rel="stylesheet" href="css/my_own.css">
     <meta charset="UTF-8">
     <title>Product and categories</title>
 </head>
 <body>
-
 <div th:insert="fragments :: navigationBar"></div>
+
 <!-- page content-->
 <div class="container">
-<div class="row">
+    <div class="row">
 
-<h2>List of categories used in our shop</h2>
-<span th:if="${categoriesDto.isEmpty()}" th:text="'No products categories'">empty list</span>
-<table th:if="${!categoriesDto.isEmpty()}">
-    <thead>
-    <tr><td>Id</td>
-        <td>Description</td>
-        <td>Parent id</td>
-    </tr>
+    </div>
 
-    </thead>
-    <tbody>
-    <tr th:each="category, Stat : ${categoriesDto}">
-        <td th:text="${category.id}"></td>
-        <td th:text="${category.description}"></td>
-        <td th:text="${category.parentId}"></td>
-        <td ><a th:href="@{/edit-category/{id}(id=${category.id})}">Edit</a> </td>
-        <td th:if="${Stat.last}"><a th:href="@{/delete-category/{id}(id=${category.id})}">Delete</a> </td>
-    </tr>
-    </tbody>
-</table>
-<h2>Create a new category</h2>
-<form th:action="@{/createCategory}" method="post" th:object="${singleCategorieDto}">
-   <input type="hidden" th:field="*{id}">
-   Description: <input type="text" th:field="*{description}">
-   Parent id: <input type="text" th:field="*{parentId}">
-    <input type="submit" value="Add category">
-</form>
+    <div class="row">
+        <h2>Add product</h2>
+        <form th:action="@{/newProduct}" method="post" th:object="${singleProductDto}">
+            <div class="form-group">
+                <label for="productTitle" th:text="#{product.title}"></label>
+                <input id="productTitle" class="form-control" type="text"
+                       th:field="*{title}" th:placeholder="#{product.title}"
+                       th:errorclass="is-invalid">
+                <small class="invalid-feedback" th:text="#{product.hint.title}"></small>
+            </div>
+            <div class="form-group">
+                <label for="prodDescr" th:text="#{product.description}"></label>
+                <input id="prodDescr" class="form-control" type="text"
+                       th:field="*{description}" th:placeholder="#{product.description}"
+                       th:errorclass="is-invalid">
+                <small class="invalid-feedback" th:text="#{product.hint.description}"></small>
+            </div>
+            <div class="form-group">
+                <label for="price" th:text="#{product.price}"></label>
+                <input id="price" class="form-control" type="text"
+                       th:field="*{price}"
+                       th:placeholder="#{product.price}"
+                       th:errorclass="is-invalid">
+                <small class="invalid-feedback" th:text="#{product.hint.price}"></small>
+            </div>
+            <label for="typeProduct" th:text="#{product.type}"></label>
+            <select id="typeProduct" name="type" th:field="*{productType}">
+                <option th:each="type : ${T(pl.mojeprojekty.shop_v2.entity.ProductType).values()}"
+                        th:text="${type}"
+                        th:value="${type}"></option>
+            </select>
+            <div class="form-group">
+                <label for="stockAmount" th:text="#{app.stock.amount}"></label>
+                <input type="text" id="stockAmount" class="form-control"
+                       th:field="*{stockAmount}"
+                       th:placeholder="#{product.strockAmount}"
+                       th:errorclass="is-invalid">
+                <small class="invalid-feedback" th:text="#{product.hint.stockAmount}"></small>
+            </div>
+            <label for="typeCategory" th:text="#{product.category}"></label>
+            <select id="typeCategory" th:field="*{productCategory}">
+                <option th:each="c : ${categoriesDto}"
+                        th:text="${c.getDescription()}"
+                        th:value="${c.getId()}">
+                </option>
+            </select>
+            <input type="submit" value="Add">
+        </form>
+    </div>
 
-<h2>Product list</h2>
-<span th:if="${productsDto.isEmpty()}" th:text=" 'No products so far..'">Nothing</span>
-<table>
-    <thead>
-    <td>Id</td>
-    <td>Title</td>
-    <td>Description</td>
-    <td>Stock</td>
-    <td>Price</td>
-    <td>Category</td>
-    <td>Product type</td>
-    </thead>
-    <tbody>
-        <tr th:each="p : ${productsDto}">
-            <td th:text="${p.id}"></td>
-            <td th:text="${p.title}"></td>
-            <td th:text="${p.description}"></td>
-            <td th:text="${p.stockAmount}"></td>
-            <td th:text="${p.price}"></td>
-            <td th:text="${p.productCategory?.description}"></td>
-            <td th:text="${p.productType}"></td>
-            <td ><a th:href="@{/edit-product/{id}(id=${p.id})}">Edit</a> </td>
-            <td><a th:href="@{/delete-product/{id}(id=${p.id})}">Delete</a> </td>
-        </tr>
-    </tbody>
-</table>
-<h2>Add product</h2>
-<form th:action="@{/createProduct}" method="post" th:object="${singleProductDto}">
-    Title: <input type="text" th:field="*{title}">
-    Description: <textarea cols="30" rows="4" maxlength="200" th:field="*{description}"></textarea>
-    Price: <input type="text" th:field="*{price}">
-    Product type: <select name = "type" th:field="*{productType}">
-        <option th:each="type : ${T(pl.mojeprojekty.shop_v2.entity.ProductType).values()}" th:text="${type}" th:value="${type}"></option>
+    <div class="row">
+        <span th:if="${productsDto} == null" th:text="#{product.NoProductSoFar}"></span>
+        <h2><span th:if="${productsDto} != null" th:text="#{product.productList}"></span></h2>
+        <table class="table table-striped" th:if="${productsDto} != null">
+            <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Id</th>
+                <th scope="col" th:text="#{product.title}">First</th>
+                <th scope="col" th:text="#{product.description}">Last</th>
+                <th scope="col" th:text="#{product.category}">Last</th>
+                <th scope="col" th:text="#{product.type}">Last</th>
+                <th scope="col" th:text="#{product.strockAmount}">Last</th>
+                <th scope="col" th:text="#{product.price}">Last</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="p, Stat : ${productsDto}">
+                <th scope="row" th:text="${Stat.count}"></th>
+                <td th:text="${p.getId()}"></td>
+                <td th:text="${p.title}"></td>
+                <td th:text="${p.description}"></td>
+                <td th:text="${p.productCategory?.getDescription()}"></td>
+                <td th:text="${p.productType}"></td>
+                <td th:text="${p.stockAmount}"></td>
+                <td th:text="${p.price}"></td>
 
-    </select>
-    Stock amount: <input type="text" th:field="*{stockAmount}">
-    Product category:
-    <select th:field="*{productCategory}">
-        <option th:each="c : ${categoriesDto}"
-                th:text="${c.getDescription()}"
-                th:value="${c.getId()}">
-        </option>
-    </select>
-    <input type="submit" value="Add">
-</form>
-<!--class row-->
+                <td><a th:href="@{/edit-product/{id}(id=${p.id})}">Edit</a></td>
+                <td><a th:href="@{/delete-product/{id}(id=${p.id})}">Delete</a></td></tr>
+            </tbody>
+        </table>
+    </div>
+
 </div>
 <!--container -->
 </div>
