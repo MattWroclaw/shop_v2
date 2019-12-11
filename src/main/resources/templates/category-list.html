@@ -21,7 +21,7 @@
 
     <div class="row">
         <div class="col-md-5">
-            <h3>List of categories used in our shop</h3>
+            <h3 th:text="#{header.ListOfCategories}">List of categories used in our shop</h3>
             <span th:if="${categories == null}" th:text="#{product.noProductCategory}">empty list</span>
 
             <table class="table table-striped" th:if="${categories != null}">
@@ -45,7 +45,7 @@
         </div>
 
         <div class="col-sm-7">
-            <h2>Create a new category</h2>
+            <h2 th:text="#{header.createNewCategory}">Create a new category</h2>
             <form class="row" th:action="@{/newCategory}" method="post" th:object="${singleCategory}">
                 <input type="hidden" th:field="*{id}">
                 <div class="form-group">

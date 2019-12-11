@@ -39,17 +39,24 @@
             <td th:text="${prod.key.getPrice()}"></td>
             <td th:text="${prod.value.toString()}"></td>
             <td>
-                <form th:action="@{/removeItems/{id}(id=${prod.key.id}) }">
-                    <button>Remove</button>
-                </form>
+                <a th:href="@{/removeItems/{id}(id=${prod.key.id}) }"
+                type="button" class="btn btn-primary btn-sm"
+                th:text="#{form.button.delete}">
+                </a>
             </td>
         </tr>
         </tbody>
     </table>
 
-    <form th:if="${not cart.isEmpty()}" th:action="@{/order}">
-        <button>I'm buying</button>
-    </form>
+    <a th:if="${not cart.isEmpty()}" th:href="@{/order}"
+         type="button" class="btn btn-primary btn-sm"
+                th:text="#{button.buying}">
+    </a>
+
+    <a th:href="@{/}"
+        type="button" class="btn btn-primary btn-sm"
+                th:text="#{button.backToShop}">
+    </a>
 </div>
 <p th:insert="fragments :: footer"></p>
 <p th:insert="fragments :: scripts"></p>

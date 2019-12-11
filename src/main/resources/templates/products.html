@@ -20,22 +20,22 @@
     </div>
 
     <div class="row">
-        <h2>Add product</h2>
-        <form th:action="@{/newProduct}" method="post" th:object="${singleProductDto}">
+        <h2 th:text="#{header.addProdut}">Add product</h2>
+        <form th:action="@{/newProduct}" method="post" th:object="${singleProductDto}" class="form-inline">
             <div class="form-group">
                 <label for="productTitle" th:text="#{product.title}"></label>
                 <input id="productTitle" class="form-control" type="text"
                        th:field="*{title}" th:placeholder="#{product.title}"
                        th:errorclass="is-invalid">
                 <small class="invalid-feedback" th:text="#{product.hint.title}"></small>
-            </div>
+            </div> &nbsp;&nbsp;
             <div class="form-group">
                 <label for="prodDescr" th:text="#{product.description}"></label>
                 <input id="prodDescr" class="form-control" type="text"
                        th:field="*{description}" th:placeholder="#{product.description}"
                        th:errorclass="is-invalid">
                 <small class="invalid-feedback" th:text="#{product.hint.description}"></small>
-            </div>
+            </div>&nbsp;&nbsp;
             <div class="form-group">
                 <label for="price" th:text="#{product.price}"></label>
                 <input id="price" class="form-control" type="text"
@@ -43,13 +43,13 @@
                        th:placeholder="#{product.price}"
                        th:errorclass="is-invalid">
                 <small class="invalid-feedback" th:text="#{product.hint.price}"></small>
-            </div>
+            </div>&nbsp;&nbsp;
             <label for="typeProduct" th:text="#{product.type}"></label>
             <select id="typeProduct" name="type" th:field="*{productType}">
                 <option th:each="type : ${T(pl.mojeprojekty.shop_v2.entity.ProductType).values()}"
                         th:text="${type}"
                         th:value="${type}"></option>
-            </select>
+            </select>&nbsp;&nbsp;
             <div class="form-group">
                 <label for="stockAmount" th:text="#{app.stock.amount}"></label>
                 <input type="text" id="stockAmount" class="form-control"
@@ -57,15 +57,16 @@
                        th:placeholder="#{product.strockAmount}"
                        th:errorclass="is-invalid">
                 <small class="invalid-feedback" th:text="#{product.hint.stockAmount}"></small>
-            </div>
+            </div>&nbsp;&nbsp;
             <label for="typeCategory" th:text="#{product.category}"></label>
             <select id="typeCategory" th:field="*{productCategory}">
                 <option th:each="c : ${categoriesDto}"
                         th:text="${c.getDescription()}"
                         th:value="${c.getId()}">
-                </option>
+                </option>&nbsp;&nbsp;
             </select>
-            <input type="submit" value="Add">
+            <button type="submit" class="btn btn-primary btn-sm" th:text="#{form.button.save}">save</button>&nbsp;&nbsp;
+            <button type="reset" class="btn btn-primary btn-sm" th:text="#{form.button.delete}">reset</button>
         </form>
     </div>
 

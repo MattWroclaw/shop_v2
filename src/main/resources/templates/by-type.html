@@ -12,7 +12,6 @@
     <link href="/css/shop-homepage.css" rel="stylesheet">
     <link href="/css/my_own.css" rel="stylesheet">
 
-
     <title th:text="#{app.app.name}">Welcome to r'shop</title>
 </head>
 <body>
@@ -20,32 +19,47 @@
 <!--page content-->
 <div class="container wrapper-my">
 
-type - sport:
-1.
-2.
-3.
-.
-.
-.
-<table>
-    <thead>
-    <tr>
-        <td>tytuł</td>
-        <td>opis</td>
-        <td>typ</td>
-        <td>cena</td>
-    </tr>
-    </thead>
-    <tbody>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col" th:text="'No'">Number</th>
+            <th scope="col" th:text="#{product.title}">title</th>
+            <th scope="col" th:text="#{product.description}">title</th>
+            <th scope="col" th:text="#{product.category}">category</th>
+            <th scope="col" th:text="#{product.price}">price</th>
+            <th scope="col" th:text="#{product.quantity}">quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="prod, Stat : ${productsOfType}">
+            <th scope="row" th:text="${Stat.count}"></th>
+            <td th:text="${prod.getTitle()}"></td>
+            <td th:text="${prod.description}"></td>
+            <td th:text="${prod.productCategory?.getDescription()}"></td>
+            <td th:text="${prod.getPrice()}"></td>
+            <td th:text="${prod.stockAmount}"></td>
+        </tr>
+        </tbody>
+    </table>
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <td>tytuł</td>-->
+<!--        <td>opis</td>-->
+<!--        <td>typ</td>-->
+<!--        <td>cena</td>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
 
-    <tr th:each=" product : ${productsOfType}">
-    <td th:text="${product.title}"></td>
-    <td th:text="${product.description}"></td>
-    <td th:text="${product.productType.toString()}"></td>
-    <td th:text="${product.price}"></td>
-    </tr>
-    </tbody>
-</table>
+<!--    <tr th:each=" product : ${productsOfType}">-->
+<!--    <td th:text="${product.title}"></td>-->
+<!--    <td th:text="${product.description}"></td>-->
+<!--    <td th:text="${product.productType.toString()}"></td>-->
+<!--    <td th:text="${product.price}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
 </div>
 <p th:insert="fragments::footer"></p>
 <p th:insert="fragments::scripts"></p>

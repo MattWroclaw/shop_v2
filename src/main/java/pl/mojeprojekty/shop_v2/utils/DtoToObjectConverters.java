@@ -43,19 +43,12 @@ public class DtoToObjectConverters {
         entity.setShippingAddress(Arrays.asList(
                 addressDtoToAddressEntity(userDto.getShippingAddress())));
 
-//        Address home = addressDtoToAddressEntity(userDto.getHomeAddress());
-//        Address shipping = addressDtoToAddressEntity(userDto.getShippingAddress());
-//        Address invoice = addressDtoToAddressEntity(userDto.getInvoiceAddress());
-//        entity.setHomeAddress(home);
-//        entity.setShippingAddress(shipping);
-//        entity.setInvoiceAddress(invoice);
-
         entity.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
         Role role = roleRepository.findByRole("USER");
-        if(userDto.getEmail().equalsIgnoreCase("admin")){
-            role = roleRepository.findByRole("ADMIN");
-        }
+//        if(userDto.getEmail().equalsIgnoreCase("admin")){
+//            role = roleRepository.findByRole("ADMIN");
+//        }
         entity.setRoles(Collections.singleton(role));
 
         return entity;

@@ -3,10 +3,7 @@ package pl.mojeprojekty.shop_v2.contoller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import pl.mojeprojekty.shop_v2.dto.UserDto;
 import pl.mojeprojekty.shop_v2.entity.Role;
 import pl.mojeprojekty.shop_v2.entity.User;
@@ -23,7 +20,7 @@ public class AllUsersDataController {
 
     private final UserService userService;
 
-    @RequestMapping(value =  "/shop", method = RequestMethod.GET)
+    @RequestMapping(value =  "/userSettings", method = RequestMethod.GET)
     public String goShop(Model model){
         List<User> users = userService.findAllUsers();
         Role role = new Role();
@@ -37,7 +34,25 @@ public class AllUsersDataController {
     @PostMapping("/createUser")
     public String goEditForm(@ModelAttribute UserDto userDto){
         userService.createUser(userDto);
-        return "redirect:/shop";
+        return "redirect:/userSettings";
     }
 
+    @GetMapping("/delete-user/{id}")
+    public String delUser(@PathVariable long id){
+        userService.deleteUser(id);
+        return "redirect:/userSettings";
+    }
+
+    @GetMapping("/edit-user/{id}")
+    public String editUser(@PathVariable long id, Model model){
+        User editedUser = userService.findUserById(id);
+        model.addAttribute("edited", editedUser);
+        return "edit-user";
+    }
+
+    @PostMapping("/edit-user-data/{id}")
+    public String editForm(@ModelAttribute UserDto edited, @PathVariable long id){
+        userService.editUser(id, edited);
+        return "redirect:/userSettings";
+    }
 }

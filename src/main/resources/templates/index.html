@@ -15,10 +15,13 @@
 <body>
 <div th:replace="fragments :: navigationBar"></div>
 <!--page content-->
-
+<h2 th:unless="${@applicationUserDetailService.loggedUser()} == null">
+    <a class="nav-link" href="#" th:text="${@applicationUserDetailService.loggedUser()}">
+        <span class="sr-only">(current)</span>
+    </a>
+</h2>
 
 <div class="container wrapper-my">
-
     <div class="row">
 
         <div class="col-lg-3">

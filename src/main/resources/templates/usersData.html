@@ -1,52 +1,86 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <meta charset="UTF-8">
-    <title>Welcome page</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/shop-homepage.css" rel="stylesheet">
+    <link href="/css/my_own.css" rel="stylesheet">
+
+    <title th:text="#{app.app.name}">Welcome to r'shop</title>
 </head>
 <body>
-<h2>Welcome to my shop</h2>
+<div th:replace="fragments :: navigationBar"></div>
+<!--page content-->
+<div class="container wrapper-my">
 
-<h3>Users table</h3>
-<table>
-    <thead>
-    <td>ID</td>
-    <td>NAME</td>
-    <td>PASSWORD</td>
-    <td>ROLE</td>
-    <td>CITY</td>
-    </thead>
-    <tr th:each="us : ${usersList}">
-        <td th:text="${us.id}"></td>
-        <td th:text="${us.name}"></td>
-        <td th:text="${us.password}"></td>
-        <td th:text="${us.roles}"></td>
-        <td th:text="${us.city}"></td>
-        <td th:each="ad : ${us.shippingAddress}">
-            <span th:text="${ad.country}"></span>
-            <span th:text="${ad.city}"></span>
-            <span th:text="${ad.street}"></span>
-            <span th:text="${ad.zipCode}"></span>
-        </td>
+    <h3>Users table</h3>
 
-        <td><a th:href="@{/edit-user/{id}(id=${us.id})}">Edit user</a> </td>
-        <td><a th:href="@{/delete-user/{id}(id=${us.id})}">Delete user</a> </td>
-    </tr>
-</table>
-<h3>Create user  -- delete this feature...</h3>
-<form th:action="@{/createUser}" method="post" th:object="${newUser}">
-   ID <input th:field="*{id}">
-   NAME <input th:field="*{name}">
-   PASS <input th:field="*{password}">
-   ROLE <select th:field="*{roles}">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col" th:text="'No'">No</th>
+            <th scope="col" th:text="'Id'">title</th>
+            <th scope="col" th:text="#{form.name}">category</th>
+            <th scope="col" th:text="'Role'">price</th>
+            <th scope="col" th:text="#{app.login}">quantity</th>
+            <th scope="col" th:text="#{form.city}">quantity</th>
+            <th scope="col" th:text="#{form.country}">quantity</th>
+            <th scope="col" th:text="#{form.city}">quantity</th>
+            <th scope="col" th:text="#{form.street}">quantity</th>
+            <th scope="col" th:text="#{form.zipCode}">quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="uL, Stat : ${usersList}">
+            <th scope="row" th:text="${Stat.count}"></th>
+            <td th:text="${uL.getId()}"></td>
+            <td th:text="${uL.getName()}"></td>
+            <td th:text="${uL.getRoles()}"></td>
+            <td th:text="${uL.getEmail()}"></td>
+            <td th:text="${uL.getCity()}"></td>
+            <td th:text="${uL.getShippingAddress().get(0).getCountry()}"></td>
+            <td th:text="${uL.getShippingAddress().get(0).getCity()}"></td>
+            <td th:text="${uL.getShippingAddress().get(0).getStreet()}"></td>
+            <td th:text="${uL.getShippingAddress().get(0).getZipCode()}"></td>
+            <td>
+                <a th:href="@{/edit-user/{id}(id=${uL.id})}"
+                   type="button" class="btn btn-primary btn-sm"
+                   th:text="#{form.button.edit}">
+                </a>
+            </td>
+            <td>
+                <a th:href="@{/delete-user/{id}(id=${uL.id})}"
+                   type="button" class="btn btn-primary btn-sm"
+                   th:text="#{form.button.delete}">
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>Create user -- delete this feature...</h3>
+    <form th:action="@{/createUser}" method="post" th:object="${newUser}">
+        ID <input th:field="*{id}">
+        NAME <input th:field="*{name}">
+        PASS <input th:field="*{password}">
+        ROLE <select th:field="*{roles}">
         <option th:each="ro : ${userRole}"
                 th:value="${userRole.id}"
                 th:text="${userRole.id}"></option>
     </select>
-<!--    <select th:field="*{roles}">-->
-    CITY <input th:field="*{city}">
-    email <input th:field="*{email}">
-    <input type="submit" value="Add user">
-</form>
+        <!--    <select th:field="*{roles}">-->
+        CITY <input th:field="*{city}">
+        email <input th:field="*{email}">
+        <input type="submit" value="Add user">
+    </form>
+</div>
+<p th:insert="fragments :: footer"></p>
+<p th:insert="fragments :: scripts"></p>
 </body>
 </html>
