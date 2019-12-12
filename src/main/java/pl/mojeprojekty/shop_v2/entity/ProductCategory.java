@@ -2,7 +2,6 @@ package pl.mojeprojekty.shop_v2.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.EAN;
 
 import javax.persistence.*;
 import java.util.ArrayList;

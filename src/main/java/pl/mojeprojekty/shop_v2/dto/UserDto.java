@@ -1,11 +1,9 @@
 package pl.mojeprojekty.shop_v2.dto;
 
 import lombok.Data;
-import pl.mojeprojekty.shop_v2.entity.Role;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
-import java.util.Set;
 
 @Data
 public class UserDto {

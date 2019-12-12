@@ -5,7 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.mojeprojekty.shop_v2.dto.*;
 import pl.mojeprojekty.shop_v2.entity.*;
-import pl.mojeprojekty.shop_v2.repositories.ProductCategoryRepsiotory;
+import pl.mojeprojekty.shop_v2.repositories.ProductCategoryRepository;
 import pl.mojeprojekty.shop_v2.repositories.RoleRepository;
 
 import java.util.Arrays;
@@ -18,7 +18,7 @@ public class DtoToObjectConverters {
 
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
-    private final ProductCategoryRepsiotory productCategoryRepsiotory;
+    private final ProductCategoryRepository productCategoryRepository;
 
     //      **************** USER *******************
     public Address addressDtoToAddressEntity(AddressDto addressDto) {
@@ -32,6 +32,7 @@ public class DtoToObjectConverters {
         entity.setZipCode(addressDto.getZipCode());
         return entity;
     }
+
 
     public User userDtoToUserEntity(UserDto userDto) {
         User entity = new User();
@@ -63,7 +64,7 @@ public class DtoToObjectConverters {
         entity.setDescription(productCategoryDto.getDescription());
 
         if (productCategoryDto.getParentId() != null) {
-            ProductCategory parent = productCategoryRepsiotory
+            ProductCategory parent = productCategoryRepository
                     .findById(productCategoryDto.getParentId())
                     .orElseThrow(() -> new NoSuchElementException("No such parent category"));
             entity.setParent(parent);
@@ -90,7 +91,7 @@ public class DtoToObjectConverters {
         Product entity = new Product();
 
         if(productDto.getId() == null){
-            productDto.setId(100l);
+            productDto.setId(100L);
         }
         entity.setTitle(productDto.getTitle());
         entity.setDescription(productDto.getDescription());

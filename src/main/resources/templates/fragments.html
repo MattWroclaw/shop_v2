@@ -15,7 +15,7 @@
 
             <a class="navbar-brand" th:href="@{/welcome}" th:text="#{app.app.name}">Universal shop</a>&nbsp;&nbsp;
             <!--        cart button-->
-            <a th:if="${#authorization.expression('isAuthenticated()')}" action="/cart"
+            <a th:if="${#authorization.expression('isAuthenticated()')}" href="/cart"
                type="button" class="btn btn-primary btn-sm"
                th:text="#{app.cart}"> cart
             </a>&nbsp;&nbsp;

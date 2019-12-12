@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
 >
 <head>
     <meta charset="UTF-8">
@@ -37,8 +37,13 @@
                     <th scope="row" th:text="${category.id}"></th>
                     <td th:text="${category.description}"></td>
                     <td th:text="${category.parentId}"></td>
-                    <td><a th:href="@{/edit-category/{id}(id=${category.id})}" th:text="#{form.button.edit}">Edit</a></td>
-                    <td th:if="${Stat.last}"><a th:href="@{/deleteCategory/{id}(id=${category.id})}" th:text="#{form.button.delete}">Delete</a></td>
+                    <td><a type="button" class="btn btn-primary btn-sm"
+                           th:href="@{/edit-category/{id}(id=${category.id})}"
+                           th:text="#{form.button.edit}">Edit</a></td>
+                    <td th:if="${Stat.last}"><a type="button" class="btn btn-primary btn-sm"
+                                                th:href="@{/deleteCategory/{id}(id=${category.id})}"
+                                                th:text="#{form.button.delete}">Delete</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -57,7 +62,7 @@
                 </div>
                 <div class="btn-group form-group">
                     <label for="parentsId" th:text="#{produkt.parent}"></label>
-                    <select id="parentsId"  th:field="*{parentId}">
+                    <select id="parentsId" th:field="*{parentId}">
                         <option th:each="ctg : ${categories}"
                                 th:text="${ctg.id}"
                                 th:value="${ctg.id}">
@@ -72,7 +77,7 @@
     </div>
 </div>
 
-        <p th:insert="fragments::footer"></p>
-    <p th:insert="fragments::scripts"></p>
+<p th:insert="fragments::footer"></p>
+<p th:insert="fragments::scripts"></p>
 </body>
 </html>

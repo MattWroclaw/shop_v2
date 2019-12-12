@@ -1,7 +1,6 @@
 package pl.mojeprojekty.shop_v2.contoller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,12 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.mojeprojekty.shop_v2.dto.ProductCategoryDto;
 import pl.mojeprojekty.shop_v2.dto.ProductDto;
-import pl.mojeprojekty.shop_v2.entity.Product;
-import pl.mojeprojekty.shop_v2.entity.ProductCategory;
 import pl.mojeprojekty.shop_v2.services.ProductCategoryService;
 import pl.mojeprojekty.shop_v2.services.ProductService;
 
-import javax.jws.WebParam;
 import javax.validation.Valid;
 import java.util.List;
 

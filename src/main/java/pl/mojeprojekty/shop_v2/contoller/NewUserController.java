@@ -7,13 +7,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.mojeprojekty.shop_v2.dto.AddressDto;
 import pl.mojeprojekty.shop_v2.dto.UserDto;
-import pl.mojeprojekty.shop_v2.dto.WeatherDataDto;
-import pl.mojeprojekty.shop_v2.entity.User;
 import pl.mojeprojekty.shop_v2.services.UserService;
 import pl.mojeprojekty.shop_v2.services.WeatherRestService;
 
 import javax.validation.Valid;
-import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor

@@ -4,7 +4,6 @@ import lombok.Data;
 import pl.mojeprojekty.shop_v2.entity.ProductCategory;
 import pl.mojeprojekty.shop_v2.entity.ProductType;
 
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

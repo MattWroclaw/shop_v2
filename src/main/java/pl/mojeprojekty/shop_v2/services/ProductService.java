@@ -2,10 +2,8 @@ package pl.mojeprojekty.shop_v2.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.mojeprojekty.shop_v2.dto.ProductCategoryDto;
 import pl.mojeprojekty.shop_v2.dto.ProductDto;
 import pl.mojeprojekty.shop_v2.entity.Product;
-import pl.mojeprojekty.shop_v2.entity.ProductCategory;
 import pl.mojeprojekty.shop_v2.entity.ProductType;
 import pl.mojeprojekty.shop_v2.repositories.ProductRepository;
 import pl.mojeprojekty.shop_v2.utils.DtoToObjectConverters;

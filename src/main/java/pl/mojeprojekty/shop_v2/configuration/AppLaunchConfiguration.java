@@ -19,12 +19,12 @@ public class AppLaunchConfiguration {
         pl.mojeprojekty.shop_v2.entity.Role user = roleRepository.findByRole("USER");
 
         if(admin == null){
-            admin  = new Role(1l, "ADMIN");
+            admin  = new Role(1L, "ADMIN");
             roleRepository.save(admin);
         }
 
         if(user == null){
-            user = new Role(2l, "USER");
+            user = new Role(2L, "USER");
             roleRepository.save(user);
         }
     }

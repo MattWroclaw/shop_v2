@@ -1,8 +1,10 @@
 package pl.mojeprojekty.shop_v2.services;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
+import pl.mojeprojekty.shop_v2.dto.ErrorDto;
 import pl.mojeprojekty.shop_v2.entity.Product;
 import pl.mojeprojekty.shop_v2.repositories.ProductRepository;
 

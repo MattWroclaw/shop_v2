@@ -9,7 +9,6 @@ import pl.mojeprojekty.shop_v2.entity.User;
 import pl.mojeprojekty.shop_v2.repositories.OrderLineRepository;
 import pl.mojeprojekty.shop_v2.repositories.OrderRepository;
 
-import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +24,8 @@ public class OrderService {
     private final UserService userService;
     private final ProductService productService;
 
-        Order order = null;
-
-    public Order createOrder(String email){
-        order = new Order();
+    public Order createOrder(String email) {
+        Order order = new Order();
 
         LocalDate orderDate = LocalDate.now();
         List<OrderLine> orderLines = new ArrayList<>();
@@ -36,17 +33,17 @@ public class OrderService {
         User userByEmail = userService.findUserByEmail(email);
 
         Map<Product, Integer> productsInCart = cartService.showProductsInCart();
-        for (Map.Entry<Product, Integer> entry : productsInCart.entrySet()){
+        for (Map.Entry<Product, Integer> entry : productsInCart.entrySet()) {
             Product aProduct = entry.getKey();
             Integer quantity = entry.getValue();
-            double orderLinePrice = ( entry.getKey().getPrice() * quantity );
+            double orderLinePrice = (entry.getKey().getPrice() * quantity);
 
             int stockAmount = aProduct.getStockAmount();
             int newStockAmount = stockAmount - quantity;
-            if(newStockAmount>0) {
+            if (newStockAmount > 0) {
                 aProduct.setStockAmount(newStockAmount);
                 productService.updateProduct(aProduct);
-            }else {
+            } else {
                 productService.deletePorduct(aProduct.getId());
             }
 

@@ -70,6 +70,20 @@
         </form>
     </div>
 
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <form method="post" enctype="multipart/form-data" th:action="@{/files/foto}">
+                <div class="custom-file mb-2">
+                    <input type="file" class="custom-file-input" id="photoFile" name="photo">
+                    <label class="custom-file-label" for="photoFile" th:text="#{file.chooseFile}"></label>
+                </div>
+                <div class="form-row float-right">
+                    <input type="submit" class="btn btn-primary" th:value="#{file.upload}"/>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="row">
         <span th:if="${productsDto} == null" th:text="#{product.NoProductSoFar}"></span>
         <h2><span th:if="${productsDto} != null" th:text="#{product.productList}"></span></h2>

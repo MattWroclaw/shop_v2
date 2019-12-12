@@ -36,15 +36,14 @@ public class ApplicationUserDetailService implements UserDetailsService {
                 .build();
     }
 
-    public String loggedUser(){
+    public String loggedUser() {
         String userName = null;
         Authentication auth = SecurityContextHolder.getContext()
                 .getAuthentication(); //tworzy i przechowuje kontext zalogowanego uzytownika
-        if(!(auth instanceof AnonymousAuthenticationToken)){
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
             userName = auth.getName(); //jeśli nie jest instancją
 //            niezalogowanego użytkownika , to przypisz getName (czyli mail)
         }
         return userName;
-
     }
 }

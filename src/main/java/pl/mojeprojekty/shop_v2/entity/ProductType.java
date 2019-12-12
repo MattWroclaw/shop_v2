@@ -9,7 +9,7 @@ public enum ProductType {
     FREEDOM("app.freedom"),
     FRIENDS("app.friends");
 
-    private String messageKey;
+    private final String messageKey;
 
     ProductType(String messageKey) {
         this.messageKey = messageKey;
