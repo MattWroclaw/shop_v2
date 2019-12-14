@@ -77,10 +77,8 @@ public class DtoToObjectConverters {
         if(categoryEntity == null){
             categoryEntity = new ProductCategory();
         }
-//        dto.setDescription("Koziołek matołek");
         dto.setDescription(categoryEntity.getDescription());
         dto.setId(categoryEntity.getId());
-//        dto.setId(1l);
         if(categoryEntity.getParent() != null) {
             dto.setParentId(categoryEntity.getParent().getId());
         }

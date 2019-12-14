@@ -44,20 +44,28 @@ public class ProductCategoryService {
         return categoryDto;
     }
 
-    public void createProductCategory(ProductCategoryDto dto){
+    public ProductCategoryDto createProductCategory(ProductCategoryDto dto){
         ProductCategory categoryEntity = dtoToObjectConverters
                 .productCategoryDtoToEntity(dto);
         productCategoryRepository.save(categoryEntity);
+        return dto;
     }
 
-    public void editProductCategory(ProductCategoryDto dto){
-        ProductCategory categoryEntity = productCategoryRepository.findById(dto.getId()).get();
+    public ProductCategoryDto editProductCategory(ProductCategoryDto dto){
+        ProductCategory categoryEntity = productCategoryRepository.findById(dto.getId())
+                .orElseThrow(()->new NoSuchElementException("There is no such category with id= "+dto.getId()));
         categoryEntity.setDescription(dto.getDescription());
-        long idParentDto = dto.getParentId();
-        ProductCategory paretnt = productCategoryRepository.findById(idParentDto)
-                .orElseThrow(()->new NoSuchElementException("No parent category. This is root category"));
-        categoryEntity.setParent(paretnt);
+
+        if(dto.getParentId() != null) {
+            long idParentDto = dto.getParentId();
+
+            ProductCategory paretnt = productCategoryRepository.findById(idParentDto)
+                    .orElseThrow(() -> new NoSuchElementException("No parent category. This is root category"));
+            categoryEntity.setParent(paretnt);
+        }
+
         productCategoryRepository.save(categoryEntity);
+        return dtoToObjectConverters.categoryEntityToDto(categoryEntity);
     }
 
     public void deleteProductCategory(long id){

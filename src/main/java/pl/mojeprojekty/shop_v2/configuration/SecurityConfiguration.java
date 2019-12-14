@@ -56,6 +56,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-
+// pozostałość po ahthentication
+//@Override
+//protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//    PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//    String encodedPassword = passwordEncoder.encode("password");
+//    auth.inMemoryAuthentication()
+//            .passwordEncoder(passwordEncoder)
+//            .withUser("jan").password(encodedPassword).roles("USER");
+//}
 
 }
