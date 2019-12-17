@@ -17,14 +17,14 @@ public class CartController {
     private final CartService cartService;
 
     @GetMapping("/cart")
-    public String goCartPage(Model model){
+    public String goCartPage(Model model) {
         Map<Product, Integer> productMap = cartService.showProductsInCart();
         model.addAttribute("cart", productMap);
         return "cart";
     }
 
     @GetMapping("/removeItems/{id}")
-    public String removeFromCart(@PathVariable long id){
+    public String removeFromCart(@PathVariable long id) {
         cartService.removeProductFormCart(id);
         return "redirect:/cart";
     }

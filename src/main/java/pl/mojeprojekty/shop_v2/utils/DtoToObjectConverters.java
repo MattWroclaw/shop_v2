@@ -64,10 +64,11 @@ public class DtoToObjectConverters {
         entity.setDescription(productCategoryDto.getDescription());
 
         if (productCategoryDto.getParentId() != null) {
-            ProductCategory parent = productCategoryRepository
-                    .findById(productCategoryDto.getParentId())
-                    .orElseThrow(() -> new NoSuchElementException("No such parent category"));
-            entity.setParent(parent);
+            entity.setParentId(productCategoryDto.getParentId());
+//            ProductCategory parent = productCategoryRepository
+//                    .findById(productCategoryDto.getParentId())
+//                    .orElseThrow(() -> new NoSuchElementException("No such parent category"));
+//            entity.setParent(parent);
         }
         return entity;
     }
@@ -79,8 +80,8 @@ public class DtoToObjectConverters {
         }
         dto.setDescription(categoryEntity.getDescription());
         dto.setId(categoryEntity.getId());
-        if(categoryEntity.getParent() != null) {
-            dto.setParentId(categoryEntity.getParent().getId());
+        if(categoryEntity.getParentId() != null) {
+            dto.setParentId(categoryEntity.getParentId());
         }
         return dto;
     }

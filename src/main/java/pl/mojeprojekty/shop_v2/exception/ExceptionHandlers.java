@@ -16,18 +16,18 @@ import java.net.BindException;
 public class ExceptionHandlers {
 
     private ErrorDto handleException(Exception ex){
-        log.error("Exception handled", ex);
+        log.error("This is exception handler. Something went wrong...", ex);
         ErrorDto errorDto = new ErrorDto();
         errorDto.setExceptionClass(ex.getClass().getCanonicalName());
         errorDto.setMessage(ex.getMessage());
         return errorDto;
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({BindException.class,
-            ConstraintViolationException.class,
-            MethodArgumentNotValidException.class})
-    public ErrorDto handleValidationEXception(Exception exc){
-        return handleException(exc);
-    }
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    @ExceptionHandler({BindException.class,
+//            ConstraintViolationException.class,
+//            MethodArgumentNotValidException.class})
+//    public ErrorDto handleValidationException(Exception exc){
+//        return handleException(exc);
+//    }
 }

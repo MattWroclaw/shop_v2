@@ -1,4 +1,4 @@
-package pl.mojeprojekty.shop_v2.contoller;
+package pl.mojeprojekty.shop_v2.restControllers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class CategoryRestController {
     }
 
     @GetMapping("/{id}")
-    public ProductCategoryDto findGivenCategory(@PathVariable Long id){
+    public ProductCategoryDto findCategoryById(@PathVariable Long id){
         return categoryService.findProductCategoryById(id);
     }
 

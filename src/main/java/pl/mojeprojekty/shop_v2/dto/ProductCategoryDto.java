@@ -18,7 +18,5 @@ public class ProductCategoryDto {
     @NotBlank
     private String description;
 
-
     private Long parentId;
-
 }

@@ -19,10 +19,12 @@ public class ProductCategory {
 
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private ProductCategory parent;
+    private Long parentId;
 
-    @OneToMany(mappedBy = "parent")
-    private List<ProductCategory> childrenCategories = new ArrayList<>();
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "parent_id")
+//    private ProductCategory parent;
+
+//    @OneToMany(mappedBy = "parent")
+//    private List<ProductCategory> childrenCategories = new ArrayList<>();
 }

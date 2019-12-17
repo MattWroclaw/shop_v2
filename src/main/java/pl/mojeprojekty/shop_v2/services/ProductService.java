@@ -71,9 +71,9 @@ public class ProductService {
     }
 
     public Product findProductById(long id){
-        Product productWithGivenId = productRepository.findById(id)
+        Product productById = productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Product with " + id + "does not exist.."));
-        return productWithGivenId;
+        return productById;
     }
 
     public List<ProductDto> findProductsByType(ProductType productType){

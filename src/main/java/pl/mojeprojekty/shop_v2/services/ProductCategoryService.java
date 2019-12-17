@@ -25,8 +25,8 @@ public class ProductCategoryService {
              ProductCategoryDto dto = new ProductCategoryDto();
             dto.setId(entity.getId());
             dto.setDescription(entity.getDescription());
-            if(entity.getParent() != null){
-                dto.setParentId(entity.getParent().getId());
+            if(entity.getParentId() != null){
+                dto.setParentId(entity.getParentId());
             }else{
                 dto.setParentId(1L);
             }
@@ -57,11 +57,11 @@ public class ProductCategoryService {
         categoryEntity.setDescription(dto.getDescription());
 
         if(dto.getParentId() != null) {
-            long idParentDto = dto.getParentId();
-
-            ProductCategory paretnt = productCategoryRepository.findById(idParentDto)
-                    .orElseThrow(() -> new NoSuchElementException("No parent category. This is root category"));
-            categoryEntity.setParent(paretnt);
+            categoryEntity.setParentId(dto.getParentId());
+//            long idParentDto = dto.getParentId();
+//            ProductCategory parent = productCategoryRepository.findById(idParentDto)
+//                    .orElseThrow(() -> new NoSuchElementException("No parent category. This is root category"));
+//            categoryEntity.setParent(parent);
         }
 
         productCategoryRepository.save(categoryEntity);
