@@ -36,4 +36,5 @@ public class ProductDto {
     private ProductType productType;
 
     private ProductCategory productCategory;
+    
 }

@@ -76,10 +76,11 @@
             </div>
             <!--end of carousel-->
 
-            <!--            descriptions-->
+            <!--   page content:         descriptions-->
+
             <div class="row " th:if="${!productsList.isEmpty()}">
 
-                <div class="col-lg-4 col-md-6 mb-4" th:each="product : ${productsList}">
+                <div  class="col-lg-4 col-md-6 mb-4" th:each="product : ${productsList}">
                     <div class="card h-100">
                         <a th:href="@{/product-details/{id}(id=${product.getId()})}"><img class="card-img-top"
                                                                                           src="http://placehold.it/700x400"
@@ -138,31 +139,26 @@
                 </tr>
                 </tbody>
             </table>
+
+
             <form th:if="${#authorization.expression('isAuthenticated()')}" action="/cart">
                 <button th:text="#{app.cart}">Your cart</button>
             </form>
-
             <div th:if="${#authorization.expression('isAuthenticated()')}">
                 <span th:text="'Chcesz wyjść?'"></span>
                 <a th:href="@{/logout}" th:text="'Wyloguj'">Logout</a>
             </div>
-
             <div th:if="${not #authorization.expression('isAuthenticated()')}">
                 <span th:text="'Chcesz coś kupić'"></span>
                 <a th:href="@{/login}" th:text="'Zaloguj się'">Logout</a>
             </div>
-
             <div th:if="${@applicationUserDetailService.loggedUser() == null}">
                 <p> You're not logged</p>
             </div>
-
             <div th:unless="${@applicationUserDetailService.loggedUser() != null}">
                 <span th:text="${@applicationUserDetailService.loggedUser()}"></span>
             </div>
-
-
             <div th:text="${#authorization.expression('hasRole(''ADMIN'')')}">Admin</div>
-
             <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
                 <form th:action="@{/admin}">
                     <button>Admin site</button>
@@ -175,6 +171,71 @@
     <p th:insert="fragments::weather"></p>
     <!--    container-->
 </div>
+
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+
+<ul id="myUL">
+    <li><a href="#">Adele</a></li>
+    <li><a href="#">Agnes</a></li>
+
+    <li><a href="#">Billy</a></li>
+    <li><a href="#">Bob</a></li>
+
+    <li><a href="#">Calvin</a></li>
+    <li><a href="#">Christina</a></li>
+    <li><a href="#">Cindy</a></li>
+</ul>
+
+<script>
+    function myFunction() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script>
+<input type="text" id="input_prod" onkeyup="prodSearch()" placeholder="product search" title="Type in prod">
+
+<ul id="lista_test"  th:each=" pr : ${productsList}">
+    <li><a href="#" th:text="${pr.title}"></a></li>
+<!--    <li><a href="#" th:text="${pr.title}">Pociąg</a></li>-->
+<!--    <li><a href="#" th:text="${pr.title}">Rower</a></li>-->
+</ul>
+
+
+
+<script>
+    function prodSearch() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("input_prod");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("lista_test");
+        li = ul.getElementsByTagName("li");
+        for(i = 0; i < li.length; i++){
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if(txtValue.toUpperCase().indexOf(filter) > -1){
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+
+
 <div class="push-my"></div>
 <div th:insert="fragments :: footer"></div>
 
