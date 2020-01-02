@@ -9,5 +9,5 @@ public class WeatherDataDto {
 
     private WeatherMainDataDto main;
 
-//    private long timestamp;
+    private long timestamp;
 }

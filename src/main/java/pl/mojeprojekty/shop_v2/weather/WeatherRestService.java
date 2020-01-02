@@ -1,4 +1,4 @@
-package pl.mojeprojekty.shop_v2.services;
+package pl.mojeprojekty.shop_v2.weather;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,13 +23,17 @@ public class WeatherRestService {
     private String url;
 
 
+    @WeatherDataCached
     public WeatherDataDto fetchWeather(String city){
         String fullUrl = url.replace("{city}", city)
                 .replace("{appId}", apiKey);
         try{
+            log.info("CUSTOM LOG: Inside fetchWeather, before restTemplate.getForEntity");
             ResponseEntity<WeatherDataDto> dtoResponseEntity =
                     restTemplate.getForEntity(fullUrl, WeatherDataDto.class);
             WeatherDataDto body = dtoResponseEntity.getBody();
+            body.setTimestamp(System.currentTimeMillis());
+            log.info("CUSTOM LOG: Inside fetchWeather, after timeStamp set");
             return body;
         } catch (Exception error){
         }
@@ -41,7 +45,6 @@ public class WeatherRestService {
         WeatherDataDto weatherDataDto = fetchWeather(city);
         if(weatherDataDto != null) {
             WeatherMainDataDto main = weatherDataDto.getMain();
-
             String[] rawWeatherData = {main.getTemp(),
                     main.getHumidity(),
                     main.getPressure(),

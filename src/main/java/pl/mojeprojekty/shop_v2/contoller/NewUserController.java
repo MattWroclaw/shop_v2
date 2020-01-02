@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.mojeprojekty.shop_v2.dto.AddressDto;
 import pl.mojeprojekty.shop_v2.dto.UserDto;
 import pl.mojeprojekty.shop_v2.services.UserService;
-import pl.mojeprojekty.shop_v2.services.WeatherRestService;
+import pl.mojeprojekty.shop_v2.weather.WeatherRestService;
 
 import javax.validation.Valid;
 

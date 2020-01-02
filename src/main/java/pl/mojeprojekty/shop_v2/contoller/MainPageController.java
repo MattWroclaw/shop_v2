@@ -11,7 +11,7 @@ import pl.mojeprojekty.shop_v2.entity.User;
 import pl.mojeprojekty.shop_v2.services.CartService;
 import pl.mojeprojekty.shop_v2.services.ProductService;
 import pl.mojeprojekty.shop_v2.services.UserService;
-import pl.mojeprojekty.shop_v2.services.WeatherRestService;
+import pl.mojeprojekty.shop_v2.weather.WeatherRestService;
 
 import java.security.Principal;
 import java.util.List;
