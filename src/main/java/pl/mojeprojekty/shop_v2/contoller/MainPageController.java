@@ -61,7 +61,6 @@ public class MainPageController {
     }
 
 
-
     //    Weather service
 
     public Model weatherHandler(Model model, Principal principal) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
 >
 <head>
     <meta charset="UTF-8">
@@ -80,7 +80,7 @@
 
             <div class="row " th:if="${!productsList.isEmpty()}">
 
-                <div  class="col-lg-4 col-md-6 mb-4" th:each="product : ${productsList}">
+                <div class="col-lg-4 col-md-6 mb-4" th:each="product : ${productsList}">
                     <div class="card h-100">
                         <a th:href="@{/product-details/{id}(id=${product.getId()})}"><img class="card-img-top"
                                                                                           src="http://placehold.it/700x400"
@@ -130,8 +130,8 @@
                     <td th:text="${prod.price}"></td>
                     <td th:text="${prod.stockAmount}"></td>
                     <td th:if="${#authorization.expression('isAuthenticated()')}">
-<!--                    || th:if="${prod.getStockAmount()} gt 1" >-->
-<!--                        TODO if statement thymeleaf-->
+                        <!--                    || th:if="${prod.getStockAmount()} gt 1" >-->
+                        <!--                        TODO if statement thymeleaf-->
                         <form th:action="@{/buy/{id}(id = ${prod.id})}">
                             <button th:text="#{app.add.to.cart}">Add to cart</button>
                         </form>
@@ -168,7 +168,6 @@
         </div>
         <!--        /.row-->
     </div>
-    <p th:insert="fragments::weather"></p>
     <!--    container-->
 </div>
 
@@ -207,12 +206,11 @@
 </script>
 <input type="text" id="input_prod" onkeyup="prodSearch()" placeholder="product search" title="Type in prod">
 
-<ul id="lista_test"  th:each=" pr : ${productsList}">
+<ul id="lista_test" th:each=" pr : ${productsList}">
     <li><a href="#" th:text="${pr.title}"></a></li>
-<!--    <li><a href="#" th:text="${pr.title}">Pociąg</a></li>-->
-<!--    <li><a href="#" th:text="${pr.title}">Rower</a></li>-->
+    <!--    <li><a href="#" th:text="${pr.title}">Pociąg</a></li>-->
+    <!--    <li><a href="#" th:text="${pr.title}">Rower</a></li>-->
 </ul>
-
 
 
 <script>
@@ -222,10 +220,10 @@
         filter = input.value.toUpperCase();
         ul = document.getElementById("lista_test");
         li = ul.getElementsByTagName("li");
-        for(i = 0; i < li.length; i++){
+        for (i = 0; i < li.length; i++) {
             a = li[i].getElementsByTagName("a")[0];
             txtValue = a.textContent || a.innerText;
-            if(txtValue.toUpperCase().indexOf(filter) > -1){
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 li[i].style.display = "";
             } else {
                 li[i].style.display = "none";
@@ -234,11 +232,34 @@
     }
 </script>
 
+<div>
+    <p th:if="${weatherFromOW} == null" th:text="${noWeather}">
+    <p th:text="#{weather.conditions.for} + ${userCity}">user city</p>
+    <table th:if="${weatherFromOW} != null" class="table table-bordered text-center">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col" th:text="#{weather.temperature}">Temp</th>
+            <th scope="col" th:text="#{weather.humidity}">Humidity</th>
+            <th scope="col" th:text="#{weather.pressure}">Pressure</th>
+            <th scope="col" th:text="#{weather.temp_max}">Temp max</th>
+            <th scope="col" th:text="#{weather.temp_min}">Temp min</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr scope="row">
+            <td th:text="${weatherFromOW[0]}">temp</td>
+            <td th:text="${weatherFromOW[1]}">humidity</td>
+            <td th:text="${weatherFromOW[2]}">pressure</td>
+            <td th:text="${weatherFromOW[3]}">temp max</td>
+            <td th:text="${weatherFromOW[4]}">temp min</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 
 <div class="push-my"></div>
 <div th:insert="fragments :: footer"></div>
-
 <div th:insert="fragments :: scripts">
 </div>
 </body>

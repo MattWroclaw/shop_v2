@@ -22,12 +22,10 @@ public class WeatherRestService {
     @Value("${api.weather.current.url}")
     private String url;
 
-
-    @WeatherDataCached
-    public WeatherDataDto fetchWeather(String city){
+    public WeatherDataDto fetchWeather(String city) {
         String fullUrl = url.replace("{city}", city)
                 .replace("{appId}", apiKey);
-        try{
+        try {
             log.info("CUSTOM LOG: Inside fetchWeather, before restTemplate.getForEntity");
             ResponseEntity<WeatherDataDto> dtoResponseEntity =
                     restTemplate.getForEntity(fullUrl, WeatherDataDto.class);
@@ -35,24 +33,28 @@ public class WeatherRestService {
             body.setTimestamp(System.currentTimeMillis());
             log.info("CUSTOM LOG: Inside fetchWeather, after timeStamp set");
             return body;
-        } catch (Exception error){
+        } catch (Exception error) {
         }
 
         return null;
     }
 
-    public String[] weatherData(String city){
+    @WeatherDataCached
+    public String[] weatherData(String city) {
+
         WeatherDataDto weatherDataDto = fetchWeather(city);
-        if(weatherDataDto != null) {
+        if (weatherDataDto != null) {
             WeatherMainDataDto main = weatherDataDto.getMain();
-            String[] rawWeatherData = {main.getTemp(),
+            String[] rawWeatherData = {
+                    main.getTemp(),
                     main.getHumidity(),
                     main.getPressure(),
                     main.getTemp_max(),
-                    main.getTemp_min()
+                    main.getTemp_min(),
+                    String.valueOf(weatherDataDto.getTimestamp())
             };
             return rawWeatherData;
         }
-       return null;
+        return null;
     }
 }
