@@ -4,7 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import pl.mojeprojekty.shop_v2.dto.AddressDto;
 import pl.mojeprojekty.shop_v2.dto.UserDto;
 import pl.mojeprojekty.shop_v2.services.UserService;
@@ -28,9 +31,9 @@ public class NewUserController {
     }
 
     @PostMapping("/newUser")
-    public String goEditForm( @Valid @ModelAttribute("newUser") UserDto userForm, BindingResult errors) {
+    public String goEditForm(@Valid @ModelAttribute("newUser") UserDto userForm, BindingResult errors) {
 
-        if(errors.hasErrors()){
+        if (errors.hasErrors()) {
             return "register";
         }
         userService.createUser(userForm);

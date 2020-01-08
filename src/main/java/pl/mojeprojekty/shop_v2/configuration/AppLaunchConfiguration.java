@@ -14,16 +14,16 @@ public class AppLaunchConfiguration {
     private final RoleRepository roleRepository;
 
     @EventListener(ApplicationReadyEvent.class)
-    public void loadRoles(){
+    public void loadRoles() {
         pl.mojeprojekty.shop_v2.entity.Role admin = roleRepository.findByRole("ADMIN");
         pl.mojeprojekty.shop_v2.entity.Role user = roleRepository.findByRole("USER");
 
-        if(admin == null){
-            admin  = new Role(1L, "ADMIN");
+        if (admin == null) {
+            admin = new Role(1L, "ADMIN");
             roleRepository.save(admin);
         }
 
-        if(user == null){
+        if (user == null) {
             user = new Role(2L, "USER");
             roleRepository.save(user);
         }

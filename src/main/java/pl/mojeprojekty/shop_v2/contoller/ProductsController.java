@@ -24,7 +24,7 @@ public class ProductsController {
     private final ProductService productService;
 
     @GetMapping("/products-settings")
-    public String goProductCategory(Model model){
+    public String goProductCategory(Model model) {
         List<ProductCategoryDto> productCategoriesDto = productCategoryService.showAllProductCategories();
         model.addAttribute("categoriesDto", productCategoriesDto); //lista kategorii do wyświetlenia
 
@@ -36,8 +36,8 @@ public class ProductsController {
 
     @PostMapping("/newProduct")
     public String createProductForm(@Valid @ModelAttribute("singleProductDto") ProductDto productDto,
-                                    BindingResult result){
-        if(result.hasErrors()){
+                                    BindingResult result) {
+        if (result.hasErrors()) {
             return "products";
         }
         productService.createProduct(productDto);
@@ -45,24 +45,24 @@ public class ProductsController {
     }
 
     @GetMapping("/delete-product/{id}")
-    public String deleteProduct(@PathVariable long id){
+    public String deleteProduct(@PathVariable long id) {
         productService.deletePorduct(id);
         return "redirect:/products-settings";
     }
 
     @GetMapping("/edit-product/{id}")
-    public String editProduct(@PathVariable long id, Model model){
+    public String editProduct(@PathVariable long id, Model model) {
         ProductDto editedProductDto = productService.findProductDtoById(id);
-        List <ProductCategoryDto> categoriesDto = productCategoryService.showAllProductCategories();
+        List<ProductCategoryDto> categoriesDto = productCategoryService.showAllProductCategories();
         model.addAttribute("editedProduct", editedProductDto);
-        model.addAttribute("categories" , categoriesDto);
+        model.addAttribute("categories", categoriesDto);
         return "edit-product";
     }
 
     @PostMapping("/editProduct")
     public String editProductForm(@Valid @ModelAttribute("editedProduct") ProductDto editedProduct,
-    BindingResult result){
-        if (result.hasErrors()){
+                                  BindingResult result) {
+        if (result.hasErrors()) {
             return "edit-product";
         }
         productService.editProduct(editedProduct);

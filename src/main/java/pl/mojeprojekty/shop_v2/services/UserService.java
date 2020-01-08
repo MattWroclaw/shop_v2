@@ -8,7 +8,8 @@ import pl.mojeprojekty.shop_v2.repositories.UserRepository;
 import pl.mojeprojekty.shop_v2.utils.DtoToObjectConverters;
 
 import javax.transaction.Transactional;
-import java.util.*;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -17,37 +18,37 @@ public class UserService {
     private final UserRepository userRepository;
     private final DtoToObjectConverters dtoToObjectConverters;
 
-    public List<User> findAllUsers(){
+    public List<User> findAllUsers() {
         return userRepository.findAll();
     }
 
-    public User findUserById(long id){
-        return   userRepository.findById(id)
-                .orElseThrow(()->new NoSuchElementException("There is no user with id: "+id));
+    public User findUserById(long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("There is no user with id: " + id));
 
     }
 
     @Transactional
-    public void createUser(UserDto userDto){
-       User newUser = dtoToObjectConverters.userDtoToUserEntity(userDto);
-       userRepository.save(newUser);
+    public void createUser(UserDto userDto) {
+        User newUser = dtoToObjectConverters.userDtoToUserEntity(userDto);
+        userRepository.save(newUser);
     }
 
-    public void deleteUser(long id){
+    public void deleteUser(long id) {
         User userToDelete = userRepository.findById(id)
-                .orElseThrow(()->new NoSuchElementException("No user with id "+id));
+                .orElseThrow(() -> new NoSuchElementException("No user with id " + id));
 
         userRepository.delete(userToDelete);
     }
 
-    public void editUser(long id, UserDto userDto){
+    public void editUser(long id, UserDto userDto) {
         User newEditedUser = dtoToObjectConverters.userDtoToUserEntity(userDto);
         newEditedUser.setId(id);
         userRepository.save(newEditedUser);
     }
 
-    public User findUserByEmail(String email){
-       return userRepository.findUserByEmail(email)
-               .orElseThrow(()->new NoSuchElementException("No user with login/email " + email));
+    public User findUserByEmail(String email) {
+        return userRepository.findUserByEmail(email)
+                .orElseThrow(() -> new NoSuchElementException("No user with login/email " + email));
     }
 }

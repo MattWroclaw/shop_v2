@@ -30,11 +30,10 @@ public class ProductDto {
 
 //    @NotNull
 //    @NotBlank
-
     private int stockAmount;
 
     private ProductType productType;
 
     private ProductCategory productCategory;
-    
+
 }

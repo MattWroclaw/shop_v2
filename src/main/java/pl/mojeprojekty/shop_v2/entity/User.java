@@ -4,13 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "user")
-public class User  {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,26 +29,12 @@ public class User  {
 
     @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
-    joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "role_id"))
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_id")
-    private List <Address> shippingAddress;
-
-
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "shipping_id")
-//    private Address shippingAddress;
-//
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "home_id")
-//    private Address homeAddress;
-//
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "invoice_id")
-//    private Address invoiceAddress;
-
+    private List<Address> shippingAddress = new ArrayList<>();
 
 }

@@ -13,4 +13,11 @@ class ShopV2ApplicationTests {
     void contextLoads() {
     }
 
+    @Test
+    void initBlockTest(){
+        System.out.println("Before init");
+        {
+            System.out.println("Inside init");
+        }
+    }
 }

@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -21,10 +19,4 @@ public class ProductCategory {
 
     private Long parentId;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "parent_id")
-//    private ProductCategory parent;
-
-//    @OneToMany(mappedBy = "parent")
-//    private List<ProductCategory> childrenCategories = new ArrayList<>();
 }

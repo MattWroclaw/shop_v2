@@ -25,7 +25,7 @@ public class OrderController {
         User u = userRepository.findUserByEmail(email).get();
         model.addAttribute("order", order);
         model.addAttribute("userEmail", email);
-        model.addAttribute("userZBazy", u);
+        model.addAttribute("userFromDB", u);
         return "order-page";
     }
 }

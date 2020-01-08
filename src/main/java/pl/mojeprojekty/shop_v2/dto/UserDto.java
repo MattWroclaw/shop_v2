@@ -27,7 +27,7 @@ public class UserDto {
     private String password;
 
     @NotNull
-    @Size(min = 2, max = 10,message = "Min 2, max 10 chars")
+    @Size(min = 2, max = 10, message = "Min 2, max 10 chars")
     private String city;
 
     @Valid

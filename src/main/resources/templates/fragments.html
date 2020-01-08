@@ -94,31 +94,6 @@
 </div>
 <!-- footer end-->
 
-<!--    weather-->
-<div th:fragment="weather">
-    <p th:if="${weatherFromOW} == null" th:text="${noWeather}">
-    <p th:text="#{weather.conditions.for} + ${userCity}">user city</p>
-    <table th:if="${weatherFromOW} != null">
-        <thead>
-        <tr>
-            <th>Temp</th>
-            <th>Humidity</th>
-            <th>Pressure</th>
-            <th>Temp max</th>
-            <th>Temp min</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td th:each=" element : ${weatherFromOW}">
-                <span th:text="${element}"></span>
-            </td>
-        </tr>
-
-        </tbody>
-    </table>
-</div>
-<!--    weather end-->
 
 </body>
 </html>

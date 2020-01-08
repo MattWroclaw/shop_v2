@@ -19,9 +19,9 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final DtoToObjectConverters dtoToObjectConverters;
 
-    public List<ProductDto> findAllProductsDto(){
+    public List<ProductDto> findAllProductsDto() {
         List<Product> products = productRepository.findAll();
-        List<ProductDto> dtos =  new ArrayList<>();
+        List<ProductDto> dtos = new ArrayList<>();
         for (Product entity : products) {
             ProductDto dto = new ProductDto();
             dto.setId(entity.getId());
@@ -32,29 +32,29 @@ public class ProductService {
             dto.setProductType(entity.getProductType());
 
             dto.setProductCategory(entity.getProductCategory());
-           dtos.add(dto);
+            dtos.add(dto);
         }
         return dtos;
     }
 
-    public ProductDto findProductDtoById(long id){
+    public ProductDto findProductDtoById(long id) {
         Product productEntity = productRepository.findById(id)
-                .orElseThrow(()->new NoSuchElementException("There is no such product in the shop"));
+                .orElseThrow(() -> new NoSuchElementException("There is no such product in the shop"));
         return dtoToObjectConverters.productEntityToDto(productEntity);
     }
 
-    public void createProduct(ProductDto productDto){
+    public void createProduct(ProductDto productDto) {
         Product entity = dtoToObjectConverters.productDtoToEntity(productDto);
         productRepository.save(entity);
     }
 
-    public void deletePorduct(long id){
+    public void deletePorduct(long id) {
         productRepository.deleteById(id);
     }
 
-    public void editProduct(ProductDto productDto){
+    public void editProduct(ProductDto productDto) {
         Product edited = productRepository.findById(productDto.getId())
-                .orElseThrow(()->new NoSuchElementException("No product with id = " + productDto.getId()));
+                .orElseThrow(() -> new NoSuchElementException("No product with id = " + productDto.getId()));
         edited.setTitle(productDto.getTitle());
         edited.setDescription(productDto.getDescription());
         edited.setPrice(productDto.getPrice());
@@ -64,21 +64,21 @@ public class ProductService {
         productRepository.save(edited);
     }
 
-    public void updateProduct(Product product){
+    public void updateProduct(Product product) {
         Product productById = findProductById(product.getId());
         productById.setStockAmount(product.getStockAmount());
         productRepository.save(productById);
     }
 
-    public Product findProductById(long id){
+    public Product findProductById(long id) {
         Product productById = productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Product with " + id + "does not exist.."));
         return productById;
     }
 
-    public List<ProductDto> findProductsByType(ProductType productType){
+    public List<ProductDto> findProductsByType(ProductType productType) {
         List<Product> productsSameType = productRepository.findAllByProductType(productType);
-        List<ProductDto> dtos =  new ArrayList<>();
+        List<ProductDto> dtos = new ArrayList<>();
         for (Product entity : productsSameType) {
             ProductDto dto = new ProductDto();
             dto.setId(entity.getId());
