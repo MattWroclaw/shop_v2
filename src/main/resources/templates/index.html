@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -54,14 +53,14 @@
                         <img class="d-block img-fluid " src="/image/friends.jpg" alt="First slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block img-fluid " src="image/goodHealth.jpg" alt="second slie">
+                        <img class="d-block img-fluid " src="image/health.png" alt="second slie">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block img-fluid " src="image/gold.jpg" alt="Third slide">
+                        <img class="d-block img-fluid " src="image/wealth.png" alt="Third slide">
                     </div>
 
                     <div class="carousel-item">
-                        <img class="d-block img-fluid " src="image/freedom.png" alt="Third slide">
+                        <img class="d-block img-fluid " src="image/authority.png" alt="Third slide">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -106,37 +105,6 @@
                 </div>
             </div>
 
-            <h2>Products</h2>
-            <table>
-                <thead>
-                <tr>
-                    <td>Title</td>
-                    <td>Description</td>
-                    <td>Type</td>
-                    <td>Category</td>
-                    <td>Type</td>
-                    <td>Price</td>
-                    <td>Stock amount</td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="prod : ${productsList}">
-                    <td th:text="${prod.title}"></td>
-                    <td th:text="${prod.description}"></td>
-                    <td th:text="${prod.productCategory?.description}"></td>
-                    <td th:text="${prod.productType}"></td>
-                    <td th:text="${prod.price}"></td>
-                    <td th:text="${prod.stockAmount}"></td>
-                    <td th:if="${#authorization.expression('isAuthenticated()')}">
-                        <!--                    || th:if="${prod.getStockAmount()} gt 1" >-->
-                        <!--                        TODO if statement thymeleaf-->
-                        <form th:action="@{/buy/{id}(id = ${prod.id})}">
-                            <button th:text="#{app.add.to.cart}">Add to cart</button>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
 
 
             <form th:if="${#authorization.expression('isAuthenticated()')}" action="/cart">
@@ -170,69 +138,10 @@
 </div>
 
 
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-
-<ul id="myUL">
-    <li><a href="#">Adele</a></li>
-    <li><a href="#">Agnes</a></li>
-
-    <li><a href="#">Billy</a></li>
-    <li><a href="#">Bob</a></li>
-
-    <li><a href="#">Calvin</a></li>
-    <li><a href="#">Christina</a></li>
-    <li><a href="#">Cindy</a></li>
-</ul>
-
-<script>
-    function myFunction() {
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("myUL");
-        li = ul.getElementsByTagName("li");
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-            } else {
-                li[i].style.display = "none";
-            }
-        }
-    }
-</script>
-<input type="text" id="input_prod" onkeyup="prodSearch()" placeholder="product search" title="Type in prod">
-
-<ul id="lista_test" th:each=" pr : ${productsList}">
-    <li><a href="#" th:text="${pr.title}"></a></li>
-    <!--    <li><a href="#" th:text="${pr.title}">Pociąg</a></li>-->
-    <!--    <li><a href="#" th:text="${pr.title}">Rower</a></li>-->
-</ul>
-
-
-<script>
-    function prodSearch() {
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById("input_prod");
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("lista_test");
-        li = ul.getElementsByTagName("li");
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-            } else {
-                li[i].style.display = "none";
-            }
-        }
-    }
-</script>
 
 <div>
     <p th:if="${weatherFromOW} == null" th:text="${noWeather}">
-    <p th:text="#{weather.conditions.for} + ${userCity}">user city</p>
+    <h2><p th:text="#{weather.conditions.for} + ${userCity}">user city</p></h2>
     <table th:if="${weatherFromOW} != null" class="table table-bordered text-center">
         <thead class="thead-dark">
         <tr>

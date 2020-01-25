@@ -37,7 +37,7 @@
         <tbody>
         <tr th:each="ord : ${order.getOrderLines()}">
             <td scope="row" th:text="${ord.getProduct().getTitle()}"></td>
-            <td scope="row" th:text="${ord.getProduct()?.getProductCategory().getDescription()}"></td>
+            <td scope="row" th:text="${ord.getProduct()?.getProductCategory()?.getDescription()}"></td>
             <td scope="row" th:text="${ord.getProduct().getPrice()}"></td>
             <td scope="row" th:text="${ord.getQuantity()}"></td>
             <td scope="row" th:text="${order.getTotalPrice()}"></td>
@@ -56,15 +56,16 @@
         <table class="table table-striped" th:if="${order} != null">
             <thead>
             <tr>
-                <th scope="col" th:text="#{product.title}">title</th>
-                <th scope="col" th:text="#{product.category}">category</th>
-                <th scope="col" th:text="#{product.price}">price</th>
-                <th scope="col" th:text="#{product.quantity}">quantity</th>
-                <th scope="col" th:text="#{order.TotalPrice}">Total price</th>
+                <th scope="col" th:text="#{form.name}">title</th>
+                <th scope="col" th:text="#{order.userMail}">category</th>
+                <th scope="col" th:text="#{form.deliver.address}">price</th>
+
             </tr>
             </thead>
             <tbody>
-
+                <td th:text="${userFromDB.name}"></td>
+                <td th:text="${userFromDB.email}"></td>
+                <td th:text="${userFromDB.getShippingAddress()}"></td>
             </tbody>
         </table>
     </div>
