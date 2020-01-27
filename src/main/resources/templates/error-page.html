@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/css/shop-homepage.css" rel="stylesheet">
+    <link href="/css/my_own.css" rel="stylesheet">
+    <title >Error page..</title>
+
+    <style>
+       .container4 {
+            height: 10em;
+            position: relative }
+        .container5 {
+            margin: 0;
+            background: red;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%) }
+    </style>
+</head>
+<body>
+<div th:replace="fragments :: navigationBar"></div>
+<!--page content-->
+<div class="container wrapper-my">
+    <div class="container5">
+    <h2>Oh no! Seems that we have an error.. </h2>
+    <br>
+    <h3>Maybe its due to the weather ;)</h3>
+    </div>
+</div>
+</body>
+</html>
