@@ -8,8 +8,11 @@ import pl.mojeprojekty.shop_v2.entity.Order;
 import pl.mojeprojekty.shop_v2.entity.User;
 import pl.mojeprojekty.shop_v2.repositories.UserRepository;
 import pl.mojeprojekty.shop_v2.services.OrderService;
+import pl.mojeprojekty.shop_v2.services.UserService;
 
+import javax.jws.WebParam;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -17,6 +20,7 @@ public class OrderController {
 
     private final OrderService orderService;
     private final UserRepository userRepository;
+    private final UserService userService;
 
     @GetMapping("/order")
     public String goOrder(Model model, Principal principal){
@@ -28,4 +32,16 @@ public class OrderController {
         model.addAttribute("userFromDB", u);
         return "order-page";
     }
+
+    @GetMapping("your-shopping")
+    public String goCustomerShopping(Model model, Principal principal){
+        principal.getName();
+        String userEmail = principal.getName();
+        User loggedUser = userService.findUserByEmail(userEmail);
+        List<Order> allOrdersOfUser = orderService.allOrdersOfUser(loggedUser);
+        model.addAttribute("usersOrders", allOrdersOfUser);
+//        TODO check this out!! --> make view on the customer-page
+        return "customer-page";
+    }
+
 }

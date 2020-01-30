@@ -125,11 +125,11 @@
                 <span th:text="${@applicationUserDetailService.loggedUser()}"></span>
             </div>
             <div th:text="${#authorization.expression('hasRole(''ADMIN'')')}">Admin</div>
-            <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-                <form th:action="@{/admin}">
-                    <button>Admin site</button>
-                </form>
-            </div>
+<!--            <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">-->
+<!--                <form th:action="@{/admin}">-->
+<!--                    <button>Admin site</button>-->
+<!--                </form>-->
+<!--            </div>-->
             <!--            /col-lg-9-->
         </div>
         <!--        /.row-->
@@ -137,7 +137,7 @@
     <!--    container-->
 </div>
 
-
+<!--    Weather data table -->
 
 <div>
     <p th:if="${weatherFromOW} == null" th:text="${noWeather}">

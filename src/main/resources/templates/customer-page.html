@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
 >
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,17 @@
 <div th:replace="fragments :: navigationBar"></div>
 <!--page content-->
 <div class="container wrapper-my">
-<!--TODO customer's former shoppings list-->
+    <!--TODO customer's former shoppings list-->
+    <h2>This is your shopping history</h2>
+
+    <section th:each="order : ${usersOrders}">
+        <p th:text="${order.getOrderDate()}">
+        <ul>
+            <li th:each="single : ${order.getOrderLines()}" th:text="${single.getProduct().title}"
+        </ul>
+        </p>
+    </section>
+
 </div>
 </body>
 </html>

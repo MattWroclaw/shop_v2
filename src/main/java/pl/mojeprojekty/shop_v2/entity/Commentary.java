@@ -5,23 +5,21 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Data
-@Entity
-@Table(name = "order_line")
-public class OrderLine {
+//@Entity
+//@Table
+public class Commentary {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    private String text;
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    User user;
 
-    private int quantity;
-
-    private double price;
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    Product product;
 }

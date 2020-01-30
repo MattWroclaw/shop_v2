@@ -6,11 +6,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import pl.mojeprojekty.shop_v2.dto.ProductDto;
+import pl.mojeprojekty.shop_v2.entity.Commentary;
+import pl.mojeprojekty.shop_v2.entity.Product;
 import pl.mojeprojekty.shop_v2.entity.ProductType;
 import pl.mojeprojekty.shop_v2.entity.User;
 import pl.mojeprojekty.shop_v2.services.CartService;
+//import pl.mojeprojekty.shop_v2.services.CommentaryService;
 import pl.mojeprojekty.shop_v2.services.ProductService;
 import pl.mojeprojekty.shop_v2.services.UserService;
+import pl.mojeprojekty.shop_v2.utils.DtoToObjectConverters;
 import pl.mojeprojekty.shop_v2.weather.WeatherRestService;
 
 import java.security.Principal;
@@ -24,6 +28,8 @@ public class MainPageController {
     private final CartService cartService;
     private final UserService userService;
     private final WeatherRestService weatherRestService;
+//    private final CommentaryService commentaryService;
+    private final DtoToObjectConverters converters;
 
     @GetMapping({"/", "/welcome"})
     public String goShop(Model model, Principal principal) {
@@ -52,6 +58,13 @@ public class MainPageController {
     public String goProductDetails(@PathVariable long id, Model model) {
         ProductDto productDto = productService.findProductDtoById(id);
         model.addAttribute("givenProduct", productDto);
+
+//        for the commentary
+
+//  *********      TODO finish commentary feature *****************
+//        Product product = converters.productDtoToEntity(productDto);
+//        Commentary commentary = commentaryService.getCommentaryForProduct(product);
+//        ********************************************
         return "productDetails";
     }
 
