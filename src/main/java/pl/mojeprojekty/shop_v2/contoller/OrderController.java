@@ -40,7 +40,7 @@ public class OrderController {
         User loggedUser = userService.findUserByEmail(userEmail);
         List<Order> allOrdersOfUser = orderService.allOrdersOfUser(loggedUser);
         model.addAttribute("usersOrders", allOrdersOfUser);
-//        TODO check this out!! --> make view on the customer-page
+//
         return "customer-page";
     }
 

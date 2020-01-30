@@ -21,10 +21,11 @@
     <section th:each="order : ${usersOrders}">
         <p th:text="${order.getOrderDate()}">
         <ul>
-            <li th:each="single : ${order.getOrderLines()}" th:text="${single.getProduct().title}"
+            <li th:each="single : ${order.getOrderLines()}" th:text="${single.getProduct().title}"></li>
         </ul>
         </p>
     </section>
+    <p th:if="${usersOrders.isEmpty()}" th:text="#{no.shopping.yet}"></p>
 
 </div>
 </body>
