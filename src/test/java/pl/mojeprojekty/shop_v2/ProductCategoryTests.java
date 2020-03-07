@@ -116,7 +116,7 @@ public class ProductCategoryTests {
     public void createCategoryWithNotValidDescription_Test() throws Exception {
 //        given
         String notValidDescription = "More than 30 chars: 1234567890, 1234567890, 1234567890";
-        String categoryJson = ("{ \"id\":{id}, \"description\":   \"{description}\" }")
+        String categoryJson = ("{ \"id\":{id}, \"description\":\"{description}\" }")
                 .replace("{description}", notValidDescription);
 //        when
         mockMvc.perform(

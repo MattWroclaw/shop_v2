@@ -11,7 +11,7 @@ import pl.mojeprojekty.shop_v2.entity.Product;
 import pl.mojeprojekty.shop_v2.entity.ProductType;
 import pl.mojeprojekty.shop_v2.entity.User;
 import pl.mojeprojekty.shop_v2.services.CartService;
-//import pl.mojeprojekty.shop_v2.services.CommentaryService;
+import pl.mojeprojekty.shop_v2.services.CommentaryService;
 import pl.mojeprojekty.shop_v2.services.ProductService;
 import pl.mojeprojekty.shop_v2.services.UserService;
 import pl.mojeprojekty.shop_v2.utils.DtoToObjectConverters;
@@ -28,7 +28,7 @@ public class MainPageController {
     private final CartService cartService;
     private final UserService userService;
     private final WeatherRestService weatherRestService;
-//    private final CommentaryService commentaryService;
+    private final CommentaryService commentaryService;
     private final DtoToObjectConverters converters;
 
     @GetMapping({"/", "/welcome"})
@@ -62,8 +62,8 @@ public class MainPageController {
 //        for the commentary
 
 //  *********      TODO finish commentary feature *****************
-//        Product product = converters.productDtoToEntity(productDto);
-//        Commentary commentary = commentaryService.getCommentaryForProduct(product);
+        Product product = converters.productDtoToEntity(productDto);
+        Commentary commentary = commentaryService.getCommentaryForProduct(product);
 //        ********************************************
         return "productDetails";
     }

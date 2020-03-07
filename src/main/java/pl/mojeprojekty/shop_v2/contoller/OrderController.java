@@ -10,7 +10,6 @@ import pl.mojeprojekty.shop_v2.repositories.UserRepository;
 import pl.mojeprojekty.shop_v2.services.OrderService;
 import pl.mojeprojekty.shop_v2.services.UserService;
 
-import javax.jws.WebParam;
 import java.security.Principal;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class OrderController {
     private final UserService userService;
 
     @GetMapping("/order")
-    public String goOrder(Model model, Principal principal){
+    public String goOrder(Model model, Principal principal) {
         String email = principal.getName();
         Order order = orderService.createOrder(email);
         User u = userRepository.findUserByEmail(email).get();
@@ -34,7 +33,7 @@ public class OrderController {
     }
 
     @GetMapping("your-shopping")
-    public String goCustomerShopping(Model model, Principal principal){
+    public String goCustomerShopping(Model model, Principal principal) {
         principal.getName();
         String userEmail = principal.getName();
         User loggedUser = userService.findUserByEmail(userEmail);

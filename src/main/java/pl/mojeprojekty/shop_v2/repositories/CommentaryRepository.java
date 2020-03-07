@@ -5,7 +5,9 @@ import pl.mojeprojekty.shop_v2.entity.Commentary;
 import pl.mojeprojekty.shop_v2.entity.Product;
 import pl.mojeprojekty.shop_v2.entity.User;
 
-//public interface CommentaryRepository extends JpaRepository<Commentary, Long> {
-//    Commentary findByUserAndProduct(User user, Product product);
-//    Commentary findByProduct(Product product);
-//}
+import java.util.Optional;
+
+public interface CommentaryRepository extends JpaRepository<Commentary, Long> {
+    Commentary findByUserAndProduct(User user, Product product);
+    Optional<Commentary> findByProduct(Product product);
+}
