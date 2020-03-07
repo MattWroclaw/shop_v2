@@ -1,0 +1,32 @@
+PS C:\WINDOWS\system32> cd 'C:\Program Files\Java\jre1.8.0_241\bin'
+PS C:\Program Files\Java\jre1.8.0_241\bin> .\keytool.exe -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -validity 365 -keysize 2048
+Enter keystore password:
+Re-enter new password:
+What is your first and last name?
+  [Unknown]:  Mateusz
+What is the name of your organizational unit?
+  [Unknown]:  wnuczek.pl
+What is the name of your organization?
+  [Unknown]:  Wnuczek
+What is the name of your City or Locality?
+  [Unknown]:  Wroclaw
+What is the name of your State or Province?
+  [Unknown]:  Dolny Slask
+What is the two-letter country code for this unit?
+  [Unknown]:  PL
+Is CN=Mateusz, OU=wnuczek.pl, O=Wnuczek, L=Wroclaw, ST=Dolny Slask, C=PL correct?
+  [no]:  yes
+
+Enter key password for <selfsigned>
+        (RETURN if same as keystore password):
+
+Warning:
+The JKS keystore uses a proprietary format. It is recommended to migrate to PKCS12 which is an industry standard format using "keytool -importkeystore -srckeystore keystore.jks -destkeystore keystore.jks -deststoretype pkcs12".
+PS C:\Program Files\Java\jre1.8.0_241\bin> .\keytool.exe -importkeystore -srckeystore keystore.jks -destkeystore keystore.jks -deststoretype pkcs12
+Enter source keystore password:
+Entry for alias selfsigned successfully imported.
+Import command completed:  1 entries successfully imported, 0 entries failed or cancelled
+
+Warning:
+Migrated "keystore.jks" to Non JKS/JCEKS. The JKS keystore is backed up as "keystore.jks.old".
+PS C:\Program Files\Java\jre1.8.0_241\bin>

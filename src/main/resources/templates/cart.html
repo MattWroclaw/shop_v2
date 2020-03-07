@@ -19,7 +19,7 @@
 
 <p th:insert="fragments :: navigationBar"></p>
 
-<span th:if="${cart.isEmpty()}" th:text=" 'Your cart is empty'"></span>
+<span th:if="${cart.isEmpty()}" th:text="#{cart.empty}"></span>
 <div class="container wrapper-my">
     <table class="table table-striped">
         <thead>
