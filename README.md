@@ -5,6 +5,7 @@ Application (maven project) that allows placing orders (buying products), user r
 - Java 8, Spring Boot,
 - Hibernate, REST, MySQL, H2 DB, Mockito, JUnit4,
 - Lombok, Maven
+- ssl certificate
 
 **Frontend:**
 - Thymeleaf, bootsrap
