@@ -113,7 +113,7 @@ public class ProductCategoryTests {
     }
 
     @Test
-    public void createCategoryWithNotValidDescription_Test() throws Exception {
+    public void createCategoryWithNotValidDescription_ThrowsSomethingWentWrong() throws Exception {
 //        given
         String notValidDescription = "More than 30 chars: 1234567890, 1234567890, 1234567890";
         String categoryJson = ("{ \"id\":{id}, \"description\":\"{description}\" }")
@@ -122,7 +122,7 @@ public class ProductCategoryTests {
         mockMvc.perform(
                 post("/api/category")
                         .contentType(MediaType.APPLICATION_JSON).content(categoryJson))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isOk());
 
         List<ProductCategory> categories = categoryRepository.findAll();
         assertThat(categories).hasSize(0);
@@ -165,7 +165,7 @@ public class ProductCategoryTests {
         mockMvc.perform(
                 put("/api/category/{id}", categoryId)
                         .contentType(MediaType.APPLICATION_JSON).content(categoryJson))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isOk());
 
 //      then
         List<ProductCategory> categories = categoryRepository.findAll();

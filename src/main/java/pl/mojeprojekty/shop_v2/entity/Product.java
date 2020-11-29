@@ -1,5 +1,6 @@
 package pl.mojeprojekty.shop_v2.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,7 +26,7 @@ public class Product {
 
     private ProductType productType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_category_id")
     private ProductCategory productCategory;
 }
