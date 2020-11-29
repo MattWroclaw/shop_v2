@@ -21,8 +21,10 @@ public class CartService {
     public Map<Long, Integer> addProductToCart(long productId) {
         boolean isExistProduct = productRepository.existsById(productId);
         if (isExistProduct) {
-            if (productsIdInCart.containsKey(productId)) {
-                productsIdInCart.put(productId, productsIdInCart.get(productId) + 1);
+            boolean isProductInCart = productsIdInCart.containsKey(productId);
+            if (isProductInCart) {
+                int increasedNumberOfProductsInCart = productsIdInCart.get(productId) + 1;
+                productsIdInCart.put(productId, increasedNumberOfProductsInCart);
             } else {
                 productsIdInCart.put(productId, 1);
             }
@@ -31,14 +33,14 @@ public class CartService {
     }
 
     public Map<Product, Integer> showProductsInCart() {
-        Map<Product, Integer> productObjectCart = new HashMap<>();
+        Map<Product, Integer> productObjectCartMap = new HashMap<>();
 
         for (Map.Entry<Long, Integer> entry : productsIdInCart.entrySet()) {
             long productId = entry.getKey();
             Product productAdded = productService.findProductById(productId);
-            productObjectCart.put(productAdded, entry.getValue());
+            productObjectCartMap.put(productAdded, entry.getValue());
         }
-        return productObjectCart;
+        return productObjectCartMap;
     }
 
     public void removeProductFormCart(long productId) {

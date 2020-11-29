@@ -9,5 +9,6 @@ import java.util.Optional;
 
 public interface CommentaryRepository extends JpaRepository<Commentary, Long> {
     Commentary findByUserAndProduct(User user, Product product);
+
     Optional<Commentary> findByProduct(Product product);
 }

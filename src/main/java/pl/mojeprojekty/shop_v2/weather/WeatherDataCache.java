@@ -10,7 +10,7 @@ import java.util.Map;
 @Component
 public class WeatherDataCache {
 
-    private static final long ONE_HOUR = 1000 * 60 * 60;
+    private static final long DURATION_OF_VALID_WEATHER_DATA = 1000 * 60 * 60;
     private final Map<String, String[]> weatherTable = new HashMap<>();
 
     public String[] find(String city) {
@@ -19,7 +19,7 @@ public class WeatherDataCache {
 
         log.info("CUSTOM LOG: inside caching method");
 
-        if (cachedWeather == null || (now - Long.parseLong(cachedWeather[5]) > ONE_HOUR)) {
+        if (cachedWeather == null || (now - Long.parseLong(cachedWeather[5]) > DURATION_OF_VALID_WEATHER_DATA)) {
             weatherTable.remove(city.toLowerCase());
             log.info("CUSTOM LOG: data from cache is old, method will not return anything");
             return null;

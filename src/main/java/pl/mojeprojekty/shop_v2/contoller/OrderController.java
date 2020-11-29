@@ -12,6 +12,7 @@ import pl.mojeprojekty.shop_v2.services.UserService;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,10 +26,12 @@ public class OrderController {
     public String goOrder(Model model, Principal principal) {
         String email = principal.getName();
         Order order = orderService.createOrder(email);
-        User u = userRepository.findUserByEmail(email).get();
-        model.addAttribute("order", order);
-        model.addAttribute("userEmail", email);
-        model.addAttribute("userFromDB", u);
+        Optional<User> userFromDataBase = userRepository.findUserByEmail(email);
+        if(userFromDataBase.isPresent()) {
+            model.addAttribute("order", order);
+            model.addAttribute("userEmail", email);
+            model.addAttribute("userFromDB", userFromDataBase);
+        }
         return "order-page";
     }
 
@@ -39,7 +42,7 @@ public class OrderController {
         User loggedUser = userService.findUserByEmail(userEmail);
         List<Order> allOrdersOfUser = orderService.allOrdersOfUser(loggedUser);
         model.addAttribute("usersOrders", allOrdersOfUser);
-//
+
         return "customer-page";
     }
 

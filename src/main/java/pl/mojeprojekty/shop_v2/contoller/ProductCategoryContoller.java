@@ -16,15 +16,15 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class CategoryContoller {
+public class ProductCategoryContoller {
 
     private final ProductCategoryService productCategoryService;
 
     @GetMapping("/categories")
     public String goCategories(Model model) {
         List<ProductCategoryDto> categoriesDto = productCategoryService.showAllProductCategories();
-        model.addAttribute("categories", categoriesDto);  //lista kategorii
-        model.addAttribute("singleCategory", new ProductCategoryDto()); // pojedyncza kategoria - tworzenie
+        model.addAttribute("categories", categoriesDto);
+        model.addAttribute("singleCategory", new ProductCategoryDto());
         return "category-list";
     }
 

@@ -23,15 +23,7 @@ public class ProductService {
         List<Product> products = productRepository.findAll();
         List<ProductDto> dtos = new ArrayList<>();
         for (Product entity : products) {
-            ProductDto dto = new ProductDto();
-            dto.setId(entity.getId());
-            dto.setTitle(entity.getTitle());
-            dto.setStockAmount(entity.getStockAmount());
-            dto.setPrice(entity.getPrice());
-            dto.setDescription(entity.getDescription());
-            dto.setProductType(entity.getProductType());
-
-            dto.setProductCategory(entity.getProductCategory());
+            ProductDto dto = dtoToObjectConverters.productEntityToDto(entity);
             dtos.add(dto);
         }
         return dtos;
@@ -44,24 +36,20 @@ public class ProductService {
     }
 
     public void createProduct(ProductDto productDto) {
-        Product entity = dtoToObjectConverters.productDtoToEntity(productDto);
+        Product entity = dtoToObjectConverters.createNewProductFromProductDto(productDto);
         productRepository.save(entity);
     }
 
-    public void deletePorduct(long id) {
+    public void deleteProduct(long id) {
         productRepository.deleteById(id);
     }
 
     public void editProduct(ProductDto productDto) {
         Product edited = productRepository.findById(productDto.getId())
                 .orElseThrow(() -> new NoSuchElementException("No product with id = " + productDto.getId()));
-        edited.setTitle(productDto.getTitle());
-        edited.setDescription(productDto.getDescription());
-        edited.setPrice(productDto.getPrice());
-        edited.setStockAmount(productDto.getStockAmount());
-        edited.setProductType(productDto.getProductType());
-        edited.setProductCategory(productDto.getProductCategory());
-        productRepository.save(edited);
+
+        Product productAfterEdit = dtoToObjectConverters.productDtoToProductEntity( productDto, edited );
+        productRepository.save(productAfterEdit);
     }
 
     public void updateProduct(Product product) {
@@ -71,24 +59,15 @@ public class ProductService {
     }
 
     public Product findProductById(long id) {
-        Product productById = productRepository.findById(id)
+        return productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Product with " + id + "does not exist.."));
-        return productById;
     }
 
     public List<ProductDto> findProductsByType(ProductType productType) {
         List<Product> productsSameType = productRepository.findAllByProductType(productType);
         List<ProductDto> dtos = new ArrayList<>();
         for (Product entity : productsSameType) {
-            ProductDto dto = new ProductDto();
-            dto.setId(entity.getId());
-            dto.setTitle(entity.getTitle());
-            dto.setStockAmount(entity.getStockAmount());
-            dto.setPrice(entity.getPrice());
-            dto.setDescription(entity.getDescription());
-            dto.setProductType(entity.getProductType());
-
-            dto.setProductCategory(entity.getProductCategory());
+            ProductDto dto = dtoToObjectConverters.productEntityToDto(entity);
             dtos.add(dto);
         }
         return dtos;

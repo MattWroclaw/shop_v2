@@ -34,6 +34,7 @@ public class WeatherRestService {
             log.info("CUSTOM LOG: Inside fetchWeather, after timeStamp set");
             return body;
         } catch (Exception error) {
+//            empty
         }
 
         return null;

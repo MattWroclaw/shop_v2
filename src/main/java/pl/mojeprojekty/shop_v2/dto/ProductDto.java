@@ -25,11 +25,8 @@ public class ProductDto {
 
     @NotNull
 
-//    @Digits(integer = 5, fraction = 2)
     private double price;
 
-//    @NotNull
-//    @NotBlank
     private int stockAmount;
 
     private ProductType productType;

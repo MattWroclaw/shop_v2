@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import pl.mojeprojekty.shop_v2.dto.AddressDto;
 import pl.mojeprojekty.shop_v2.dto.UserDto;
 import pl.mojeprojekty.shop_v2.services.UserService;
-import pl.mojeprojekty.shop_v2.weather.WeatherRestService;
 
 import javax.validation.Valid;
 
@@ -20,18 +19,16 @@ import javax.validation.Valid;
 public class NewUserController {
 
     private final UserService userService;
-    private final WeatherRestService weatherRestService;
 
     @RequestMapping(value = {"/register"}, method = RequestMethod.GET)
-    public String goUser(Model model) {
-
+    public String goRegisterNewUser(Model model) {
         model.addAttribute("newUser", new UserDto());
         model.addAttribute("userAddress", new AddressDto());
         return "register";
     }
 
     @PostMapping("/newUser")
-    public String goEditForm(@Valid @ModelAttribute("newUser") UserDto userForm, BindingResult errors) {
+    public String goEditFormForNewUser(@Valid @ModelAttribute("newUser") UserDto userForm, BindingResult errors) {
 
         if (errors.hasErrors()) {
             return "register";

@@ -12,6 +12,7 @@ public class UserDto {
 
     @NotNull
     @Size(min = 3, max = 10, message = "Min 3, max 10 chars")
+
     @Pattern(regexp = "\\w+")
     @NotBlank
     private String name;
@@ -34,9 +35,4 @@ public class UserDto {
     @NotNull
     private AddressDto shippingAddress;
 
-//     private AddressDto shippingAddress;
-//
-//    private AddressDto homeAddress;
-//
-//    private AddressDto invoiceAddress;
 }

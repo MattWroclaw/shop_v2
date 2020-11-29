@@ -24,7 +24,7 @@ public class ProductRestController {
     }
 
     @GetMapping("/{id}")
-    public ProductDto productById(@PathVariable long id) {
+    public ProductDto showProductById(@PathVariable long id) {
         return productService.findProductDtoById(id);
     }
 
@@ -42,7 +42,7 @@ public class ProductRestController {
 
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable long id){
-        productService.deletePorduct(id);
+        productService.deleteProduct(id);
     }
 
 }

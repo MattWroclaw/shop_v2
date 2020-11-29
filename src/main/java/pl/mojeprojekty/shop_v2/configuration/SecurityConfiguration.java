@@ -23,17 +23,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/hidden").hasRole("ADMIN")
                 .and().csrf().disable()
                 .formLogin()
-//                .loginPage("/login").permitAll()
                 .failureUrl("/login?error=true")
                 .defaultSuccessUrl("/")
                 .usernameParameter("email")
                 .passwordParameter("password")
-
-//                .and().rememberMe()// remember me,
-//                .key("rememberKey")// key for remember me,
-//                .rememberMeParameter("remember")// remember me field name in login form,
-//                .tokenValiditySeconds(86400)// remember me for one day
-
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
@@ -42,23 +35,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .httpBasic();
-
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
-
-// pozostałość po ahthentication
-//@Override
-//protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//    PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//    String encodedPassword = passwordEncoder.encode("password");
-//    auth.inMemoryAuthentication()
-//            .passwordEncoder(passwordEncoder)
-//            .withUser("jan").password(encodedPassword).roles("USER");
-//}
-
 }

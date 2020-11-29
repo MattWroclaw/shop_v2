@@ -25,21 +25,17 @@
 <div class="container">
 
     <div class="row">
-
         <div class="col-lg-3">
             <h1 class="my-4">Dreams shop</h1>
             <div class="list-group">
                 <a th:href="@{/byType/{type}(type='WEALTH')}" class="list-group-item active" th:text="${'Wealth'}">category 1 </a>
-                <a th:href="@{/byType/{type}(type='FREEDOM')}" class="list-group-item" th:text="${'Freedom'}">category 1 </a>
-                <a th:href="@{/byType/{type}(type='GOOD_HEALTH')}" class="list-group-item" th:text="${'Good heath'}">category 1 </a>
-                <a th:href="@{/byType/{type}(type='FRIENDS')}" class="list-group-item" th:text="${'Friends'}">category 1 </a>
-
+                <a th:href="@{/byType/{type}(type='FREEDOM')}" class="list-group-item" th:text="${'Freedom'}">category 2 </a>
+                <a th:href="@{/byType/{type}(type='GOOD_HEALTH')}" class="list-group-item" th:text="${'Good heath'}">category 3 </a>
+                <a th:href="@{/byType/{type}(type='FRIENDS')}" class="list-group-item" th:text="${'Friends'}">category 4 </a>
             </div>
         </div>
         <!-- /.col-lg-3 -->
-
         <div class="col-lg-9">
-
             <div class="card mt-4">
                 <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
                 <div class="card-body">

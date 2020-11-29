@@ -59,23 +59,15 @@ public class MainPageController {
         ProductDto productDto = productService.findProductDtoById(id);
         model.addAttribute("givenProduct", productDto);
 
-//        for the commentary
-
-//  *********      TODO finish commentary feature *****************
-        Product product = converters.productDtoToEntity(productDto);
+//        TODO finish commentary feature *****************
+        Product product = converters.createNewProductFromProductDto(productDto);
         Commentary commentary = commentaryService.getCommentaryForProduct(product);
-//        ********************************************
-        return "productDetails";
-    }
 
-    @GetMapping("test2")
-    public String test2() {
-        return "test2";
+        return "productDetails";
     }
 
 
     //    Weather service
-
     public Model weatherHandler(Model model, Principal principal) {
         String userEmail = "";
         String userCity = "";
@@ -96,7 +88,6 @@ public class MainPageController {
             model.addAttribute("noWeather", "Not available");
         }
         return model;
-
     }
 
 }

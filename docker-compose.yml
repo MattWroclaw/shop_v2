@@ -1,0 +1,22 @@
+version: '3.1'
+services:
+  mysql:
+    image: mysql
+    ports:
+    - "3308:3306"
+    hostname: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=sklep2
+  shop:
+    build: .
+    ports:
+    - "8080:8080"
+    hostname: shop
+    tty: true
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    environment:
+      - DB_PORT=tcp://mysql:3308

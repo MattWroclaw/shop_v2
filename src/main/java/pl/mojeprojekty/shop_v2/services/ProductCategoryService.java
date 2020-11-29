@@ -22,17 +22,22 @@ public class ProductCategoryService {
         List<ProductCategory> entities = productCategoryRepository.findAll();
         List<ProductCategoryDto> dtos = new ArrayList<>();
         for (ProductCategory entity : entities) {
-            ProductCategoryDto dto = new ProductCategoryDto();
-            dto.setId(entity.getId());
-            dto.setDescription(entity.getDescription());
-            if (entity.getParentId() != null) {
-                dto.setParentId(entity.getParentId());
-            } else {
-                dto.setParentId(1L);
-            }
+            ProductCategoryDto dto = fromProductCategoryToDTOProductCategory(entity);
             dtos.add(dto);
         }
         return dtos;
+    }
+
+    private ProductCategoryDto fromProductCategoryToDTOProductCategory(ProductCategory entity){
+        ProductCategoryDto dto = new ProductCategoryDto();
+        dto.setId(entity.getId());
+        dto.setDescription(entity.getDescription());
+        if (entity.getParentId() != null) {
+            dto.setParentId(entity.getParentId());
+        } else {
+            dto.setParentId(1L);
+        }
+        return dto;
     }
 
     public ProductCategoryDto findProductCategoryById(long id) {
@@ -40,7 +45,7 @@ public class ProductCategoryService {
                 .orElseThrow(() -> new NoSuchElementException(
                         "No such product category with id =" + id
                 ));
-        ProductCategoryDto categoryDto = dtoToObjectConverters.categoryEntityToDto(category);
+        ProductCategoryDto categoryDto = dtoToObjectConverters.productCategoryEntityToCategoryDto(category);
         return categoryDto;
     }
 
@@ -61,7 +66,7 @@ public class ProductCategoryService {
         }
 
         productCategoryRepository.save(categoryEntity);
-        return dtoToObjectConverters.categoryEntityToDto(categoryEntity);
+        return dtoToObjectConverters.productCategoryEntityToCategoryDto(categoryEntity);
     }
 
     public void deleteProductCategory(long id) {

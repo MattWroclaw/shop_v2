@@ -17,6 +17,7 @@ public class ProductCategoryDto {
 
     @NotNull
     @Size(min = 1, max = 30, message = "Min 1, max 30 chars")
+
     @NotBlank
     private String description;
 

@@ -8,7 +8,6 @@ import pl.mojeprojekty.shop_v2.dto.ProductCategoryDto;
 import pl.mojeprojekty.shop_v2.dto.ProductDto;
 import pl.mojeprojekty.shop_v2.dto.UserDto;
 import pl.mojeprojekty.shop_v2.entity.*;
-import pl.mojeprojekty.shop_v2.repositories.ProductCategoryRepository;
 import pl.mojeprojekty.shop_v2.repositories.RoleRepository;
 
 import java.util.Arrays;
@@ -20,7 +19,6 @@ public class DtoToObjectConverters {
 
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
-    private final ProductCategoryRepository productCategoryRepository;
 
     //      **************** USER *******************
     public Address addressDtoToAddressEntity(AddressDto addressDto) {
@@ -43,21 +41,18 @@ public class DtoToObjectConverters {
         entity.setEmail(userDto.getEmail());
         entity.setCity(userDto.getCity());
 
-        entity.setShippingAddress(Arrays.asList(
-                addressDtoToAddressEntity(userDto.getShippingAddress())));
+        Address addressUserDto = addressDtoToAddressEntity(userDto.getShippingAddress());
+        entity.setShippingAddress(Arrays.asList(addressUserDto));
 
         entity.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
         Role role = roleRepository.findByRole("USER");
-//     TEMP   if(userDto.getEmail().equalsIgnoreCase("admin")){
-//            role = roleRepository.findByRole("ADMIN");
-//        }
         entity.setRoles(Collections.singleton(role));
 
         return entity;
     }
 
-    //    **************** CATEGORY ****************
+    //    **************** PRODUCT CATEGORY ****************
     public ProductCategory productCategoryDtoToEntity(ProductCategoryDto productCategoryDto) {
         ProductCategory entity = new ProductCategory();
         if (productCategoryDto == null) {
@@ -71,7 +66,7 @@ public class DtoToObjectConverters {
         return entity;
     }
 
-    public ProductCategoryDto categoryEntityToDto(ProductCategory categoryEntity) {
+    public ProductCategoryDto productCategoryEntityToCategoryDto(ProductCategory categoryEntity) {
         ProductCategoryDto dto = new ProductCategoryDto();
         if (categoryEntity == null) {
             categoryEntity = new ProductCategory();
@@ -85,30 +80,34 @@ public class DtoToObjectConverters {
     }
 
     //  **************** PRODUCTS ****************
-    public Product productDtoToEntity(ProductDto productDto) {
+    public Product createNewProductFromProductDto(ProductDto productDto) {
         Product entity = new Product();
 
         if (productDto.getId() == null) {
             productDto.setId(100L);
         }
-        entity.setTitle(productDto.getTitle());
-        entity.setDescription(productDto.getDescription());
-        entity.setPrice(productDto.getPrice());
-        entity.setStockAmount(productDto.getStockAmount());
-        entity.setProductType(productDto.getProductType());
-        entity.setProductCategory(productDto.getProductCategory());
-        return entity;
+        return  productDtoToProductEntity( productDto,  entity );
+    }
+
+    public Product productDtoToProductEntity(ProductDto productDto, Product edited ){
+        edited.setTitle(productDto.getTitle());
+        edited.setDescription(productDto.getDescription());
+        edited.setPrice(productDto.getPrice());
+        edited.setStockAmount(productDto.getStockAmount());
+        edited.setProductType(productDto.getProductType());
+        edited.setProductCategory(productDto.getProductCategory());
+        return edited;
     }
 
     public ProductDto productEntityToDto(Product entity) {
         ProductDto dto = new ProductDto();
         dto.setId(entity.getId());
         dto.setTitle(entity.getTitle());
-        dto.setProductCategory(entity.getProductCategory());
-        dto.setProductType(entity.getProductType());
         dto.setDescription(entity.getDescription());
         dto.setPrice(entity.getPrice());
         dto.setStockAmount(entity.getStockAmount());
+        dto.setProductType(entity.getProductType());
+        dto.setProductCategory(entity.getProductCategory());
         return dto;
     }
 }

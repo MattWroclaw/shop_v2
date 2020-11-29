@@ -26,11 +26,4 @@ public class ExceptionHandlers {
         return "error-page";
     }
 
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    @ExceptionHandler({BindException.class,
-//            ConstraintViolationException.class,
-//            MethodArgumentNotValidException.class})
-//    public ErrorDto handleValidationException(Exception exc){
-//        return handleException(exc);
-//    }
 }
