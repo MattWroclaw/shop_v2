@@ -27,6 +27,10 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: Run muti bla bla bla..
+      run: | 
+        echo Mateusz test msg
+        echo Mateusz 2 test msg
     - name: Build with Maven
       run: mvn test
 #      run: mvn -B package --file pom.xml
