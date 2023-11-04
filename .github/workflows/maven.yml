@@ -32,8 +32,8 @@ jobs:
         echo Mateusz test msg
         pwd
         ls -la
-        echo Going to src/test/resources/application-integration-test.properties
-        cat src/test/resources/application-integration-test.properties
+        echo Going to src/main/resources/keystore.jks
+        cat src/main/resources/keystore.jks
         echo Mateusz
     - name: Build with Maven
       run: mvn test -Dtest="ProductCategoryTests#getAllProductCategories_Test"
@@ -44,7 +44,7 @@ jobs:
     - name: Chck if .jks exists
       # /home/runner/.m2/repository/pl/moje-projekty/shop_v2/0.0.1-SNAPSHOT/src/main/resources/keystore.jks
       run:  test -f home/runner/.m2/repository/pl/moje-projekty/shop_v2/0.0.1-SNAPSHOT/src/main/resources/keystore.jks && echo "File exists." fi
-            ! test -f home/runner/.m2/repository/pl/moje-projekty/shop_v2/0.0.1-SNAPSHOT/src/main/resources/keystore.jks && echo "File NOT exists." fi
+            # ! test -f home/runner/.m2/repository/pl/moje-projekty/shop_v2/0.0.1-SNAPSHOT/src/main/resources/keystore.jks && echo "File NOT exists." fi
 
     - name: Total bomb, let's run jar
       run: |
