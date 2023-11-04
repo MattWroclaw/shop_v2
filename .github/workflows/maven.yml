@@ -45,7 +45,7 @@ jobs:
       # /home/runner/.m2/repository/pl/moje-projekty/shop_v2/0.0.1-SNAPSHOT/src/main/resources/keystore.jks
       run:  
           # test -f home/runner/.m2/repository/pl/moje-projekty/shop_v2/0.0.1-SNAPSHOT/src/main/resources/keystore.jks && echo "File exists." 
-             ! test -f home/runner/.m2/repository/pl/moje-projekty/shop_v2/0.0.1-SNAPSHOT/src/main/resources/keystore.jks && echo "File NOT exists." 
+             "! test -f home/runner/.m2/repository/pl/moje-projekty/shop_v2/0.0.1-SNAPSHOT/src/main/resources/keystore.jks && echo 'File NOT exists.'" 
 
     - name: Total bomb, let's run jar
       run: |
