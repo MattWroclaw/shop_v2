@@ -31,7 +31,6 @@ jobs:
       run: | 
         echo Mateusz test msg
         pwd
-        cd /
         ls -la
         echo Mateusz
     - name: Build with Maven
