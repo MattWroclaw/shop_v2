@@ -30,9 +30,10 @@ jobs:
     - name: Run muti bla bla bla..
       run: | 
         echo Mateusz test msg
-        echo Mateusz 2 test msg
+        echo pwd
+        echo Mateusz
     - name: Build with Maven
-      run: mvn test -Dtest=ProductCategoryTests#getAllProductCategories_Test"
+      run: mvn test -Dtest="ProductCategoryTests#getAllProductCategories_Test"
 #      run: mvn -B package --file pom.xml
       
 
