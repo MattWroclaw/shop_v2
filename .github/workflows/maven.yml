@@ -40,6 +40,12 @@ jobs:
 #      run: mvn -B package --file pom.xml
     - name: Now let's go crazy! Let's do mvn instal
       run: mvn install
+      
+    - name: Chck if .jks exists
+      # /home/runner/.m2/repository/pl/moje-projekty/shop_v2/0.0.1-SNAPSHOT/src/main/resources/keystore.jks
+      run: if test -f home/runner/.m2/repository/pl/moje-projekty/shop_v2/0.0.1-SNAPSHOT/src/main/resources/keystore.jks; then echo "File exists." fi
+           if ! test -f home/runner/.m2/repository/pl/moje-projekty/shop_v2/0.0.1-SNAPSHOT/src/main/resources/keystore.jks; then echo "File NOT exists." fi
+
     - name: Total bomb, let's run jar
       run: |
         cd /home/runner/.m2/repository/pl/moje-projekty/shop_v2/0.0.1-SNAPSHOT/
