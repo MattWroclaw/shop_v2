@@ -32,7 +32,7 @@ jobs:
         echo Mateusz test msg
         pwd
         ls -la
-        echo Going to --> src/test/resources/application-integration-test.properties
+        echo Going to src/test/resources/application-integration-test.properties
         cat src/test/resources/application-integration-test.properties
         echo Mateusz
     - name: Build with Maven
