@@ -40,6 +40,11 @@ jobs:
 #      run: mvn -B package --file pom.xml
     - name: Now let's go crazy! Let's do mvn instal
       run: mvn install
+    - name: Total bomb, let's run jar
+      run: |
+        cd /home/runner/.m2/repository/pl/moje-projekty/shop_v2/0.0.1-SNAPSHOT/
+        pwd
+        java -jar shop_v2-0.0.1-SNAPSHOT.jar
       
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
