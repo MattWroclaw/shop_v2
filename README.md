@@ -9,4 +9,4 @@ Application (maven project) that allows placing orders (buying products), user r
 
 **Frontend:**
 - Thymeleaf, bootsrap
-- Tools: Intellij, MySql Workbench
+- Tools: Intellij, MySql
